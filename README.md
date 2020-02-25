@@ -25,3 +25,7 @@ Technological aspects:
 - Performance is key. We want to find the right balance and move as much business logic into the VM layer, but need to make sure the ECS powered View part stays performant. 
 
 #2. Decide on the best fitting ingredients for a 3D XAML/MVVM architecture.
+
+#3. Define a 3D XAML standard.
+- That can work across different 3D engines. 
+- If possible: A setup in which ViewModels can be reused between 2D and 3D applications. 
