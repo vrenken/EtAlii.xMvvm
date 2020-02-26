@@ -1,8 +1,8 @@
-namespace ROOT_NAMESPACE
+namespace EtAlii.xMvvm
 {
-    using System;
-    using System.IO;
-    using UnityEngine;
+    // using System;
+    // using System.IO;
+    // using UnityEngine;
 
     public partial class LoginView
     {
