@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using UnityEngine;
 
     public class Variant1ViewCodeManager : IViewCodeManager
     {
@@ -15,6 +16,11 @@
 
         public void Create(string asset)
         {
+            var fullFilename = Path.Combine(Application.dataPath, "..", asset);
+                
+            var content = File.ReadAllText(fullFilename);
+            
+            // Debug.Log(content);
         }
     }
 }
