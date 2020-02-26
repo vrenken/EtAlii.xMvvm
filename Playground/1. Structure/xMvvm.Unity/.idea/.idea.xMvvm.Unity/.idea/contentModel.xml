@@ -9,6 +9,8 @@
         <e p="_Tests" t="Include">
           <e p="FlyCamera.cs" t="Include" />
           <e p="XamlVariant1" t="Include">
+            <e p="LoginView.v1xaml.cs" t="Include" />
+            <e p="LoginView.v1xaml.g.cs" t="Include" />
             <e p="LoginViewModel.cs" t="Include" />
           </e>
         </e>
@@ -134,6 +136,8 @@
             <e p="XamlAssetModificationProcessor.cs" t="Include" />
             <e p="XamlAssetPostprocessor.cs" t="Include" />
             <e p="XamlVariant1" t="Include">
+              <e p="GeneratedCsTemplate.txt" t="Include" />
+              <e p="PartialCsTemplate.txt" t="Include" />
               <e p="Variant1ViewCodeManager.cs" t="Include" />
             </e>
             <e p="XamlVariant2" t="Include">
