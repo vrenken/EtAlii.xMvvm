@@ -9,7 +9,7 @@
         "System.Reflection.Emit.dll",
         "System.Reflection.Emit.ILGeneration.dll"
     ],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": []
 }

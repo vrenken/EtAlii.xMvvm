@@ -1,7 +1,7 @@
 {
     "name": "XamlIl.Cecil",
     "references": [
-        "GUID:a38733ac2b6d2664bb913798089320b8"
+        "XamlIl"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -12,7 +12,7 @@
         "Mono.Cecil.Rocks.dll",
         "Mono.Cecil.Pdb.dll"
     ],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": []
 }
