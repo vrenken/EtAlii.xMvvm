@@ -15,6 +15,10 @@
           </e>
         </e>
         <e p="Packages" t="Include">
+          <e p="System.CodeDom.4.4.0" t="Include">
+            <e p="useSharedDesignerContext.txt" t="Include" />
+            <e p="version.txt" t="Include" />
+          </e>
           <e p="System.Reflection.Emit.4.7.0" t="Include">
             <e p="lib" t="Include">
               <e p="netstandard2.0" t="Include">
@@ -136,6 +140,7 @@
             <e p="XamlAssetModificationProcessor.cs" t="Include" />
             <e p="XamlAssetPostprocessor.cs" t="Include" />
             <e p="XamlVariant1" t="Include">
+              <e p="FileGenerator.cs" t="Include" />
               <e p="GeneratedCsTemplate.txt" t="Include" />
               <e p="PartialCsTemplate.txt" t="Include" />
               <e p="Variant1ViewCodeManager.cs" t="Include" />

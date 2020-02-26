@@ -6,9 +6,11 @@
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Mono.TextTemplating.dll"
+    ],
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": []
 }
