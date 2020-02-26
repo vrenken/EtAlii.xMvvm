@@ -8,6 +8,9 @@
       <e p="Assets" t="Include">
         <e p="_Tests" t="Include">
           <e p="FlyCamera.cs" t="Include" />
+          <e p="XamlVariant1" t="Include">
+            <e p="LoginViewModel.cs" t="Include" />
+          </e>
         </e>
         <e p="Packages" t="Include">
           <e p="System.Reflection.Emit.4.7.0" t="Include">
