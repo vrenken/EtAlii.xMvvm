@@ -40,25 +40,29 @@
             BuildRelevantFileNames(asset, out var filename, out var generatedFileName, out var partialFileName);
             var name = Path.GetFileNameWithoutExtension(asset);
 
+            var rootNamespace = UnityEditor.EditorSettings.projectGenerationRootNamespace;
+            
             var xamlContent = File.ReadAllText(filename);
             
             // Debug.Log(content);
 
-            CreateGeneratedFile(name, generatedFileName);
+            CreateGeneratedFile(name, rootNamespace, generatedFileName);
 
-            CreatePartialFile(name, partialFileName);
+            CreatePartialFile(name, rootNamespace, partialFileName);
         }
 
-        private void CreatePartialFile(string name, string partialFileName)
+        private void CreatePartialFile(string name, string rootNamespace, string partialFileName)
         {
             // We only generated the partial file when it doesn't exist yet.
             if (File.Exists(partialFileName)) return;
             
-            var partialCsContent = _partialCsTemplate.Replace("CLASS", name); 
+            var partialCsContent = _partialCsTemplate
+                .Replace("CLASS", name)
+                .Replace("ROOT_NAMESPACE", rootNamespace); 
             File.WriteAllText(partialFileName, partialCsContent);
         }
         
-        private void CreateGeneratedFile(string name, string generatedFileName)
+        private void CreateGeneratedFile(string name, string rootNamespace, string generatedFileName)
         {
             // We always delete the generated file and recreate it.
             if (File.Exists(generatedFileName))
@@ -66,7 +70,9 @@
                 File.Delete(generatedFileName);
             }
 
-            var generatedCsContent = _generatedCsTemplate.Replace("CLASS", name); 
+            var generatedCsContent = _generatedCsTemplate
+                .Replace("CLASS", name)
+                .Replace("ROOT_NAMESPACE", rootNamespace); 
             File.WriteAllText(generatedFileName, generatedCsContent);
         }
         
