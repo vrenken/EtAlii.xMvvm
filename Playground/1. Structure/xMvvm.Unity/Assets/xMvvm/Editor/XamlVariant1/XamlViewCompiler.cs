@@ -86,7 +86,7 @@
 
 
             var tb = ts.CreateTypeBuilder(def);
-            Compile(tb, contextTypeDef, xaml);
+            var _ = Compile(tb, contextTypeDef, xaml);
             
             var ms = new MemoryStream();
             asm.Write(ms);
