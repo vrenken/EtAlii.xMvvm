@@ -40,27 +40,25 @@
             var partialCsTemplateFileName = Path.Combine(Application.dataPath, TemplateFolder, PartialCsTemplateFileName);
             var partialCsTemplate = File.ReadAllText(partialCsTemplateFileName);
 
-            // Also we need a few files and 
+            // Also we need a few files and folders. 
             BuildRelevantFileNames(asset, out var xamlFileName, out var generatedFileName, out var partialFileName);
-            
+
+            // Let's fetch the XAML and convert it into a View hierarchy.
             var xamlContent = File.ReadAllText(xamlFileName);
-            Debug.Log(xamlContent);
-            
             var xamlViewCompiler = new XamlViewCompiler();
             var compilation = xamlViewCompiler.Compile(xamlContent);
-            
-            var view = new View();
-            //compilation.populate(null, view);
-            //var view = compilation.create(null);
-            
-            Debug.Log(view);
-            
+            var view = (View)compilation.create(null);
+
+            // Some values might not be set. Let's add a few default ones.
+            view.ViewModelType = view.ViewModelType ?? Path.GetFileNameWithoutExtension(asset) + "Model";
+            view.Prefab = view.Prefab ?? Path.GetFileNameWithoutExtension(asset) + ".prefab";
+
             var data = new Dictionary<string, object>
             {
+                ["view"] = view,
                 ["now"] = DateTime.Now,
                 ["className"] = Path.GetFileNameWithoutExtension(asset), 
                 ["classNamespace"] = UnityEditor.EditorSettings.projectGenerationRootNamespace,
-                ["viewModelType"] = Path.GetFileNameWithoutExtension(asset) + "Model",
             };
             
             // We always delete the generated file and recreate it.
