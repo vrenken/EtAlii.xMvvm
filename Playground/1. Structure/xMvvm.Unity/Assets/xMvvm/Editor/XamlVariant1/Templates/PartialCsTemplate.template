@@ -1,0 +1,9 @@
+﻿namespace {{classNamespace}} 
+{
+    public partial class {{className}} 
+    {    
+        public void Initialize()
+        {
+        }
+    }
+}
