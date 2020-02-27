@@ -3,13 +3,15 @@
     "references": [
         "XamlIl"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "Mono.TextTemplating.dll",
-        "System.CodeDom.dll"
+        "DotLiquid.dll",
+        "DotLiquid.resources.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [],

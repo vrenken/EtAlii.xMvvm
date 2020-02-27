@@ -19,10 +19,10 @@
         
         public Variant1ViewCodeManager()
         {
-            var generatedCsTemplateFileName = Path.Combine(Application.dataPath, "xMvvm/Editor/XamlVariant1", "GeneratedCsTemplate.tt");
+            var generatedCsTemplateFileName = Path.Combine(Application.dataPath, "xMvvm/Editor/XamlVariant1", "GeneratedCsTemplate.template");
             _generatedCsTemplate = File.ReadAllText(generatedCsTemplateFileName);
 
-            var partialCsTemplateFileName = Path.Combine(Application.dataPath, "xMvvm/Editor/XamlVariant1", "PartialCsTemplate.tt");
+            var partialCsTemplateFileName = Path.Combine(Application.dataPath, "xMvvm/Editor/XamlVariant1", "PartialCsTemplate.template");
             _partialCsTemplate = File.ReadAllText(partialCsTemplateFileName);
         }
         
