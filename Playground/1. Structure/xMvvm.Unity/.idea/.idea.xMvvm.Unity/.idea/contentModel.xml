@@ -8,6 +8,7 @@
           <e p="FlyCamera.cs" t="Include" />
           <e p="XamlVariant1" t="Include">
             <e p="LoginView.v1xaml.cs" t="Include" />
+            <e p="LoginView.v1xaml.g.cs" t="Include" />
             <e p="LoginViewModel.cs" t="Include" />
           </e>
         </e>

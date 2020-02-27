@@ -1,7 +1,11 @@
 ﻿<View
     xmlns="xMvvm"    
     ViewModelType="LoginViewModel"        
-    Prefab="LoginView.prefab">              
+    Prefab="LoginView.prefab">
+
+    <!-- <Property Path="Panel/PasswordTextBox" ComponentType="Label" Property="Text" Value="{x:Bind Password}"> -->
+    <!-- <Event Path="Panel/LoginButton" ComponentType="Button" Event="Clicked" Handler="{x:Bind LoginClicked}"> -->
+                   
     <Binding Name="Password" Component="Panel/PasswordTextBox" ComponentProperty="Text" ViewModelProperty="Password" Mode="TwoWay" />       
     <Binding Name="UserName" Component="Panel/UserNameTextBox" ComponentProperty="Text" ViewModelProperty="UserName" Mode="TwoWay" />       
 </View>      
