@@ -1,22 +1,19 @@
 ﻿namespace EtAlii.xMvvm
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using DotLiquid;
     using UnityEngine;
 
     public class FileGenerator 
     {
-        public void Generate(string outputFileName, string className, string classNamespace, string template)
+        public void Generate(string outputFileName, string template, Dictionary<string, object> data)
         {
             try
             {
                 var templateInstance = Template.Parse(template); // Parses and compiles the template
-                var outputFileContent = templateInstance.Render(Hash.FromAnonymousObject(new
-                {
-                    className = className,
-                    classNamespace = classNamespace
-                })); 
+                var outputFileContent = templateInstance.Render(Hash.FromDictionary(data)); 
                 File.WriteAllText(outputFileName, outputFileContent);
             }
             catch (Exception e)

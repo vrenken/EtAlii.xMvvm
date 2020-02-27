@@ -1,6 +1,7 @@
 ﻿namespace EtAlii.xMvvm
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using UnityEngine;
 
@@ -12,65 +13,68 @@
 
         public bool CanManage(string asset) => string.Compare(Path.GetExtension(asset), XamlFileExtension, StringComparison.OrdinalIgnoreCase) == 0;
 
-        private readonly string _generatedCsTemplate;
-        private readonly string _partialCsTemplate;
-        
+        private const string GeneratedCsTemplateFileName = "GeneratedCsTemplate.template";
+        private const string PartialCsTemplateFileName = "PartialCsTemplate.template";
+        private const string TemplateFolder = "xMvvm/Editor/XamlVariant1";
+            
         private readonly FileGenerator _fileGenerator = new FileGenerator();
-        
-        public Variant1ViewCodeManager()
-        {
-            var generatedCsTemplateFileName = Path.Combine(Application.dataPath, "xMvvm/Editor/XamlVariant1", "GeneratedCsTemplate.template");
-            _generatedCsTemplate = File.ReadAllText(generatedCsTemplateFileName);
-
-            var partialCsTemplateFileName = Path.Combine(Application.dataPath, "xMvvm/Editor/XamlVariant1", "PartialCsTemplate.template");
-            _partialCsTemplate = File.ReadAllText(partialCsTemplateFileName);
-        }
         
         public void Delete(string asset)
         {
-            BuildRelevantFileNames(asset, out _, out var fullGeneratedFileName, out _);
-
-            // We always delete the generated file and recreate it.
-            if (File.Exists(fullGeneratedFileName))
-            {
-                File.Delete(fullGeneratedFileName);
-            }
-        }
-
-        public void Create(string asset)
-        {
-            BuildRelevantFileNames(asset, out var filename, out var generatedFileName, out var partialFileName);
-            var className = Path.GetFileNameWithoutExtension(asset);
-
-            var classNamespace = UnityEditor.EditorSettings.projectGenerationRootNamespace;
-            
-            var xamlContent = File.ReadAllText(filename);
-            
-            // Debug.Log(content);
+            BuildRelevantFileNames(asset, out _, out var generatedFileName, out _);
 
             // We always delete the generated file and recreate it.
             if (File.Exists(generatedFileName))
             {
                 File.Delete(generatedFileName);
             }
-            _fileGenerator.Generate(generatedFileName, className, classNamespace, _generatedCsTemplate);
+        }
 
+        public void Create(string asset)
+        {
+            // Let's fetch our templates.
+            // This could be optimized by moving it to the constructor and only done once
+            // but this makes development frustrating as the editor classes need to be touched in order to test template changes.  
+            var generatedCsTemplateFileName = Path.Combine(Application.dataPath, TemplateFolder, GeneratedCsTemplateFileName);
+            var generatedCsTemplate = File.ReadAllText(generatedCsTemplateFileName);
+            var partialCsTemplateFileName = Path.Combine(Application.dataPath, TemplateFolder, PartialCsTemplateFileName);
+            var partialCsTemplate = File.ReadAllText(partialCsTemplateFileName);
+
+            // Also we need a few files and 
+            BuildRelevantFileNames(asset, out var xamlFileName, out var generatedFileName, out var partialFileName);
+            
+            var xamlContent = File.ReadAllText(xamlFileName);
+
+            var data = new Dictionary<string, object>
+            {
+                ["className"] = Path.GetFileNameWithoutExtension(asset), 
+                ["classNamespace"] = UnityEditor.EditorSettings.projectGenerationRootNamespace,
+                ["viewModelType"] = Path.GetFileNameWithoutExtension(asset) + "Model",
+            };
+            
+            // We always delete the generated file and recreate it.
+            if (File.Exists(generatedFileName))
+            {
+                File.Delete(generatedFileName);
+            }
+            _fileGenerator.Generate(generatedFileName, generatedCsTemplate, data);
+            
             // We only generated the partial file when it doesn't exist yet.
             if (!File.Exists(partialFileName))
             {
-                _fileGenerator.Generate(partialFileName, className, classNamespace, _partialCsTemplate);
+                _fileGenerator.Generate(partialFileName, partialCsTemplate, data);
             }
         }
         
         private void BuildRelevantFileNames(
             string asset, 
-            out string fileName, 
+            out string xamlFileName, 
             out string generatedFileName,
             out string partialFileName)
         {
-            fileName = Path.Combine(Application.dataPath, "..", asset);
-            generatedFileName = Path.ChangeExtension(fileName, GeneratedCsFileExtension);
-            partialFileName = Path.ChangeExtension(fileName, PartialCsFileExtension);
+            xamlFileName = Path.Combine(Application.dataPath, "..", asset);
+            generatedFileName = Path.ChangeExtension(xamlFileName, GeneratedCsFileExtension);
+            partialFileName = Path.ChangeExtension(xamlFileName, PartialCsFileExtension);
         }
     }
 }

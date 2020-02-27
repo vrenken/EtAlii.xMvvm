@@ -9,8 +9,8 @@
         <e p="_Tests" t="Include">
           <e p="FlyCamera.cs" t="Include" />
           <e p="XamlVariant1" t="Include">
-            <e p="LoginView3.v1xaml.cs" t="Include" />
-            <e p="LoginView3.v1xaml.g.cs" t="Include" />
+            <e p="LoginView.v1xaml.cs" t="Include" />
+            <e p="LoginView.v1xaml.g.cs" t="Include" />
             <e p="LoginViewModel.cs" t="Include" />
           </e>
         </e>
@@ -157,6 +157,11 @@
             </e>
           </e>
           <e p="EtAlii.xMvvm.asmdef" t="Include" />
+          <e p="Runtime" t="Include">
+            <e p="XamlVariant1" t="Include">
+              <e p="View.cs" t="Include" />
+            </e>
+          </e>
         </e>
       </e>
       <e p="EtAlii.xMvvm.csproj" t="IncludeRecursive" />
