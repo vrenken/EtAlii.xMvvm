@@ -15,10 +15,10 @@
 
         private const string GeneratedCsTemplateFileName = "GeneratedCsTemplate.template";
         private const string PartialCsTemplateFileName = "PartialCsTemplate.template";
-        private const string TemplateFolder = "xMvvm/Editor/XamlVariant1";
+        private const string TemplateFolder = "xMvvm/Editor/XamlVariant1/Templates";
             
         private readonly FileGenerator _fileGenerator = new FileGenerator();
-        
+        //private readonly XamlViewCompiler _xamlViewCompiler = new XamlViewCompiler();
         public void Delete(string asset)
         {
             BuildRelevantFileNames(asset, out _, out var generatedFileName, out _);
@@ -44,9 +44,20 @@
             BuildRelevantFileNames(asset, out var xamlFileName, out var generatedFileName, out var partialFileName);
             
             var xamlContent = File.ReadAllText(xamlFileName);
-
+            Debug.Log(xamlContent);
+            
+            var xamlViewCompiler = new XamlViewCompiler();
+            var compilation = xamlViewCompiler.Compile(xamlContent);
+            
+            var view = new View();
+            //compilation.populate(null, view);
+            //var view = compilation.create(null);
+            
+            Debug.Log(view);
+            
             var data = new Dictionary<string, object>
             {
+                ["now"] = DateTime.Now,
                 ["className"] = Path.GetFileNameWithoutExtension(asset), 
                 ["classNamespace"] = UnityEditor.EditorSettings.projectGenerationRootNamespace,
                 ["viewModelType"] = Path.GetFileNameWithoutExtension(asset) + "Model",

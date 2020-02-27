@@ -1,11 +1,9 @@
 namespace EtAlii.xMvvm 
 {
-    using EtAlii.xMvvm.XamlVariant1;
-
-    public partial class LoginView : View 
+    public partial class LoginView 
     {    
-            public void Initialize()
-            {
-            }
+        public void Initialize()
+        {
+        }
     }
 }
