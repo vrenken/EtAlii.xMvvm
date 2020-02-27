@@ -144,10 +144,18 @@
             <e p="IViewCodeManager.cs" t="Include" />
             <e p="XamlAssetPostprocessor.cs" t="Include" />
             <e p="XamlVariant1" t="Include">
+              <e p="_Model" t="Include">
+                <e p="Binding.cs" t="Include" />
+                <e p="View.cs" t="Include" />
+              </e>
               <e p="FileGenerator.cs" t="Include" />
-              <e p="GeneratedCsTemplate.template" t="Include" />
-              <e p="PartialCsTemplate.template" t="Include" />
+              <e p="Templates" t="Include">
+                <e p="GeneratedCsTemplate.template" t="Include" />
+                <e p="PartialCsTemplate.template" t="Include" />
+              </e>
               <e p="Variant1ViewCodeManager.cs" t="Include" />
+              <e p="XamlLanguage.cs" t="Include" />
+              <e p="XamlViewCompiler.cs" t="Include" />
             </e>
             <e p="XamlVariant2" t="Include">
               <e p="Variant2ViewCodeManager.cs" t="Include" />
