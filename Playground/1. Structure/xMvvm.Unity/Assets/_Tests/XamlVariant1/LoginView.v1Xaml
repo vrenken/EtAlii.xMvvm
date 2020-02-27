@@ -1,7 +1,7 @@
 ﻿<View
     xmlns="xMvvm"    
-    ViewModelType="LoginViewModel"    
+    ViewModelType="LoginViewModel"        
     Prefab="LoginView.prefab">              
-    <Binding Name="First" />       
-    <Binding Name="Second" />       
-</View>   
+    <Binding Name="Password" Component="Panel/PasswordTextBox" ComponentProperty="Text" ViewModelProperty="Password" Mode="TwoWay" />       
+    <Binding Name="UserName" Component="Panel/UserNameTextBox" ComponentProperty="Text" ViewModelProperty="UserName" Mode="TwoWay" />       
+</View>      

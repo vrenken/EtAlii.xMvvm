@@ -13,9 +13,8 @@ namespace {{classNamespace}}
 {
     using UnityEngine;
     using System;
-    using EtAlii.xMvvm.XamlVariant1;
-    
-    public partial class {{className}} : View  
+
+    public partial class {{className}} : EtAlii.xMvvm.XamlVariant1.View  
     {
         /// <summary>
         /// The {{view.ViewModelType}} that should be used to power the view.     
@@ -25,7 +24,7 @@ namespace {{classNamespace}}
         public GameObject GameObject {get;}
 
 {% for binding in view.Bindings -%}
-        private readonly Binding {{ binding.Name | PrivateMember }};
+        private readonly EtAlii.xMvvm.XamlVariant1.Binding {{ binding.Name | PrivateMember }};
 {% endfor -%}
          
         public {{className}}()
@@ -35,7 +34,7 @@ namespace {{classNamespace}}
             
             // Wire the bindings.
 {% for binding in view.Bindings -%}
-            {{ binding.Name | PrivateMember }} = new Binding();
+            {{ binding.Name | PrivateMember }} = new EtAlii.xMvvm.XamlVariant1.Binding("{{binding.Component}}", "{{binding.ComponentProperty}}", "{{binding.ViewModelProperty}}");
 {% endfor -%}
                 
             // And initialize.
