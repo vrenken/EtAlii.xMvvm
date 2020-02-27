@@ -25,7 +25,7 @@ namespace {{classNamespace}}
         public GameObject GameObject {get;}
 
 {% for binding in view.Bindings -%}
-        private readonly Binding _{{ binding.Name | PascalCase }};
+        private readonly Binding {{ binding.Name | PrivateMember }};
 {% endfor -%}
          
         public {{className}}()
@@ -35,7 +35,7 @@ namespace {{classNamespace}}
             
             // Wire the bindings.
 {% for binding in view.Bindings -%}
-            _{{ binding.Name | PascalCase }} = new Binding();
+            {{ binding.Name | PrivateMember }} = new Binding();
 {% endfor -%}
                 
             // And initialize.
