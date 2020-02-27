@@ -1,4 +1,4 @@
-[assembly: EtAlii.xMvvm.XmlnsDefinition("xMvvm.EtAlii.net", "EtAlii.xMvvm")]
+[assembly: EtAlii.xMvvm.XmlnsDefinition("xMvvm", "EtAlii.xMvvm")]
 namespace EtAlii.xMvvm
 {
     using System;
