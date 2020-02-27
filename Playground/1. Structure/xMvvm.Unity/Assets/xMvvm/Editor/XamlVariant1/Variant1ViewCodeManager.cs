@@ -15,12 +15,14 @@
         private readonly string _generatedCsTemplate;
         private readonly string _partialCsTemplate;
         
+        private readonly FileGenerator _fileGenerator = new FileGenerator();
+        
         public Variant1ViewCodeManager()
         {
-            var generatedCsTemplateFileName = Path.Combine(Application.dataPath, "xMvvm/Editor/XamlVariant1", "GeneratedCsTemplate.txt");
+            var generatedCsTemplateFileName = Path.Combine(Application.dataPath, "xMvvm/Editor/XamlVariant1", "GeneratedCsTemplate.tt");
             _generatedCsTemplate = File.ReadAllText(generatedCsTemplateFileName);
 
-            var partialCsTemplateFileName = Path.Combine(Application.dataPath, "xMvvm/Editor/XamlVariant1", "PartialCsTemplate.txt");
+            var partialCsTemplateFileName = Path.Combine(Application.dataPath, "xMvvm/Editor/XamlVariant1", "PartialCsTemplate.tt");
             _partialCsTemplate = File.ReadAllText(partialCsTemplateFileName);
         }
         
@@ -38,42 +40,26 @@
         public void Create(string asset)
         {
             BuildRelevantFileNames(asset, out var filename, out var generatedFileName, out var partialFileName);
-            var name = Path.GetFileNameWithoutExtension(asset);
+            var className = Path.GetFileNameWithoutExtension(asset);
 
-            var rootNamespace = UnityEditor.EditorSettings.projectGenerationRootNamespace;
+            var classNamespace = UnityEditor.EditorSettings.projectGenerationRootNamespace;
             
             var xamlContent = File.ReadAllText(filename);
             
             // Debug.Log(content);
 
-            CreateGeneratedFile(name, rootNamespace, generatedFileName);
-
-            CreatePartialFile(name, rootNamespace, partialFileName);
-        }
-
-        private void CreatePartialFile(string name, string rootNamespace, string partialFileName)
-        {
-            // We only generated the partial file when it doesn't exist yet.
-            if (File.Exists(partialFileName)) return;
-            
-            var partialCsContent = _partialCsTemplate
-                .Replace("CLASS", name)
-                .Replace("ROOT_NAMESPACE", rootNamespace); 
-            File.WriteAllText(partialFileName, partialCsContent);
-        }
-        
-        private void CreateGeneratedFile(string name, string rootNamespace, string generatedFileName)
-        {
             // We always delete the generated file and recreate it.
             if (File.Exists(generatedFileName))
             {
                 File.Delete(generatedFileName);
             }
+            _fileGenerator.Generate(generatedFileName, className, classNamespace, _generatedCsTemplate);
 
-            var generatedCsContent = _generatedCsTemplate
-                .Replace("CLASS", name)
-                .Replace("ROOT_NAMESPACE", rootNamespace); 
-            File.WriteAllText(generatedFileName, generatedCsContent);
+            // We only generated the partial file when it doesn't exist yet.
+            if (!File.Exists(partialFileName))
+            {
+                _fileGenerator.Generate(partialFileName, className, classNamespace, _partialCsTemplate);
+            }
         }
         
         private void BuildRelevantFileNames(

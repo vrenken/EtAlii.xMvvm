@@ -8,9 +8,11 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "Mono.TextTemplating.dll"
+        "Mono.TextTemplating.dll",
+        "System.CodeDom.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [],
-    "versionDefines": []
+    "versionDefines": [],
+    "noEngineReferences": false
 }

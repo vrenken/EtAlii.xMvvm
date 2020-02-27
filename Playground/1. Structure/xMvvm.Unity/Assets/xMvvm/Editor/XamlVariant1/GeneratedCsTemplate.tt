@@ -1,0 +1,6 @@
+﻿<#@ template language="C#" inherits="MonoBehaviour" hostSpecific="false" debug="true" #>
+<#@ output extension=".cs" encoding="utf-8" #>
+<#@ import namespace="UnityEngine" #>
+
+
+
