@@ -1,7 +1,7 @@
 ﻿<View
-    xmlns="clr-namespace:EtAlii.xMvvm"      
-    ViewModelType="LoginViewModel"  
-    Prefab="LoginView.prefab">        
-    <Binding name="First" />     
-    <Binding name="Second" />     
-</View> 
+    xmlns="xMvvm"    
+    ViewModelType="LoginViewModel"    
+    Prefab="LoginView.prefab">              
+    <Binding Name="First" />       
+    <Binding Name="Second" />       
+</View>   
