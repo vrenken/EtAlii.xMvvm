@@ -1,7 +1,9 @@
 {
     "name": "EtAlii.xMvvm",
     "references": [
-        "XamlIl"
+        "XamlIl",
+        "XamlIl.Cecil",
+        "XamlIl.Runtime"
     ],
     "includePlatforms": [
         "Editor"
@@ -11,7 +13,11 @@
     "overrideReferences": true,
     "precompiledReferences": [
         "DotLiquid.dll",
-        "DotLiquid.resources.dll"
+        "DotLiquid.resources.dll",
+        "System.Reflection.Emit.dll",
+        "System.Reflection.Emit.ILGeneration.dll",
+        "Mono.Cecil.dll",
+        "Mono.Cecil.Rocks.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
