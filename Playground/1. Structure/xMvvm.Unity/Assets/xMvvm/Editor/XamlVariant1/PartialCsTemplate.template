@@ -2,7 +2,7 @@
 {
     using EtAlii.xMvvm.XamlVariant1;
 
-    public partial class {{className}} : View 
+    public partial class {{className}} 
     {    
             public void Initialize()
             {
