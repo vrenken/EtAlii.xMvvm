@@ -4,10 +4,16 @@
     using System.Collections.Generic;
     using System.IO;
     using DotLiquid;
+    using DotLiquid.NamingConventions;
     using UnityEngine;
 
     public class FileGenerator 
     {
+        static FileGenerator()
+        {
+            Template.NamingConvention = new CSharpNamingConvention();
+            Template.RegisterFilter(typeof(CodeGenerationFilters));
+        }
         public void Generate(string outputFileName, string template, Dictionary<string, object> data)
         {
             try

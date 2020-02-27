@@ -1,6 +1,6 @@
 ﻿namespace EtAlii.xMvvm
 {
-    public static class PascalCaseFilter
+    public static class CodeGenerationFilters
     {
         public static string PascalCase(string input)
         {
