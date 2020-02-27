@@ -15,22 +15,29 @@ namespace {{classNamespace}}
     using System;
     using EtAlii.xMvvm.XamlVariant1;
     
-    public partial class {{className}} : View 
+    public partial class {{className}} : View  
     {
         /// <summary>
-        /// The {{viewModelType}} that should be used to power the view.     
+        /// The {{view.ViewModelType}} that should be used to power the view.     
         /// </summary>
-        public {{viewModelType}} ViewModel { get; set; }
+        public {{view.ViewModelType}} ViewModel { get; set; }
         
         public GameObject GameObject {get;}
+
+{% for binding in view.Bindings -%}
+        private readonly Binding _{{ binding.Name | PascalCase }};
+{% endfor -%}
          
         public {{className}}()
         {
             // Setup a prefab instance. 
-            GameObject = GameObject.Instantiate(Resources.Load("{{className}}.prefab", typeof(GameObject))) as GameObject;
+            GameObject = GameObject.Instantiate(Resources.Load("{{view.Prefab}}", typeof(GameObject))) as GameObject;
             
             // Wire the bindings.
-            
+{% for binding in view.Bindings -%}
+            _{{ binding.Name | PascalCase }} = new Binding();
+{% endfor -%}
+                
             // And initialize.
             Initialize();   
         }

@@ -2,7 +2,7 @@
 {
     public partial class {{className}} 
     {    
-        public void Initialize()
+        private void Initialize()
         {
         }
     }
