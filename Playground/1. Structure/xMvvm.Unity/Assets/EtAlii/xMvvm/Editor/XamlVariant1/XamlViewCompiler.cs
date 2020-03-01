@@ -11,6 +11,7 @@
     using XamlIl.Runtime;
     using XamlIl.Transform;
     using XamlIl.TypeSystem;
+    using Object = System.Object;
     using TypeAttributes = Mono.Cecil.TypeAttributes;
 
     public class XamlViewCompiler 
@@ -70,6 +71,7 @@
         public (Func<IServiceProvider, object> create, Action<IServiceProvider, object> populate) Compile(string xaml)
         {
             var ts = (CecilTypeSystem) (_typeSystem);
+            
             var asm = ts.CreateAndRegisterAssembly(GeneratedAssemblyName, new Version(1, 0),
                 ModuleKind.Dll);
 
@@ -87,17 +89,17 @@
 
             var tb = ts.CreateTypeBuilder(def);
             var _ = Compile(tb, contextTypeDef, xaml);
-            
-            var ms = new MemoryStream();
-            asm.Write(ms);
-            var data = ms.ToArray();
-            lock (AsmLock)
-                File.WriteAllBytes(GeneratedAssemblyName+".dll", data);
-            
-            var loaded = Assembly.Load(data);
-            var t = loaded.GetType($"{GeneratedNameSpace}.{GeneratedViewClass}");
 
-            return GetCallbacks(t);
+            using (var ms = new MemoryStream())
+            {
+                asm.Write(ms);
+                var data = ms.ToArray();
+            
+                var loaded = Assembly.Load(data);
+                var t = loaded.GetType($"{GeneratedNameSpace}.{GeneratedViewClass}");
+
+                return GetCallbacks(t);
+            }
         }
 
         private (Func<IServiceProvider, object> create, Action<IServiceProvider, object> populate) GetCallbacks(Type created)
