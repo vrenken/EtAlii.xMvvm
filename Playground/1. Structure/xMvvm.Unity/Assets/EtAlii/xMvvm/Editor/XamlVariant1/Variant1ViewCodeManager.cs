@@ -15,7 +15,7 @@
 
         private const string GeneratedCsTemplateFileName = "GeneratedCsTemplate.template";
         private const string PartialCsTemplateFileName = "PartialCsTemplate.template";
-        private const string TemplateFolder = "xMvvm/Editor/XamlVariant1/Templates";
+        private const string TemplateFolder = "EtAlii/xMvvm/Editor/XamlVariant1/Templates";
             
         private readonly FileGenerator _fileGenerator = new FileGenerator();
         //private readonly XamlViewCompiler _xamlViewCompiler = new XamlViewCompiler();
