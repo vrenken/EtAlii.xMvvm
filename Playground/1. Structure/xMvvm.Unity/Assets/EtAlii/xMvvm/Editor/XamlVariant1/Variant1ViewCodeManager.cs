@@ -18,7 +18,8 @@
         private const string TemplateFolder = "EtAlii/xMvvm/Editor/XamlVariant1/Templates";
             
         private readonly FileGenerator _fileGenerator = new FileGenerator();
-        //private readonly XamlViewCompiler _xamlViewCompiler = new XamlViewCompiler();
+        private readonly XamlViewCompiler _xamlViewCompiler = new XamlViewCompiler();
+        
         public void Delete(string asset)
         {
             BuildRelevantFileNames(asset, out _, out var generatedFileName, out _);
@@ -45,8 +46,7 @@
 
             // Let's fetch the XAML and convert it into a View hierarchy.
             var xamlContent = File.ReadAllText(xamlFileName);
-            var xamlViewCompiler = new XamlViewCompiler();
-            var compilation = xamlViewCompiler.Compile(xamlContent);
+            var compilation = _xamlViewCompiler.Compile(xamlContent);
             var view = (View)compilation.create(null);
 
             // Some values might not be set. Let's add a few default ones.

@@ -19,8 +19,6 @@
         private readonly IXamlIlTypeSystem _typeSystem;
         public XamlIlTransformerConfiguration Configuration { get; }
 
-        private static readonly object AsmLock = new object();
-
         private const string GeneratedNameSpace = "EtAlii.xMvvm.Generated";
         private const string GeneratedAssemblyName = "EtAlii.xMvvm.Generated";
         private const string GeneratedViewClass = "GeneratedView";
@@ -36,7 +34,6 @@
                 typeof(IXamlIlParentStackProviderV1).Assembly.Location,
             };
 
-            //_typeSystem = new SreTypeSystem();
             _typeSystem = new CecilTypeSystem(references);
             
             var defaultAssembly = _typeSystem.FindAssembly(typeof(XamlViewCompiler).Assembly.FullName);
