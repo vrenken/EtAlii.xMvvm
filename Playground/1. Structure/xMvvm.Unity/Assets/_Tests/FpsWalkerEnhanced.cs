@@ -17,10 +17,11 @@
         [SerializeField]
         public bool limitDiagonalSpeed = true;
 
-        [Tooltip(
-            "If checked, the run key toggles between running and walking. Otherwise player runs if the key is held down.")]
+        #pragma warning disable CS0649
+        [Tooltip("If checked, the run key toggles between running and walking. Otherwise player runs if the key is held down.")]
         [SerializeField]
         private bool toggleRun;
+        #pragma warning restore CS0649
 
         [Tooltip("How high the player jumps when hitting the jump button.")] [SerializeField]
         private float jumpSpeed = 8.0f;
@@ -28,34 +29,35 @@
         [Tooltip("How fast the player falls when not standing on anything.")] [SerializeField]
         private float gravity = 20.0f;
 
-        [Tooltip(
-            "Units that player can fall before a falling function is run. To disable, type \"infinity\" in the inspector.")]
+        [Tooltip("Units that player can fall before a falling function is run. To disable, type \"infinity\" in the inspector.")]
         [SerializeField]
         private float fallingThreshold = 10.0f;
 
-        [Tooltip(
-            "If the player ends up on a slope which is at least the Slope Limit as set on the character controller, then he will slide down.")]
+        #pragma warning disable CS0649
+        [Tooltip("If the player ends up on a slope which is at least the Slope Limit as set on the character controller, then he will slide down.")]
         [SerializeField]
         private bool slideWhenOverSlopeLimit;
+        #pragma warning restore CS0649
 
-        [Tooltip(
-            "If checked and the player is on an object tagged \"Slide\", he will slide down it regardless of the slope limit.")]
+        #pragma warning disable CS0649
+        [Tooltip("If checked and the player is on an object tagged \"Slide\", he will slide down it regardless of the slope limit.")]
         [SerializeField]
         private bool slideOnTaggedObjects;
+        #pragma warning restore CS0649
 
         [Tooltip("How fast the player slides when on slopes as defined above.")] [SerializeField]
         private float slideSpeed = 12.0f;
 
+        #pragma warning disable CS0649
         [Tooltip("If checked, then the player can change direction while in the air.")] [SerializeField]
         private bool airControl;
+        #pragma warning restore CS0649
 
-        [Tooltip(
-            "Small amounts of this results in bumping when walking down slopes, but large amounts results in falling too fast.")]
+        [Tooltip("Small amounts of this results in bumping when walking down slopes, but large amounts results in falling too fast.")]
         [SerializeField]
         private float antiBumpFactor = .75f;
 
-        [Tooltip(
-            "Player must be grounded for at least this many physics frames before being able to jump again; set to 0 to allow bunny hopping.")]
+        [Tooltip("Player must be grounded for at least this many physics frames before being able to jump again; set to 0 to allow bunny hopping.")]
         [SerializeField]
         private int antiBunnyHopFactor = 1;
 
