@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelUserStore">
-    <attachedFolders />
+    <attachedFolders>
+      <Path>../../../../../../../Users/vrenk/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ide.vscode@1.1.4</Path>
+    </attachedFolders>
     <explicitIncludes>
       <Path>Library/PackageCache/com.unity.collab-proxy@1.2.16</Path>
       <Path>Library/PackageCache/com.unity.ext.nunit@1.0.0</Path>
@@ -12,7 +14,6 @@
       <Path>Library/PackageCache/com.unity.timeline@1.2.12</Path>
       <Path>Packages</Path>
       <Path>ProjectSettings</Path>
-      <Path>../../../../../../../Users/vrenk/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ide.vscode@1.1.4</Path>
     </explicitIncludes>
     <explicitExcludes>
       <Path>.idea</Path>

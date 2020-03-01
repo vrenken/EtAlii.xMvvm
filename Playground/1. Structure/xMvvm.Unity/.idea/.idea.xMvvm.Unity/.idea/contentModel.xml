@@ -5,11 +5,146 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="_Tests" t="Include">
-          <e p="FlyCamera.cs" t="Include" />
+          <e p="FPSWalkerEnhanced.cs" t="Include" />
+          <e p="MouseLook.cs" t="Include" />
           <e p="XamlVariant1" t="Include">
             <e p="LoginView.v1xaml.cs" t="Include" />
             <e p="LoginView.v1xaml.g.cs" t="Include" />
             <e p="LoginViewModel.cs" t="Include" />
+          </e>
+        </e>
+        <e p="EtAlii" t="Include">
+          <e p="xMvvm" t="Include">
+            <e p="Editor" t="Include">
+              <e p="IViewCodeManager.cs" t="Include" />
+              <e p="XamlAssetPostprocessor.cs" t="Include" />
+              <e p="XamlVariant1" t="Include">
+                <e p="_Model" t="Include">
+                  <e p="Binding.cs" t="Include" />
+                  <e p="View.cs" t="Include" />
+                </e>
+                <e p="FileGenerator.cs" t="Include" />
+                <e p="Templates" t="Include">
+                  <e p="CodeGenerationFilters.cs" t="Include" />
+                  <e p="GeneratedCsTemplate.template" t="Include" />
+                  <e p="PartialCsTemplate.template" t="Include" />
+                </e>
+                <e p="Variant1ViewCodeManager.cs" t="Include" />
+                <e p="XamlLanguage.cs" t="Include" />
+                <e p="XamlViewCompiler.cs" t="Include" />
+              </e>
+              <e p="XamlVariant2" t="Include">
+                <e p="Variant2ViewCodeManager.cs" t="Include" />
+              </e>
+              <e p="XamlVariant3" t="Include">
+                <e p="Variant3ViewCodeManager.cs" t="Include" />
+              </e>
+            </e>
+            <e p="EtAlii.xMvvm.asmdef" t="Include" />
+            <e p="Runtime" t="Include">
+              <e p="XamlVariant1" t="Include">
+                <e p="Binding.cs" t="Include" />
+                <e p="View.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Kekekeks" t="Include">
+          <e p="XamlIl" t="Include">
+            <e p="XamlIl" t="Include">
+              <e p="Ast" t="Include">
+                <e p="Clr.cs" t="Include" />
+                <e p="Common.cs" t="Include" />
+                <e p="CompilerHelpers.cs" t="Include" />
+                <e p="Intrinsics.cs" t="Include" />
+                <e p="Xaml.cs" t="Include" />
+                <e p="XamlIlDocument.cs" t="Include" />
+                <e p="Xml.cs" t="Include" />
+              </e>
+              <e p="Exceptions.cs" t="Include" />
+              <e p="Parsers" t="Include">
+                <e p="CommaSeparatedParenthesesTreeParser.cs" t="Include" />
+                <e p="CompatibleXmlReader.cs" t="Include" />
+                <e p="SystemXamlMarkupExtensionParser" t="Include">
+                  <e p="KnownStrings.cs" t="Include" />
+                  <e p="MeScanner.cs" t="Include" />
+                  <e p="MeScanner.Shims.cs" t="Include" />
+                  <e p="SystemXamlMarkupExtensionParser.cs" t="Include" />
+                </e>
+                <e p="XamlMarkupExtensionParser.cs" t="Include" />
+                <e p="XDocumentXamlIlParser.cs" t="Include" />
+              </e>
+              <e p="Transform" t="Include">
+                <e p="CheckingIlEmitter.cs" t="Include" />
+                <e p="Emitters" t="Include">
+                  <e p="ManipulationGroupEmitter.cs" t="Include" />
+                  <e p="MarkupExtensionEmitter.cs" t="Include" />
+                  <e p="MethodCallEmitter.cs" t="Include" />
+                  <e p="NewObjectEmitter.cs" t="Include" />
+                  <e p="ObjectInitializationNodeEmitter.cs" t="Include" />
+                  <e p="PropertyAssignmentEmitter.cs" t="Include" />
+                  <e p="PropertyValueManipulationEmitter.cs" t="Include" />
+                  <e p="TextNodeEmitter.cs" t="Include" />
+                  <e p="ValueWithManipulationsEmitter.cs" t="Include" />
+                </e>
+                <e p="RecordingIlEmitter.cs" t="Include" />
+                <e p="Transformers" t="Include">
+                  <e p="XamlIlContentConvertTransformer.cs" t="Include" />
+                  <e p="XamlIlConvertPropertyValuesToAssignmentsTransformer.cs" t="Include" />
+                  <e p="XamlIlDeferredContentTransformer.cs" t="Include" />
+                  <e p="XamlIlFlattenTransformer.cs" t="Include" />
+                  <e p="XamlIlIntrinsicsTransformer.cs" t="Include" />
+                  <e p="XamlIlKnownDirectivesTransformer.cs" t="Include" />
+                  <e p="XamlIlMarkupExtensionTransformer.cs" t="Include" />
+                  <e p="XamlIlNewObjectTransformer.cs" t="Include" />
+                  <e p="XamlIlPropertyReferenceResolver.cs" t="Include" />
+                  <e p="XamlIlResolveContentPropertyTransformer.cs" t="Include" />
+                  <e p="XamlIlResolvePropertyValueAddersTransformer.cs" t="Include" />
+                  <e p="XamlIlTopDownInitializationTransformer.cs" t="Include" />
+                  <e p="XamlIlTypeReferenceResolver.cs" t="Include" />
+                  <e p="XamlIlXArgumentsTransformer.cs" t="Include" />
+                </e>
+                <e p="XamlIlAstTransformationContext.cs" t="Include" />
+                <e p="XamlIlCompiler.cs" t="Include" />
+                <e p="XamlIlContext.cs" t="Include" />
+                <e p="XamlIlEmitContext.cs" t="Include" />
+                <e p="XamlIlLanguageTypeMappings.cs" t="Include" />
+                <e p="XamlIlNamespaceInfoHelper.cs" t="Include" />
+                <e p="XamlIlTransformerConfiguration.cs" t="Include" />
+                <e p="XamlIlTransformHelpers.cs" t="Include" />
+                <e p="XamlIlXmlnsMappings.cs" t="Include" />
+              </e>
+              <e p="TypeSystem" t="Include">
+                <e p="SreTypeSystem.cs" t="Include" />
+                <e p="TypeSystem.cs" t="Include" />
+                <e p="TypeSystemExtensions.cs" t="Include" />
+                <e p="TypeSystemHelpers.cs" t="Include" />
+                <e p="XamlIlLocalsPool.cs" t="Include" />
+              </e>
+              <e p="XamlIl.asmdef" t="Include" />
+              <e p="XamlNamespaces.cs" t="Include" />
+            </e>
+            <e p="XamlIl.Cecil" t="Include">
+              <e p="CecilAssembly.cs" t="Include" />
+              <e p="CecilCustomAttribute.cs" t="Include" />
+              <e p="CecilEmitter.cs" t="Include" />
+              <e p="CecilEvent.cs" t="Include" />
+              <e p="CecilField.cs" t="Include" />
+              <e p="CecilHelpers.cs" t="Include" />
+              <e p="CecilMethod.cs" t="Include" />
+              <e p="CecilProperty.cs" t="Include" />
+              <e p="CecilType.cs" t="Include" />
+              <e p="CecilTypeBuilder.cs" t="Include" />
+              <e p="CecilTypeCache.cs" t="Include" />
+              <e p="CecilTypeSystem.cs" t="Include" />
+              <e p="CustomMetadataResolver.cs" t="Include" />
+              <e p="UnresolvedCecilType.cs" t="Include" />
+              <e p="XamlIl.Cecil.asmdef" t="Include" />
+            </e>
+            <e p="XamlIl.Runtime" t="Include">
+              <e p="Interfaces.cs" t="Include" />
+              <e p="XamlIl.Runtime.asmdef" t="Include" />
+            </e>
           </e>
         </e>
         <e p="Packages" t="Include">
@@ -41,134 +176,32 @@
             <e p="version.txt" t="Include" />
           </e>
         </e>
-        <e p="XamlIl" t="Include">
-          <e p="XamlIl" t="Include">
-            <e p="Ast" t="Include">
-              <e p="Clr.cs" t="Include" />
-              <e p="Common.cs" t="Include" />
-              <e p="CompilerHelpers.cs" t="Include" />
-              <e p="Intrinsics.cs" t="Include" />
-              <e p="Xaml.cs" t="Include" />
-              <e p="XamlIlDocument.cs" t="Include" />
-              <e p="Xml.cs" t="Include" />
-            </e>
-            <e p="Exceptions.cs" t="Include" />
-            <e p="Parsers" t="Include">
-              <e p="CommaSeparatedParenthesesTreeParser.cs" t="Include" />
-              <e p="CompatibleXmlReader.cs" t="Include" />
-              <e p="SystemXamlMarkupExtensionParser" t="Include">
-                <e p="KnownStrings.cs" t="Include" />
-                <e p="MeScanner.cs" t="Include" />
-                <e p="MeScanner.Shims.cs" t="Include" />
-                <e p="SystemXamlMarkupExtensionParser.cs" t="Include" />
-              </e>
-              <e p="XamlMarkupExtensionParser.cs" t="Include" />
-              <e p="XDocumentXamlIlParser.cs" t="Include" />
-            </e>
-            <e p="Transform" t="Include">
-              <e p="CheckingIlEmitter.cs" t="Include" />
-              <e p="Emitters" t="Include">
-                <e p="ManipulationGroupEmitter.cs" t="Include" />
-                <e p="MarkupExtensionEmitter.cs" t="Include" />
-                <e p="MethodCallEmitter.cs" t="Include" />
-                <e p="NewObjectEmitter.cs" t="Include" />
-                <e p="ObjectInitializationNodeEmitter.cs" t="Include" />
-                <e p="PropertyAssignmentEmitter.cs" t="Include" />
-                <e p="PropertyValueManipulationEmitter.cs" t="Include" />
-                <e p="TextNodeEmitter.cs" t="Include" />
-                <e p="ValueWithManipulationsEmitter.cs" t="Include" />
-              </e>
-              <e p="RecordingIlEmitter.cs" t="Include" />
-              <e p="Transformers" t="Include">
-                <e p="XamlIlContentConvertTransformer.cs" t="Include" />
-                <e p="XamlIlConvertPropertyValuesToAssignmentsTransformer.cs" t="Include" />
-                <e p="XamlIlDeferredContentTransformer.cs" t="Include" />
-                <e p="XamlIlFlattenTransformer.cs" t="Include" />
-                <e p="XamlIlIntrinsicsTransformer.cs" t="Include" />
-                <e p="XamlIlKnownDirectivesTransformer.cs" t="Include" />
-                <e p="XamlIlMarkupExtensionTransformer.cs" t="Include" />
-                <e p="XamlIlNewObjectTransformer.cs" t="Include" />
-                <e p="XamlIlPropertyReferenceResolver.cs" t="Include" />
-                <e p="XamlIlResolveContentPropertyTransformer.cs" t="Include" />
-                <e p="XamlIlResolvePropertyValueAddersTransformer.cs" t="Include" />
-                <e p="XamlIlTopDownInitializationTransformer.cs" t="Include" />
-                <e p="XamlIlTypeReferenceResolver.cs" t="Include" />
-                <e p="XamlIlXArgumentsTransformer.cs" t="Include" />
-              </e>
-              <e p="XamlIlAstTransformationContext.cs" t="Include" />
-              <e p="XamlIlCompiler.cs" t="Include" />
-              <e p="XamlIlContext.cs" t="Include" />
-              <e p="XamlIlEmitContext.cs" t="Include" />
-              <e p="XamlIlLanguageTypeMappings.cs" t="Include" />
-              <e p="XamlIlNamespaceInfoHelper.cs" t="Include" />
-              <e p="XamlIlTransformerConfiguration.cs" t="Include" />
-              <e p="XamlIlTransformHelpers.cs" t="Include" />
-              <e p="XamlIlXmlnsMappings.cs" t="Include" />
-            </e>
-            <e p="TypeSystem" t="Include">
-              <e p="SreTypeSystem.cs" t="Include" />
-              <e p="TypeSystem.cs" t="Include" />
-              <e p="TypeSystemExtensions.cs" t="Include" />
-              <e p="TypeSystemHelpers.cs" t="Include" />
-              <e p="XamlIlLocalsPool.cs" t="Include" />
-            </e>
-            <e p="XamlIl.asmdef" t="Include" />
-            <e p="XamlNamespaces.cs" t="Include" />
+        <e p="TextMesh Pro" t="Include">
+          <e p="Fonts" t="Include">
+            <e p="LiberationSans - OFL.txt" t="Include" />
           </e>
-          <e p="XamlIl.Cecil" t="Include">
-            <e p="CecilAssembly.cs" t="Include" />
-            <e p="CecilCustomAttribute.cs" t="Include" />
-            <e p="CecilEmitter.cs" t="Include" />
-            <e p="CecilEvent.cs" t="Include" />
-            <e p="CecilField.cs" t="Include" />
-            <e p="CecilHelpers.cs" t="Include" />
-            <e p="CecilMethod.cs" t="Include" />
-            <e p="CecilProperty.cs" t="Include" />
-            <e p="CecilType.cs" t="Include" />
-            <e p="CecilTypeBuilder.cs" t="Include" />
-            <e p="CecilTypeCache.cs" t="Include" />
-            <e p="CecilTypeSystem.cs" t="Include" />
-            <e p="CustomMetadataResolver.cs" t="Include" />
-            <e p="UnresolvedCecilType.cs" t="Include" />
-            <e p="XamlIl.Cecil.asmdef" t="Include" />
-          </e>
-          <e p="XamlIl.Runtime" t="Include">
-            <e p="Interfaces.cs" t="Include" />
-            <e p="XamlIl.Runtime.asmdef" t="Include" />
-          </e>
-        </e>
-        <e p="xMvvm" t="Include">
-          <e p="Editor" t="Include">
-            <e p="IViewCodeManager.cs" t="Include" />
-            <e p="XamlAssetPostprocessor.cs" t="Include" />
-            <e p="XamlVariant1" t="Include">
-              <e p="_Model" t="Include">
-                <e p="Binding.cs" t="Include" />
-                <e p="View.cs" t="Include" />
-              </e>
-              <e p="FileGenerator.cs" t="Include" />
-              <e p="Templates" t="Include">
-                <e p="CodeGenerationFilters.cs" t="Include" />
-                <e p="GeneratedCsTemplate.template" t="Include" />
-                <e p="PartialCsTemplate.template" t="Include" />
-              </e>
-              <e p="Variant1ViewCodeManager.cs" t="Include" />
-              <e p="XamlLanguage.cs" t="Include" />
-              <e p="XamlViewCompiler.cs" t="Include" />
-            </e>
-            <e p="XamlVariant2" t="Include">
-              <e p="Variant2ViewCodeManager.cs" t="Include" />
-            </e>
-            <e p="XamlVariant3" t="Include">
-              <e p="Variant3ViewCodeManager.cs" t="Include" />
+          <e p="Resources" t="Include">
+            <e p="LineBreaking Following Characters.txt" t="Include" />
+            <e p="LineBreaking Leading Characters.txt" t="Include" />
+            <e p="Shaders" t="Include">
+              <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+              <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+              <e p="TMP_Bitmap.shader" t="Include" />
+              <e p="TMP_SDF Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+              <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+              <e p="TMP_SDF-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+              <e p="TMP_SDF-Surface.shader" t="Include" />
+              <e p="TMP_SDF.shader" t="Include" />
+              <e p="TMP_Sprite.shader" t="Include" />
+              <e p="TMPro.cginc" t="Include" />
+              <e p="TMPro_Properties.cginc" t="Include" />
+              <e p="TMPro_Surface.cginc" t="Include" />
             </e>
           </e>
-          <e p="EtAlii.xMvvm.asmdef" t="Include" />
-          <e p="Runtime" t="Include">
-            <e p="XamlVariant1" t="Include">
-              <e p="Binding.cs" t="Include" />
-              <e p="View.cs" t="Include" />
-            </e>
+          <e p="Sprites" t="Include">
+            <e p="EmojiOne Attribution.txt" t="Include" />
           </e>
         </e>
       </e>
