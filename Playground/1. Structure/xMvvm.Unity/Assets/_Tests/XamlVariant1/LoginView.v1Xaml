@@ -3,12 +3,22 @@
     ViewModelType="LoginViewModel"        
     Prefab="LoginView.prefab">
 
+    <Binding Name="Password" Component="PasswordTextBox" ComponentProperty="Text" ViewModelProperty="Password" Mode="TwoWay" />       
+    <Binding Name="UserName" Component="UserNameTextBox" ComponentProperty="Text" ViewModelProperty="UserName" Mode="TwoWay" /> 
+    
     <!-- <Property Path="Panel/PasswordTextBox" ComponentType="Label" Property="Text" Value="{x:Bind Password}"> -->
     <!-- <Event Path="Panel/LoginButton" ComponentType="Button" Event="Clicked" Handler="{x:Bind LoginClicked}"> -->
-
-    <!-- <Property Target="{x:Map Path=Panel/PasswordTextBox, Component=Label, Member=Text}" Value="{x:Bind Password}"> -->
-    <!-- <Event Target="{x:Map Path=Panel/LoginButton, Component=Button, Member=Clicked}" Value="{x:Bind LoginClicked}"> -->
-                   
-    <Binding Name="Password" Component="Panel/PasswordTextBox" ComponentProperty="Text" ViewModelProperty="Password" Mode="TwoWay" />       
-    <Binding Name="UserName" Component="Panel/UserNameTextBox" ComponentProperty="Text" ViewModelProperty="UserName" Mode="TwoWay" />       
+    
+    <!-- <Value Name="Password" Source="{x:Property Password}" Target="{x:Component Path=Canvas/Panel/PasswordTextBox, Type=TMP_InputField, Member=Text}" Mode="TwoWay"> -->
+    <!-- <Value Name="UserName" Source="{x:Property UserName}" Target="{x:Component Path=Canvas/Panel/UserNameTextBox, Type=TMP_InputField, Member=Text}" Mode="TwoWay"> -->
+    <!-- <Event Name="Login" Source="{x:Component Path=Canvas/Panel/LoginButton, Type=Button, Event=onClick}" Target="{x:Method LoginClicked}"> -->
+                       
+    <!-- <PropertyBinding Name="Password" Mode="TwoWay"> -->  
+        <!-- <ComponentProperty Path="Canvas/Panel/PasswordTextBox" Type="TMP_InputField" Property="text" /> -->  
+        <!-- <ViewModelProperty Property="UserName" /> -->
+    <!-- </PropertyBinding> -->
+    <!-- <EventBinding Name="Login"> -->
+        <!-- <ComponentEvent Path="Panel/UserNameTextBox" Type="Button" Event="onClick" /> -->
+        <!-- <ViewModelMethod Property="Login" /> -->
+    <!-- </PropertyBinding> -->       
 </View>      
