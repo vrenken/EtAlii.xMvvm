@@ -11,6 +11,7 @@
           <e p="MouseLook.cs" t="Include" />
           <e p="XamlVariant1" t="Include">
             <e p="LoginView.v1xaml.cs" t="Include" />
+            <e p="LoginView.v1xaml.g.cs" t="Include" />
             <e p="LoginViewModel.cs" t="Include" />
           </e>
         </e>
@@ -47,8 +48,6 @@
                 <e p="Binding.cs" t="Include" />
                 <e p="View.cs" t="Include" />
               </e>
-              <e p="XamlVariant2" t="Include" />
-              <e p="XamlVariant3" t="Include" />
             </e>
           </e>
         </e>
@@ -125,7 +124,6 @@
                 <e p="XamlIlLocalsPool.cs" t="Include" />
               </e>
               <e p="XamlIl.asmdef" t="Include" />
-              <e p="XamlIl.csproj" t="Include" />
               <e p="XamlNamespaces.cs" t="Include" />
             </e>
             <e p="XamlIl.Cecil" t="Include">
@@ -144,12 +142,10 @@
               <e p="CustomMetadataResolver.cs" t="Include" />
               <e p="UnresolvedCecilType.cs" t="Include" />
               <e p="XamlIl.Cecil.asmdef" t="Include" />
-              <e p="XamlIl.Cecil.csproj" t="Include" />
             </e>
             <e p="XamlIl.Runtime" t="Include">
               <e p="Interfaces.cs" t="Include" />
               <e p="XamlIl.Runtime.asmdef" t="Include" />
-              <e p="XamlIl.Runtime.csproj" t="Include" />
             </e>
           </e>
         </e>
