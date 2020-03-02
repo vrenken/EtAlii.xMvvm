@@ -1,6 +1,7 @@
 ﻿namespace EtAlii.xMvvm
 {
     using UnityEngine;
+    using Cursor = UnityEngine.Cursor;
 
     /// MouseLook rotates the transform based on the mouse delta.
     /// Minimum and Maximum values can be used to constrain the possible rotation
@@ -20,63 +21,43 @@
     [AddComponentMenu("Camera-Control/Mouse Look")]
     public class MouseLook : MonoBehaviour
     {
-
-
-        public enum RotationAxes
-        {
-            MouseXAndY = 0,
-            MouseX = 1,
-            MouseY = 2
-        }
-
-        public RotationAxes axes = RotationAxes.MouseXAndY;
-        public float sensitivityX = 15F;
-        public float sensitivityY = 15F;
-        public float minimumX = -360F;
-        public float maximumX = 360F;
-        public float minimumY = -60F;
-        public float maximumY = 60F;
-        float _rotationX;
-        float _rotationY;
-        Quaternion _originalRotation;
+        public float sensitivity = 15f;
+        private Vector2 _mouseLook;
+        private GameObject _character;
 
 #if UNITY_EDITOR
         private Vector2 _lastAxis;
 #endif
-        void FixedUpdate()
+        void Update()
         {
-#if UNITY_EDITOR
-                Vector3 axis = new Vector3(-(_lastAxis.x - Input.mousePosition.x) * 0.1f, -(_lastAxis.y - Input.mousePosition.y) * 0.1f, Input.GetAxis("Mouse ScrollWheel"));
+            if (Input.GetMouseButton(1)) // = right button down.
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                
+#if FALSE //UNITY_EDITOR
+                var look = new Vector2(-(_lastAxis.x - Input.mousePosition.x) * 0.1f, -(_lastAxis.y - Input.mousePosition.y) * 0.1f);
                 _lastAxis = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-                _rotationX += axis.x * sensitivityX;
-                _rotationY += axis.y * sensitivityY;
 #else             
                 // Read the mouse input axis
-                _rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-                _rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-#endif           
-                _rotationX = ClampAngle(_rotationX, minimumX, maximumX);
-                _rotationY = ClampAngle(_rotationY, minimumY, maximumY);
-                Quaternion xQuaternion = Quaternion.AngleAxis(_rotationX, Vector3.up);
-                Quaternion yQuaternion = Quaternion.AngleAxis(_rotationY, -Vector3.right);
-                transform.localRotation = _originalRotation * xQuaternion * yQuaternion;
-        }
+                var horizontal = Input.GetAxis("Mouse X");
+                var vertical = Input.GetAxis("Mouse Y");
+                var look = new Vector2(horizontal, vertical);
+#endif
+                _mouseLook += look * sensitivity;
+                _mouseLook.y = Mathf.Clamp(_mouseLook.y, -80f, +80f);
+            }
+            else
+            {
+                // We want to be able to interact with UI elements.
+                Cursor.lockState = CursorLockMode.None;
+            }
 
+            transform.localRotation = Quaternion.AngleAxis(-_mouseLook.y, Vector3.right);
+            _character.transform.localRotation = Quaternion.AngleAxis(_mouseLook.x, _character.transform.up);
+        }
         void Start()
         {
-            // Make the rigid body not change rotation
-            if (GetComponent<Rigidbody>())
-                GetComponent<Rigidbody>().freezeRotation = true;
-            _originalRotation = transform.localRotation;
-        }
-
-        public static float ClampAngle(float angle, float min, float max)
-        {
-            if (angle < -360F)
-                angle += 360F;
-            if (angle > 360F)
-                angle -= 360F;
-            return Mathf.Clamp(angle, min, max);
+            _character = transform.parent.gameObject;
         }
     }
 }

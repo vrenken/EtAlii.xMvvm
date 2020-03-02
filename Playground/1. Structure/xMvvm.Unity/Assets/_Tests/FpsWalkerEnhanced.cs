@@ -103,15 +103,15 @@
 
         private void FixedUpdate()
         {
-            float inputX = Input.GetAxis("Horizontal");
-            float inputY = Input.GetAxis("Vertical");
+            var inputX = Input.GetAxis("Horizontal");
+            var inputY = Input.GetAxis("Vertical");
 
             // If both horizontal and vertical are used simultaneously, limit speed (if allowed), so the total doesn't exceed normal move speed
-            float inputModifyFactor = (Math.Abs(inputX) > 0.01f && Math.Abs(inputY) > 0.01f && limitDiagonalSpeed) ? .7071f : 1.0f;
+            var inputModifyFactor = (Math.Abs(inputX) > 0.01f && Math.Abs(inputY) > 0.01f && limitDiagonalSpeed) ? .7071f : 1.0f;
 
             if (_grounded)
             {
-                bool sliding = false;
+                var sliding = false;
                 // See if surface immediately below should be slid down. We use this normally rather than a ControllerColliderHit point,
                 // because that interferes with step climbing amongst other annoyances
                 if (Physics.Raycast(_transform.position, -Vector3.up, out _hit, _rayDistance))
@@ -151,7 +151,7 @@
                 // If sliding (and it's allowed), or if we're on an object tagged "Slide", get a vector pointing down the slope we're on
                 if ((sliding && slideWhenOverSlopeLimit) || slideOnTaggedObjects && _hit.collider.CompareTag($"Slide"))
                 {
-                    Vector3 hitNormal = _hit.normal;
+                    var hitNormal = _hit.normal;
                     _moveDirection = new Vector3(hitNormal.x, -hitNormal.y, hitNormal.z);
                     Vector3.OrthoNormalize(ref hitNormal, ref _moveDirection);
                     _moveDirection *= slideSpeed;
