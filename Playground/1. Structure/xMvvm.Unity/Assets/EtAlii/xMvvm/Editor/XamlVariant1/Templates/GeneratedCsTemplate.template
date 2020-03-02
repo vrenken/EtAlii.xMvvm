@@ -28,9 +28,14 @@ namespace {{classNamespace}}
 {% endfor -%}
          
         public {{className}}()
+            : this(GameObject.Instantiate(Resources.Load("{{view.Prefab}}", typeof(GameObject))) as GameObject)
+        {
+        }
+        
+        public {{className}}(GameObject gameObject)
         {
             // Setup a prefab instance. 
-            GameObject = GameObject.Instantiate(Resources.Load("{{view.Prefab}}", typeof(GameObject))) as GameObject;
+            GameObject = gameObject;
             
             // Wire the bindings.
 {% for binding in view.Bindings -%}

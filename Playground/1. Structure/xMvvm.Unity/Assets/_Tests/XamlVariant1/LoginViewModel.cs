@@ -1,15 +1,15 @@
 ﻿namespace EtAlii.xMvvm
 {
     using System.ComponentModel;
-    using System.Runtime.CompilerServices;
 
     public class LoginViewModel : INotifyPropertyChanged
     {
+        public string UserName { get => _userName; set => PropertyChanged.SetAndRaise(this, ref _userName, value); }
+        private string _userName;
+        
+        public string Password { get => _password; set => PropertyChanged.SetAndRaise(this, ref _password, value); }
+        private string _password;
+        
         public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
