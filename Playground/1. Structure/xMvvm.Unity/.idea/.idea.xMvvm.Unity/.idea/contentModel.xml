@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Git\github\vrenken\EtAlii.xMvvm\Playground\1. Structure\xMvvm.Unity" t="IncludeRecursive">
+    <e p="C:\Users\Peter Vrenken\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Peter Vrenken\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_xMvvm.Unity.-1508620263.00" t="ExcludeRecursive" />
+    <e p="D:\github\vrenken\EtAlii.xMvvm\Playground\1. Structure\xMvvm.Unity" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="_Tests" t="Include">
-          <e p="FPSWalkerEnhanced.cs" t="Include" />
+          <e p="FpsWalkerEnhanced.cs" t="Include" />
           <e p="MouseLook.cs" t="Include" />
           <e p="XamlVariant1" t="Include">
             <e p="LoginView.v1xaml.cs" t="Include" />
-            <e p="LoginView.v1xaml.g.cs" t="Include" />
             <e p="LoginViewModel.cs" t="Include" />
           </e>
         </e>
@@ -46,6 +47,8 @@
                 <e p="Binding.cs" t="Include" />
                 <e p="View.cs" t="Include" />
               </e>
+              <e p="XamlVariant2" t="Include" />
+              <e p="XamlVariant3" t="Include" />
             </e>
           </e>
         </e>
@@ -122,6 +125,7 @@
                 <e p="XamlIlLocalsPool.cs" t="Include" />
               </e>
               <e p="XamlIl.asmdef" t="Include" />
+              <e p="XamlIl.csproj" t="Include" />
               <e p="XamlNamespaces.cs" t="Include" />
             </e>
             <e p="XamlIl.Cecil" t="Include">
@@ -140,10 +144,12 @@
               <e p="CustomMetadataResolver.cs" t="Include" />
               <e p="UnresolvedCecilType.cs" t="Include" />
               <e p="XamlIl.Cecil.asmdef" t="Include" />
+              <e p="XamlIl.Cecil.csproj" t="Include" />
             </e>
             <e p="XamlIl.Runtime" t="Include">
               <e p="Interfaces.cs" t="Include" />
               <e p="XamlIl.Runtime.asmdef" t="Include" />
+              <e p="XamlIl.Runtime.csproj" t="Include" />
             </e>
           </e>
         </e>
@@ -214,8 +220,5 @@
       <e p="XamlIl.Runtime.csproj" t="IncludeRecursive" />
       <e p="xMvvm.Unity.sln" t="IncludeFlat" />
     </e>
-    <e p="C:\Users\vrenk\.Rider2019.3\config\extensions" t="IncludeRecursive" />
-    <e p="C:\Users\vrenk\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\vrenk\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_xMvvm.Unity.208015088.00" t="ExcludeRecursive" />
   </component>
 </project>
