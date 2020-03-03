@@ -1,5 +1,5 @@
 # What is xMvvm?
-xMvvm is a cross-UI paradigm 3D application architecture framework based on XAML, XamlIl, MVVM and Rx.NET/ReactiveUI
+xMvvm is a cross-UI paradigm 3D application architecture framework based on XAML, XamlIl, MVVM and Rx.NET/ReactiveUI.
 
 # Why xMvvm?
 Most traditional 3D development approaches don't make a distinct separation between View, Data and functional logic (i.e. ViewModels/Controller/Presenter etc.). It's often just a bunch of components thrown together which makes development more complex, especially when introducing new features or refactoring them towards a better quality. Surely there are eventing/messaging concepts that introduce some kind of separation of concerns, but these come with their own set of challenges.
