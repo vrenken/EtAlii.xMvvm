@@ -16,6 +16,14 @@ Within Unity there are three distinct concepts that play an important role to de
 
 The idea of this XAML variation is to delegate the creation of the view onto prefabs, and allow a XAML file to create a compile-time map between the view and a viewmodel.
 
+For this the following principles need to be implemented:
+
+- Simple (i.e. value based) bindings
+- List bindings
+- View nesting
+
+
+
 ```XAML
 <!-- Current setup -->
 <View
