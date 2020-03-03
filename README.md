@@ -43,3 +43,8 @@ The rough approach will happen in three phases:
 1. [XAML schema variations](XamlVariations.md)
 2. [Thoughts on ECS to MVVM mapping](EcsMapping.md)
 3. ...
+
+# Used open source projects
+
+- Snippets from ReactiveUI (MIT)
+  https://github.com/reactiveui/ReactiveUI
