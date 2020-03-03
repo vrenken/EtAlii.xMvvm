@@ -15,6 +15,6 @@ namespace EtAlii.xMvvm
         public string Prefab { get; set; }
         
         [Content]
-        public List<Element> Elements { get; set; } = new List<Element>();
+        public List<Element> Elements { get; } = new List<Element>();
     }
 }
