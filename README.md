@@ -1,15 +1,14 @@
-# EtAlii.xMvvm
-
-## What is xMvvm?
+# What is xMvvm?
 xMvvm is a cross-UI paradigm 3D application architecture framework based on XAML, XamlIl, MVVM and Rx.NET/ReactiveUI
 
+# Why xMvvm?
 Most traditional 3D development approaches don't make a distinct separation between View, Data and functional logic (i.e. ViewModels/Controller/Presenter etc.). It's often just a bunch of components thrown together which makes development more complex, especially when introducing new features or refactoring them towards a better quality. Surely there are eventing/messaging concepts that introduce some kind of separation of concerns, but these come with their own set of challenges.
 
 In many (if not all) .NET oriented ecosystems the XAML/MVVM combination has become the de-facto standard for separation of control between the more visual or functional oriented parts of a code base. And with a broad support and awareness of user interface controls and components development of bigger (i.e. enterprise-grade applications) has become easier than ever.
 
 The aim of this project is to support 3D application development with well-known application architectural patterns based on MVVM and XAML. Currently most 3D applications are developed using one of the available 3D engines, but as these are based on high-performance Entity-Component-Systems paradigm it isn't easy to build professional, layered applications.
 
-## Approach
+# Approach
 Developing an approach that allows XAML and MVVM to be used for 3D applications isn't that easy. Because of this we're very happy to all proposals, ideas and bugfixes in any form whasoever. Feel free to create issues and/or provide us with push requests so that we can make this a reality.
 
 The rough approach will happen in three phases:
@@ -39,7 +38,7 @@ The rough approach will happen in three phases:
    - That can work across different 3D engines. 
    - If possible: A setup in which ViewModels can be reused between 2D and 3D applications. 
 
-## Additional documents
+# Additional documents
 
 1. [XAML schema variations](XamlVariations.md)
 2. [Thoughts on ECS to MVVM mapping](EcsMapping.md)
