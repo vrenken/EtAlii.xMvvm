@@ -3,23 +3,13 @@
     xmlns:x="xMvvm"
     ViewModelType="LoginViewModel"        
     Prefab="LoginView.prefab">
-        
-    <!-- <Binding Name="Password" Component="PasswordTextBox" ComponentProperty="Text" ViewModelProperty="Password" Mode="TwoWay" /> -->       
-    <!-- <Binding Name="UserName" Component="UserNameTextBox" ComponentProperty="Text" ViewModelProperty="UserName" Mode="TwoWay" /> --> 
-
-    <!-- <Property Path="Panel/PasswordTextBox" ComponentType="Label" Property="Text" Value="{x:Bind Password}"> --> 
-    <!-- <Event Path="Panel/LoginButton" ComponentType="Button" Event="Clicked" Handler="{x:Bind LoginClicked}"> -->
+  
+    <Property Name="Password" Value="Password" Path="Canvas/Panel/PasswordTextBox" Type="TMPro.TMP_InputField" Member="text"/>
+    <Property Name="UserName" Value="UserName" Path="Canvas/Panel/UserNameTextBox" Type="TMPro.TMP_InputField" Member="text" />
+    <!-- <Event Name="Login" Handler="OnLogin" Path="Canvas/Panel/LoginButton" Type="UnityEngine.UI.Button" Member="onClick" /> -->  
+ 
+    <!-- <Property Name="Password" Value="x:Bind Password Mode=TwoWay" Path="Canvas/Panel/PasswordTextBox" Type="TMPro.TMP_InputField" Member="text"/> -->
+    <!-- <Property Name="UserName" Value="x:Bind UserName Mode=TwoWay" Path="Canvas/Panel/UserNameTextBox" Type="TMPro.TMP_InputField" Member="text" /> -->
+    <!-- <Event Name="Login" Handler="x:Bind OnLogin" Path="Canvas/Panel/LoginButton" Type="UnityEngine.UI.Button" Member="onClick" /> -->  
    
-    <Property Name="Password" Value="x:Bind Password Mode=TwoWay" Path="Canvas/Panel/PasswordTextBox" Type="TMPro.TMP_InputField" Member="text"/>
-    <Property Name="UserName" Value="x:Bind UserName Mode=TwoWay" Path="Canvas/Panel/UserNameTextBox" Type="TMPro.TMP_InputField" Member="text" />
-    <Event Name="Login" Handler="x:Bind OnLogin" Path="Canvas/Panel/LoginButton" Type="UnityEngine.UI.Button" Member="onClick" />  
-   
-    <!-- <PropertyBinding Name="Password" Mode="TwoWay"> -->  
-        <!-- <ComponentProperty Path="Canvas/Panel/PasswordTextBox" Type="TMP_InputField" Property="text" /> -->  
-        <!-- <ViewModelProperty Property="UserName" /> -->
-    <!-- </PropertyBinding> -->
-    <!-- <EventBinding Name="Login"> -->
-        <!-- <ComponentEvent Path="Panel/UserNameTextBox" Type="Button" Event="onClick" /> -->
-        <!-- <ViewModelMethod Property="Login" /> -->
-    <!-- </PropertyBinding> -->       
 </View>      
