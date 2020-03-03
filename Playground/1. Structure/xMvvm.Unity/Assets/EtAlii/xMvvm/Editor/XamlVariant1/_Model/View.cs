@@ -7,7 +7,7 @@ namespace EtAlii.xMvvm
     {
         nameof(ViewModelType),
         nameof(Prefab),
-        nameof(Bindings)
+        nameof(Elements)
     })]
     public class View
     {
@@ -15,6 +15,6 @@ namespace EtAlii.xMvvm
         public string Prefab { get; set; }
         
         [Content]
-        public List<Binding> Bindings { get; set; } = new List<Binding>();
+        public List<Element> Elements { get; set; } = new List<Element>();
     }
 }

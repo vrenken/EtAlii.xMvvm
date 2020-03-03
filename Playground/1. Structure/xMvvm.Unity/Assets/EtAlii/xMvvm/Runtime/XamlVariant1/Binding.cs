@@ -1,10 +1,18 @@
 namespace EtAlii.xMvvm.XamlVariant1
 {
-    public class Binding
+    using System;
+    using System.ComponentModel;
+    using UnityEngine;
+
+    public class Binding<TComponent, TViewModel>
+        where TComponent: MonoBehaviour
+        where TViewModel: INotifyPropertyChanged
     {
-        public Binding(string component, string componentProperty, string viewModelProperty)
+        private readonly string _path;
+
+        public Binding(string path, Func<TComponent, object> componentProperty, Func<TViewModel, object> viewModelProperty)
         {
-            
+            _path = path;
         }
     }
 }

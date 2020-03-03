@@ -25,6 +25,10 @@
               <e p="XamlVariant1" t="Include">
                 <e p="_Model" t="Include">
                   <e p="Binding.cs" t="Include" />
+                  <e p="Element.cs" t="Include" />
+                  <e p="Method.cs" t="Include" />
+                  <e p="Origin.cs" t="Include" />
+                  <e p="Property.cs" t="Include" />
                   <e p="View.cs" t="Include" />
                 </e>
                 <e p="FileGenerator.cs" t="Include" />

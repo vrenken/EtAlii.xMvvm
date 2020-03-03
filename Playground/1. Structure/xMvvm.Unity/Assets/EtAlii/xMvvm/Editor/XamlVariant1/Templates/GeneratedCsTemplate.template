@@ -23,8 +23,8 @@ namespace {{classNamespace}}
         
         public GameObject GameObject {get;}
 
-{% for binding in view.Bindings -%}
-        private readonly EtAlii.xMvvm.XamlVariant1.Binding {{ binding.Name | PrivateMember }};
+{% for element in view.Elements -%}
+        private readonly EtAlii.xMvvm.XamlVariant1.Binding<{{element.Type}}, {{view.ViewModelType}}> {{ element.Name | PrivateMember }};
 {% endfor -%}
          
         public {{className}}()
@@ -38,8 +38,8 @@ namespace {{classNamespace}}
             GameObject = gameObject;
             
             // Wire the bindings.
-{% for binding in view.Bindings -%}
-            {{ binding.Name | PrivateMember }} = new EtAlii.xMvvm.XamlVariant1.Binding("{{binding.Component}}", "{{binding.ComponentProperty}}", "{{binding.ViewModelProperty}}");
+{% for element in view.Elements -%}
+            {{ element.Name | PrivateMember }} = new EtAlii.xMvvm.XamlVariant1.Binding<{{element.Type}}, {{view.ViewModelType}}>("{{element.Path}}", component => component.{{element.Member}}, vm => "vm.{{element.Value}}");
 {% endfor -%}
                 
             // And initialize.

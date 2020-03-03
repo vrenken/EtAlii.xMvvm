@@ -5,17 +5,15 @@ namespace EtAlii.xMvvm
     [LiquidType( new []
     {
         nameof(Name),
-        nameof(Component),
-        nameof(ComponentProperty),
-        nameof(ViewModelProperty),
+        nameof(Source),
+        nameof(Target),
         nameof(Mode)
     })]
     public class Binding
     {
         public string Name { get; set; }
-        public string Component { get; set; }
-        public string ComponentProperty { get; set; }
-        public string ViewModelProperty { get; set; }
+        public Property Source { get; set; }
+        public Property Target { get; set; }
         public string Mode { get; set; }
     }
 }
