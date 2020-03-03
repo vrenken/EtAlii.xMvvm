@@ -12,7 +12,7 @@ Developing an approach that allows XAML and MVVM to be used for 3D applications 
 
 The rough approach will happen in three phases:
 
-###1. Playground / Experimenting
+1. Playground / Experimenting
 We need to find out what XAML/MVVM principles work and which don't. For this we'll build a few experimental setups in Unity 3D.
 
 Binding tests: 
@@ -31,14 +31,14 @@ Technological aspects:
 - If possible we want to have compile time bindings. Not the old, traditional runtime-MVVM ones as available in WPF.
 - Performance is key. We want to find the right balance and move as much business logic into the VM layer, but need to make sure the ECS powered View part stays performant. 
 
-###2. Decide on the best fitting ingredients for a 3D XAML/MVVM architecture.
+2. Decide on the best fitting ingredients for a 3D XAML/MVVM architecture.
 
-###3. Define a 3D XAML standard.
+3. Define a 3D XAML standard.
 - That can work across different 3D engines. 
 - If possible: A setup in which ViewModels can be reused between 2D and 3D applications. 
 
 ## Additional documents
 
 1. [XAML schema variations](XamlVariations.md)
-2. [Thoughts on ECS to MVVM mapping] (EcsMapping.md)
+2. [Thoughts on ECS to MVVM mapping](EcsMapping.md)
 3. ...
