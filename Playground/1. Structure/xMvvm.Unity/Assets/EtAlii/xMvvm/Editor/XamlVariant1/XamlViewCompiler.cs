@@ -16,15 +16,25 @@
 
     public class XamlViewCompiler 
     {
-        private readonly IXamlIlTypeSystem _typeSystem;
-        public XamlIlTransformerConfiguration Configuration { get; }
-
         private const string GeneratedNameSpace = "EtAlii.xMvvm.Generated";
         private const string GeneratedAssemblyName = "EtAlii.xMvvm.Generated";
         private const string GeneratedViewClass = "GeneratedView";
         
-        public XamlViewCompiler()
+        private XamlIlDocument Compile(IXamlIlTypeBuilder builder, XamlIlTransformerConfiguration configuration, IXamlIlType context, string xaml)
         {
+            var parsed = XDocumentXamlIlParser.Parse(xaml);
+            var compiler = new XamlIlCompiler(configuration, true) { EnableIlVerification = true };
+            compiler.Transform(parsed);
+            compiler.Compile(parsed, builder, context, "Populate", "Build", "XamlIlNamespaceInfo", "http://example.com/", null);
+            return parsed;
+        }
+        
+        
+        public (Func<IServiceProvider, object> create, Action<IServiceProvider, object> populate) Compile(string xaml)
+        {
+            // Let's build ourselves a typesystem and compiler configuration.
+            // We're going to do this for each compile action as we don't want to have anything 
+            // cached in the Unity subsystems.
             var references = new[] 
             {
                 typeof(Object).Assembly.Location,
@@ -34,42 +44,27 @@
                 typeof(IXamlIlParentStackProviderV1).Assembly.Location,
             };
 
-            _typeSystem = new CecilTypeSystem(references);
+            var typeSystem = new CecilTypeSystem(references);
             
-            var defaultAssembly = _typeSystem.FindAssembly(typeof(XamlViewCompiler).Assembly.FullName);
+            var defaultAssembly = typeSystem.FindAssembly(typeof(XamlViewCompiler).Assembly.FullName);
             
-            var languageTypeMappings = new XamlIlLanguageTypeMappings(_typeSystem)
+            var languageTypeMappings = new XamlIlLanguageTypeMappings(typeSystem)
             {
-                XmlnsAttributes = {_typeSystem.GetType(typeof(XmlnsDefinitionAttribute).FullName)},
-                ContentAttributes = {_typeSystem.GetType(typeof(ContentAttribute).FullName)},
-                UsableDuringInitializationAttributes = {_typeSystem.GetType(typeof(UsableDuringInitializationAttribute).FullName)},
-                DeferredContentPropertyAttributes = { _typeSystem.GetType(typeof(DeferredContentAttribute).FullName) },
+                XmlnsAttributes = {typeSystem.GetType(typeof(XmlnsDefinitionAttribute).FullName)},
+                ContentAttributes = {typeSystem.GetType(typeof(ContentAttribute).FullName)},
+                UsableDuringInitializationAttributes = {typeSystem.GetType(typeof(UsableDuringInitializationAttribute).FullName)},
+                DeferredContentPropertyAttributes = { typeSystem.GetType(typeof(DeferredContentAttribute).FullName) },
                 
-                RootObjectProvider = _typeSystem.GetType(typeof(IViewRootObjectProvider).FullName),
-                UriContextProvider = _typeSystem.GetType(typeof(IViewUriContext).FullName),
-                ProvideValueTarget = _typeSystem.GetType(typeof(IViewProvideValueTarget).FullName),
+                RootObjectProvider = typeSystem.GetType(typeof(IViewRootObjectProvider).FullName),
+                UriContextProvider = typeSystem.GetType(typeof(IViewUriContext).FullName),
+                ProvideValueTarget = typeSystem.GetType(typeof(IViewProvideValueTarget).FullName),
                 
-                ParentStackProvider = _typeSystem.GetType(typeof(IXamlIlParentStackProviderV1).FullName),
-                XmlNamespaceInfoProvider = _typeSystem.GetType(typeof(IXamlIlXmlNamespaceInfoProviderV1).FullName)
+                ParentStackProvider = typeSystem.GetType(typeof(IXamlIlParentStackProviderV1).FullName),
+                XmlNamespaceInfoProvider = typeSystem.GetType(typeof(IXamlIlXmlNamespaceInfoProviderV1).FullName)
             };
-            Configuration = new XamlIlTransformerConfiguration(_typeSystem, defaultAssembly, languageTypeMappings);
-        }
-        
-        private XamlIlDocument Compile(IXamlIlTypeBuilder builder, IXamlIlType context, string xaml)
-        {
-            var parsed = XDocumentXamlIlParser.Parse(xaml);
-            var compiler = new XamlIlCompiler(Configuration, true) { EnableIlVerification = true };
-            compiler.Transform(parsed);
-            compiler.Compile(parsed, builder, context, "Populate", "Build", "XamlIlNamespaceInfo", "http://example.com/", null);
-            return parsed;
-        }
-        
-        
-        public (Func<IServiceProvider, object> create, Action<IServiceProvider, object> populate) Compile(string xaml)
-        {
-            var ts = (CecilTypeSystem) (_typeSystem);
-            
-            var asm = ts.CreateAndRegisterAssembly(GeneratedAssemblyName, new Version(1, 0),
+            var configuration = new XamlIlTransformerConfiguration(typeSystem, defaultAssembly, languageTypeMappings);
+
+            var asm = typeSystem.CreateAndRegisterAssembly(GeneratedAssemblyName, new Version(1, 0),
                 ModuleKind.Dll);
 
             var def = new TypeDefinition(GeneratedNameSpace, GeneratedViewClass,
@@ -78,14 +73,14 @@
             var ct = new TypeDefinition(GeneratedNameSpace, "XamlContext", TypeAttributes.Class,
                 asm.MainModule.TypeSystem.Object);
             asm.MainModule.Types.Add(ct);
-            var ctb = ((CecilTypeSystem)_typeSystem).CreateTypeBuilder(ct);
-            var contextTypeDef = XamlIlContextDefinition.GenerateContextClass(ctb, _typeSystem, Configuration.TypeMappings);
+            var ctb = typeSystem.CreateTypeBuilder(ct);
+            var contextTypeDef = XamlIlContextDefinition.GenerateContextClass(ctb, typeSystem, configuration.TypeMappings);
             
             asm.MainModule.Types.Add(def);
 
 
-            var tb = ts.CreateTypeBuilder(def);
-            var _ = Compile(tb, contextTypeDef, xaml);
+            var tb = typeSystem.CreateTypeBuilder(def);
+            var _ = Compile(tb, configuration, contextTypeDef, xaml);
 
             using (var ms = new MemoryStream())
             {
@@ -103,7 +98,7 @@
         {
             var isp = Expression.Parameter(typeof(IServiceProvider));
             var createCb = Expression.Lambda<Func<IServiceProvider, object>>(
-                // ReSharper disable once AssignNullToNotNullAttribute
+                    // ReSharper disable once AssignNullToNotNullAttribute
                 Expression.Convert(Expression.Call(created.GetMethod("Build"), isp), typeof(object)), isp).Compile();
             
             var epar = Expression.Parameter(typeof(object));
