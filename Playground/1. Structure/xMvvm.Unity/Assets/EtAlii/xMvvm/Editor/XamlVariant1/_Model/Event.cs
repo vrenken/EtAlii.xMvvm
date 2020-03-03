@@ -9,16 +9,15 @@ namespace EtAlii.xMvvm
         nameof(Member),
         nameof(Type),
         nameof(ElementType),
-        
-        nameof(Value),
+
+        nameof(Handler),
     })]
-    public class Property : ComponentElement
+    public class Event : ComponentElement
     {
-        public string Value { get; set; }
-        public Property()
-            : base(ElementType.Property)
+        public string Handler { get; set; }
+        public Event()
+            : base(ElementType.Event)
         {
         }
-
     }
 }

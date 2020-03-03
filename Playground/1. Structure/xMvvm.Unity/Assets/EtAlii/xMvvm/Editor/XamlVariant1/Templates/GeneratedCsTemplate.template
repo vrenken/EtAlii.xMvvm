@@ -13,16 +13,20 @@ namespace {{classNamespace}}
 {
     using UnityEngine;
     using System;
-
-    public partial class {{className}} : EtAlii.xMvvm.XamlVariant1.View  
+    using System.ComponentModel;
+    
+    public partial class {{className}} : EtAlii.xMvvm.XamlVariant1.View, INotifyPropertyChanged  
     {
         /// <summary>
         /// The {{view.ViewModelType}} that should be used to power the view.     
         /// </summary>
-        public {{view.ViewModelType}} ViewModel { get; set; }
+        public {{view.ViewModelType}} ViewModel { get => _viewModel; set => PropertyChanged.SetAndRaise(this, ref _viewModel, value); }
+        private {{view.ViewModelType}} _viewModel;
         
         public GameObject GameObject {get;}
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        
 {% for element in view.Elements -%}
         private readonly EtAlii.xMvvm.XamlVariant1.Binding<{{element.Type}}, {{view.ViewModelType}}> {{ element.Name | PrivateMember }};
 {% endfor -%}
@@ -38,10 +42,10 @@ namespace {{classNamespace}}
             GameObject = gameObject;
             
             // Wire the bindings.
-{% for element in view.Elements -%}
-            {{ element.Name | PrivateMember }} = new EtAlii.xMvvm.XamlVariant1.Binding<{{element.Type}}, {{view.ViewModelType}}>("{{element.Path}}", component => component.{{element.Member}}, vm => "vm.{{element.Value}}");
-{% endfor -%}
-                
+{% for element in view.Elements -%}{% case element.ElementType -%}
+{% when "Property" %}            {{ element.Name | PrivateMember }} = new EtAlii.xMvvm.XamlVariant1.PropertyBinding<{{element.Type}}, {{view.ViewModelType}}>("{{element.Path}}", component => component.{{element.Member}}, vm => "vm.{{element.Value}}");
+{% when "Event" %}            {{ element.Name | PrivateMember }} = new EtAlii.xMvvm.XamlVariant1.EventBinding<{{element.Type}}, {{view.ViewModelType}}>("{{element.Path}}", component => component.{{element.Member}}, vm => "vm.{{element.Method}}");
+{% endcase -%}{% endfor -%}                 
             // And initialize.
             Initialize();   
         }
