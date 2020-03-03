@@ -47,4 +47,5 @@ The rough approach will happen in three phases:
 # Used open source projects
 
 - Snippets from ReactiveUI (MIT)
+
   https://github.com/reactiveui/ReactiveUI
