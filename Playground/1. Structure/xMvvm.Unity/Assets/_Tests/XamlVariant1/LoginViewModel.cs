@@ -24,5 +24,10 @@
         {
             IsValid = !string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password);
         }
+
+        public void OnLogin()
+        {
+            
+        }
     }
 }
