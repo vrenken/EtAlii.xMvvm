@@ -14,7 +14,8 @@ namespace EtAlii.xMvvm
     })]
     public class Event : ComponentElement
     {
-        public string Handler { get; set; }
+        public Bind Handler { get; set; }
+        
         public Event()
             : base(ElementType.Event)
         {

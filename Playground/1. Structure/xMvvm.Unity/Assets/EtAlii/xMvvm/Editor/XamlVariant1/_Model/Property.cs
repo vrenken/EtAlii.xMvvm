@@ -14,7 +14,8 @@ namespace EtAlii.xMvvm
     })]
     public class Property : ComponentElement
     {
-        public string Value { get; set; }
+        public Bind Value { get; set; }
+        
         public Property()
             : base(ElementType.Property)
         {

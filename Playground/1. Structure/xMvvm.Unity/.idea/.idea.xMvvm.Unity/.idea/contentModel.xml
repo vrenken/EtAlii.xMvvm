@@ -20,12 +20,11 @@
               <e p="XamlAssetPostprocessor.cs" t="Include" />
               <e p="XamlVariant1" t="Include">
                 <e p="_Model" t="Include">
-                  <e p="Binding.cs" t="Include" />
+                  <e p="Bind.cs" t="Include" />
                   <e p="ComponentElement.cs" t="Include" />
                   <e p="Element.cs" t="Include" />
                   <e p="ElementType.cs" t="Include" />
                   <e p="Event.cs" t="Include" />
-                  <e p="Origin.cs" t="Include" />
                   <e p="Property.cs" t="Include" />
                   <e p="View.cs" t="Include" />
                 </e>

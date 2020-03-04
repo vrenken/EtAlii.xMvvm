@@ -28,8 +28,8 @@ namespace {{classNamespace}}
         {
             // Wire the bindings.
 {% for element in view.Elements -%}{% case element.ElementType -%}
-{% when "Property" %}            {{ element.Name | PrivateMember }} = new EtAlii.xMvvm.XamlVariant1.PropertyBinding<{{element.Type}}, {{view.ViewModelType}}>(this, "{{element.Path}}", component => component.{{element.Member}}, vm => vm.{{element.Value}});
-{% when "Event" %}            {{ element.Name | PrivateMember }} = new EtAlii.xMvvm.XamlVariant1.EventBinding<{{element.Type}}, {{view.ViewModelType}}>(this, "{{element.Path}}", component => component.{{element.Member}}, vm => vm.{{element.Handler}});
+{% when "Property" %}            {{ element.Name | PrivateMember }} = new EtAlii.xMvvm.XamlVariant1.PropertyBinding<{{element.Type}}, {{view.ViewModelType}}>(this, "{{element.Path}}", component => component.{{element.Member}}, vm => vm.{{element.Value.Name}});
+{% when "Event" %}            {{ element.Name | PrivateMember }} = new EtAlii.xMvvm.XamlVariant1.EventBinding<{{element.Type}}, {{view.ViewModelType}}>(this, "{{element.Path}}", component => component.{{element.Member}}, vm => vm.{{element.Handler.Name}});
 {% endcase -%}{% endfor -%}                 
             // And initialize.
             Initialize();   
