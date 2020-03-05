@@ -7,7 +7,6 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="_Tests" t="Include">
-          <e p="Caret.cs" t="Include" />
           <e p="FpsWalkerEnhanced.cs" t="Include" />
           <e p="MouseLook.cs" t="Include" />
           <e p="XamlVariant1" t="Include">
@@ -55,9 +54,13 @@
               <e p="PropertyChangedEventHandler.RaiseExtensions.cs" t="Include" />
               <e p="XamlVariant1" t="Include">
                 <e p="Binding.cs" t="Include" />
+                <e p="ComponentListener.cs" t="Include" />
+                <e p="ComponentUpdater.cs" t="Include" />
                 <e p="EventBinding.cs" t="Include" />
                 <e p="PropertyBinding.cs" t="Include" />
                 <e p="View.cs" t="Include" />
+                <e p="ViewModelListener.cs" t="Include" />
+                <e p="ViewModelUpdater.cs" t="Include" />
               </e>
             </e>
           </e>
