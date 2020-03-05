@@ -1,6 +1,7 @@
 ﻿namespace EtAlii.xMvvm
 {
     using System.ComponentModel;
+    using UnityEngine;
 
     public class CompositionViewModel : INotifyPropertyChanged
     {
@@ -21,7 +22,8 @@
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
+        {            
+            Debug.Log($"{nameof(CompositionView)} property changed: {e.PropertyName}");
         }
 
     }
