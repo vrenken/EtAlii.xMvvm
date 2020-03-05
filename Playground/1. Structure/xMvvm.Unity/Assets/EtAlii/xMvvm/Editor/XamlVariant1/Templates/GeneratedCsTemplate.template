@@ -13,11 +13,12 @@ namespace {{classNamespace}}
 {
     using UnityEngine;
     using System;
-    
-    public partial class {{className}} : {{variantNamespace}}.View<{{view.ViewModelType}}>  
+    using {{variantNamespace}};
+
+    public partial class {{className}} : View<{{view.ViewModelType}}>  
     {
 {% for element in view.Elements -%}
-        private readonly {{variantNamespace}}.Binding<{{element.Type}}, {{view.ViewModelType}}> {{ element.Name | PrivateMember }};
+        private readonly Binding<{{element.Type}}, {{view.ViewModelType}}> {{ element.Name | PrivateMember }};
 {% endfor -%}
          
         public {{className}}() : this(GameObject.Instantiate(Resources.Load("{{view.Prefab}}", typeof(GameObject))) as GameObject)
@@ -28,8 +29,8 @@ namespace {{classNamespace}}
         {
             // Wire the bindings.
 {% for element in view.Elements -%}{% case element.ElementType -%}
-{% when "Property" %}            {{ element.Name | PrivateMember }} = new {{variantNamespace}}.PropertyBinding<{{element.Type}}, {{view.ViewModelType}}>(this, "{{element.Path}}", component => component.{{element.Member}}, vm => vm.{{element.Value.Name}}, {{variantNamespace}}.BindingMode.{{element.Value.Mode}});
-{% when "Event" %}            {{ element.Name | PrivateMember }} = new {{variantNamespace}}.EventBinding<{{element.Type}}, {{view.ViewModelType}}>(this, "{{element.Path}}", component => component.{{element.Member}}, vm => vm.{{element.Handler.Name}});
+{% when "Property" %}            {{ element.Name | PrivateMember }} = new PropertyBinding<{{element.Type}}, {{view.ViewModelType}}>(this, "{{element.Path}}", component => component.{{element.Member}}, vm => vm.{{element.Value.Name}}, BindingMode.{{element.Value.Mode}});
+{% when "Event" %}            {{ element.Name | PrivateMember }} = new EventBinding<{{element.Type}}, {{view.ViewModelType}}>(this, "{{element.Path}}", component => component.{{element.Member}}, vm => vm.{{element.Handler.Name}});
 {% endcase -%}{% endfor -%}                 
             // And initialize.
             Initialize();   

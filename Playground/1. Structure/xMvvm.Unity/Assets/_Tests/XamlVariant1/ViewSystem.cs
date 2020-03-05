@@ -1,4 +1,4 @@
-﻿namespace EtAlii.xMvvm
+﻿namespace EtAlii.xMvvm.Tests
 {
     using UnityEngine;
 
