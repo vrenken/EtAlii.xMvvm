@@ -6,8 +6,10 @@
     {
         [SerializeField]
         public GameObject loginPanel;
-
         public LoginView loginView;
+
+        public GameObject compositionPanel;
+        public CompositionView compositionView;
 
         private void Start()
         {
@@ -19,9 +21,11 @@
                 ViewModel = new LoginViewModel
                 {
                     UserName = "john.doe@nomail.com",
-                    Password = "123"
+                    Password = "1234"
                 }
             };
+            
+            compositionView = new CompositionView(compositionPanel);
         }
     }
 }
