@@ -6,7 +6,7 @@ namespace EtAlii.xMvvm.XamlVariant1
     using System.Linq.Expressions;
     using System.Reflection;
     using UnityEngine.Events;
-    
+
     public class ComponentListener<TViewModel>
         where TViewModel: INotifyPropertyChanged
     {
@@ -64,10 +64,16 @@ namespace EtAlii.xMvvm.XamlVariant1
                 case UnityEvent actionEvent:
                     actionEvent.AddListener(action);
                     break;
+                case UnityEvent<bool> actionEvent:
+                    actionEvent.AddListener(o => action());
+                    break;                    
                 case UnityEvent<string> actionEvent:
                     actionEvent.AddListener(o => action());
                     break;                    
                 case UnityEvent<float> actionEvent:
+                    actionEvent.AddListener(o => action());
+                    break;                    
+                case UnityEvent<double> actionEvent:
                     actionEvent.AddListener(o => action());
                     break;                    
                 case UnityEvent<int> actionEvent:
@@ -98,6 +104,9 @@ namespace EtAlii.xMvvm.XamlVariant1
             {
                 case UnityEvent actionEvent:
                     actionEvent.RemoveListener(action);
+                    break;
+                case UnityEvent<bool> actionEvent:
+                    actionEvent.RemoveListener(o => action());
                     break;
                 case UnityEvent<string> actionEvent:
                     actionEvent.RemoveListener(o => action());
