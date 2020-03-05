@@ -4,11 +4,15 @@
     ViewModelType="LoginViewModel"        
     Prefab="LoginView.prefab"> 
           
-    <Property Name="Password" Value="{x:Bind Password}" Path="Canvas/Panel/PasswordTextBox" Type="TMPro.TMP_InputField" Member="text"/>
+    <Property Name="Password" Value="{x:Bind Password}" Path="Canvas/Panel/PasswordTextBox" Type="TMPro.TMP_InputField" Member="text" /> 
     <Property Name="UserName" Value="{x:Bind UserName}" Path="Canvas/Panel/UserNameTextBox" Type="TMPro.TMP_InputField" Member="text" />
     <Event Name="Login" Handler="{x:Bind OnLogin}" Path="Canvas/Panel/LoginButton" Type="UnityEngine.UI.Button" Member="onClick" />  
+    <Property Name="ToggleLoginButton" Value="{x:Bind IsValid}" Path="Canvas/Panel/LoginButton" Type="UnityEngine.UI.Button" Member="enabled" />
+    <Property Name="ToggleCancelButton" Value="{x:Bind IsValid}" Path="Canvas/Panel/CancelButton" Type="UnityEngine.UI.Button" Member="enabled" />
+
     <!-- <Property Name="{x:Bind IsValid, Converter={StaticResource BooleanToIsEnabledConverter}" Value="UserName" Path="Canvas/Panel/UserNameTextBox" Type="TMPro.TMP_InputField" Member="isEnabled" /> -->
              
+    <!-- <Property Name="Password" Value="{x:Bind Password}" Path="Canvas/Panel/PasswordTextBox" Type="TMPro.TMP_InputField" Member="text" ValueType="{x:Type String}"/> -->
     <!-- <Property Name="Password" Value="{x:Bind Password Mode=TwoWay}" Path="Canvas/Panel/PasswordTextBox" Type="TMPro.TMP_InputField" Member="text"/> -->
     <!-- <Property Name="UserName" Value="{x:Bind UserName Mode=TwoWay}" Path="Canvas/Panel/UserNameTextBox" Type="TMPro.TMP_InputField" Member="text" /> -->
     <!-- <Event Name="Login" Handler="{x:Bind OnLogin}" Path="Canvas/Panel/LoginButton" Type="UnityEngine.UI.Button" Member="onClick" /> -->  

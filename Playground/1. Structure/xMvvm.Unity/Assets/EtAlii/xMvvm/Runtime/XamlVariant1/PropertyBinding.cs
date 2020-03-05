@@ -20,22 +20,34 @@ namespace EtAlii.xMvvm.XamlVariant1
                 throw new ArgumentNullException(nameof(vm));
             }
 
-            var viewModelMemberExpression = vm.Body as MemberExpression;
-            _viewModelPropertyInfo = viewModelMemberExpression?.Member as PropertyInfo;
+            switch (vm.Body)
+            {
+                case MemberExpression memberExpression:
+                    _viewModelPropertyInfo = memberExpression.Member as PropertyInfo;
+                    break;
+                case UnaryExpression unaryExpression:
+                    _viewModelPropertyInfo = (unaryExpression.Operand as MemberExpression)?.Member as PropertyInfo;
+                    break;
+                    
+            }
+
             if (_viewModelPropertyInfo == null)
             {
                 throw new InvalidOperationException("Unable to access viewModelProperty from expression: " + vm);
             }
         }
         
-        protected override void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void StartBinding() => ViewModel.PropertyChanged += OnViewModelPropertyChanged;
+        protected override void StopBinding() => ViewModel.PropertyChanged -= OnViewModelPropertyChanged;
+
+        private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != _viewModelPropertyInfo.Name) return;
             
-            SetComponentPropertyValue();
+            UpdateBinding();
         }
         
-        protected override void SetComponentPropertyValue()
+        protected override void UpdateBinding()
         {
             var value = _viewModelPropertyInfo.GetValue(ViewModel);
                 
@@ -49,6 +61,5 @@ namespace EtAlii.xMvvm.XamlVariant1
                     break;
             }
         }
-
     }
 }

@@ -5,6 +5,7 @@ namespace EtAlii.xMvvm.XamlVariant1
     using System.Linq.Expressions;
     using System.Reflection;
     using UnityEngine;
+    using UnityEngine.Events;
 
     public class EventBinding<TComponent, TViewModel> : Binding<TComponent, TViewModel>
         where TComponent: MonoBehaviour
@@ -20,35 +21,52 @@ namespace EtAlii.xMvvm.XamlVariant1
                 throw new ArgumentNullException(nameof(vm));
             }
 
-            var viewModelMemberExpression = vm.Body as MemberExpression;
-            _viewModelMethodInfo = viewModelMemberExpression?.Member as MethodInfo;
+            var unaryExpression = vm.Body as UnaryExpression;
+            var methodCallExpression = unaryExpression?.Operand as  MethodCallExpression;
+            var typedConstantExpression = methodCallExpression?.Object as ConstantExpression;
+            _viewModelMethodInfo = typedConstantExpression?.Value as MethodInfo;
             if (_viewModelMethodInfo == null)
             {
                 throw new InvalidOperationException("Unable to access viewModelMethod from expression: " + vm);
             }
         }
-        
-        protected override void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+
+        protected override void StartBinding()
         {
-            if (e.PropertyName != _viewModelMethodInfo.Name) return;
-            
-            SetComponentPropertyValue();
-        }
-        
-        protected override void SetComponentPropertyValue()
-        {
-            // var value = _viewModelMethodInfo.GetValue(ViewModel);
-            //     
-            // switch (ComponentMemberExpression.Member)
-            // {
-            //     case MethodInfo componentMethodInfo: 
-            //         componentPropertyInfo.SetValue(Component, value, null);
-            //         break;
-            //     case FieldInfo componentFieldInfo: 
-            //         componentFieldInfo.SetValue(Component, value);
-            //         break;
-            // }
+            var handler = _viewModelMethodInfo;
+            var listener = (UnityAction)Delegate.CreateDelegate(typeof(UnityAction), ViewModel, handler);
+
+            switch (ComponentMemberExpression.Member)
+            {
+                case PropertyInfo componentPropertyInfo:
+                    var unityPropertyEvent = (UnityEvent)componentPropertyInfo.GetValue(Component);
+                    unityPropertyEvent.AddListener(listener);
+                    break;
+                case FieldInfo componentFieldInfo: 
+                    var unityFieldEvent = (UnityEvent)componentFieldInfo.GetValue(Component);
+                    unityFieldEvent.AddListener(listener);
+                    break;
+            }
         }
 
+        protected override void StopBinding()
+        {
+            var handler = _viewModelMethodInfo;
+            var listener = (UnityAction)Delegate.CreateDelegate(typeof(UnityAction), ViewModel, handler);
+
+            switch (ComponentMemberExpression.Member)
+            {
+                case PropertyInfo componentPropertyInfo:
+                    var unityPropertyEvent = (UnityEvent)componentPropertyInfo.GetValue(Component);
+                    unityPropertyEvent.RemoveListener(listener);
+                    break;
+                case FieldInfo componentFieldInfo: 
+                    var unityFieldEvent = (UnityEvent)componentFieldInfo.GetValue(Component);
+                    unityFieldEvent.RemoveListener(listener);
+                    break;
+            }
+        }
+
+        protected override void UpdateBinding() { } // Nothing to do here as everything is done through the wired events.
     }
 }

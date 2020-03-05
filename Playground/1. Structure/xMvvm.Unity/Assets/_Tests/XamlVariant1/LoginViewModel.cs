@@ -27,7 +27,7 @@
 
         public void OnLogin()
         {
-            
+            UnityEngine.Debug.Log("OnLogin");
         }
     }
 }

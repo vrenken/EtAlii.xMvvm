@@ -17,14 +17,14 @@ namespace EtAlii.xMvvm.XamlVariant1
         protected Binding(
             View<TViewModel> view,
             string path, 
-            Expression<Func<TComponent, object>> componentPropertyLambda)
+            Expression<Func<TComponent, object>> component)
         {
             _view = view;
             _view.PropertyChanged += OnViewPropertyChanged;
 
-            if (componentPropertyLambda == null)
+            if (component == null)
             {
-                throw new ArgumentNullException(nameof(componentPropertyLambda));
+                throw new ArgumentNullException(nameof(component));
             }
 
             var child = _view.GameObject.transform.Find(path);
@@ -34,15 +34,24 @@ namespace EtAlii.xMvvm.XamlVariant1
                 throw new InvalidOperationException($"Unable to find component {typeof(TComponent)} on path {path}");
             }
 
-            ComponentMemberExpression  = componentPropertyLambda.Body as MemberExpression;
+            switch (component.Body)
+            {
+                case MemberExpression memberExpression:
+                    ComponentMemberExpression  = memberExpression;
+                    break;
+                case UnaryExpression unaryExpression:
+                    ComponentMemberExpression  = unaryExpression.Operand as MemberExpression;
+                    break;
+            }
             if (ComponentMemberExpression  == null)
             {
-                throw new InvalidOperationException("Unable to access component member from expression: " + componentPropertyLambda);
+                throw new InvalidOperationException("Unable to access component member from expression: " + component);
             }
         }
 
-        protected abstract void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e);
-        protected abstract void SetComponentPropertyValue();
+        protected abstract void StartBinding();
+        protected abstract void StopBinding();
+        protected abstract void UpdateBinding();
 
         private void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -50,15 +59,15 @@ namespace EtAlii.xMvvm.XamlVariant1
             
             if (ViewModel != null)
             {
-                ViewModel.PropertyChanged -= OnViewModelPropertyChanged;
+                StopBinding();
             }
 
             ViewModel = _view.ViewModel;
 
             if (ViewModel != null)
             {
-                SetComponentPropertyValue();
-                ViewModel.PropertyChanged += OnViewModelPropertyChanged;
+                UpdateBinding();
+                StartBinding();
             }
         }
     }
