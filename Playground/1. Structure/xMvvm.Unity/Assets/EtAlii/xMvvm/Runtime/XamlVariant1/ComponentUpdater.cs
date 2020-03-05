@@ -39,6 +39,5 @@ namespace EtAlii.xMvvm.XamlVariant1
                     break;
             }
         }
-
     }
 }

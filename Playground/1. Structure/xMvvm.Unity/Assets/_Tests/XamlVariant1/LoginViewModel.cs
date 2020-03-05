@@ -1,6 +1,7 @@
 ﻿namespace EtAlii.xMvvm
 {
     using System.ComponentModel;
+    using UnityEngine;
 
     public class LoginViewModel : INotifyPropertyChanged
     {
@@ -27,7 +28,16 @@
 
         public void OnLogin()
         {
-            UnityEngine.Debug.Log("OnLogin");
+            Debug.Log("OnLogin");
+        }
+
+        public void OnCancel()
+        {
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            #else
+            Application.Quit();
+            #endif
         }
     }
 }
