@@ -1,0 +1,16 @@
+﻿<View
+    xmlns="xMvvm"     
+    xmlns:x="xMvvm"
+    ViewModelType="LocationsViewModel"        
+    Prefab="LocationsView.prefab">  
+ 
+    <ListView ItemsSource="{x:Bind Locations}">
+        <ListView.ItemTemplate>
+            <DataTemplate 
+                Prefab="LocationItem.prefab" />
+                <Property Name="Title" Value="{x:Bind Title}" Path="Canvas/Panel/TitleLabel" Type="TMPro.TMP_Text" Member="text" /> 
+                <Property Name="Text" Value="{x:Bind Text}" Path="Canvas/Panel/TextLabel" Type="TMPro.TMP_Text" Member="text" /> 
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>  
+</View>
