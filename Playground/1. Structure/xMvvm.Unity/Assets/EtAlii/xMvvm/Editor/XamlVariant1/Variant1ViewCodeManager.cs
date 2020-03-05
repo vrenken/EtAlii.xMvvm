@@ -59,6 +59,7 @@
                 ["now"] = DateTime.Now,
                 ["className"] = Path.GetFileNameWithoutExtension(asset), 
                 ["classNamespace"] = UnityEditor.EditorSettings.projectGenerationRootNamespace,
+                ["variantNamespace"] = "EtAlii.xMvvm.XamlVariant1",
             };
             
             // We always delete the generated file and recreate it.

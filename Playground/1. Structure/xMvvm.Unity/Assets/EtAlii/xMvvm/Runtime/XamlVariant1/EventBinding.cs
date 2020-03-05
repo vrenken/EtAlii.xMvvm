@@ -66,7 +66,5 @@ namespace EtAlii.xMvvm.XamlVariant1
                     break;
             }
         }
-
-        protected override void UpdateBinding() { } // Nothing to do here as everything is done through the wired events.
     }
 }

@@ -13,6 +13,7 @@ namespace EtAlii.xMvvm.XamlVariant1
         protected INotifyPropertyChanged ViewModel { get; set; }
         protected MonoBehaviour Component { get; }
         protected MemberExpression ComponentMemberExpression { get; }
+        protected Type ComponentType { get; }
 
         protected Binding(
             View<TViewModel> view,
@@ -33,6 +34,7 @@ namespace EtAlii.xMvvm.XamlVariant1
             {
                 throw new InvalidOperationException($"Unable to find component {typeof(TComponent)} on path {path}");
             }
+            ComponentType = Component.GetType();
 
             switch (component.Body)
             {
@@ -51,8 +53,7 @@ namespace EtAlii.xMvvm.XamlVariant1
 
         protected abstract void StartBinding();
         protected abstract void StopBinding();
-        protected abstract void UpdateBinding();
-
+        
         private void OnViewPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName != nameof(_view.ViewModel)) return;
@@ -66,7 +67,6 @@ namespace EtAlii.xMvvm.XamlVariant1
 
             if (ViewModel != null)
             {
-                UpdateBinding();
                 StartBinding();
             }
         }

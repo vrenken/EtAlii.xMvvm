@@ -5,10 +5,13 @@ namespace EtAlii.xMvvm
     [LiquidType( new []
     {
         nameof(Name),
+        nameof(Mode),
     })]
     public class Bind
     {
         public string Name { get; set; }
+
+        public BindingMode Mode { get; set; } = BindingMode.OneWay;
         
         public object ProvideValue()
         {
