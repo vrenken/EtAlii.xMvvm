@@ -1,4 +1,4 @@
-namespace EtAlii.xMvvm.Tests 
+namespace EtAlii.xMvvm 
 {
     public partial class LoginView 
     {    
