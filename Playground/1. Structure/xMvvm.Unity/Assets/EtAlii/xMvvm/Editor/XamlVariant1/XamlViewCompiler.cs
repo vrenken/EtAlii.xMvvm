@@ -6,6 +6,7 @@
     using System.Linq.Expressions;
     using System.Reflection;
     using Mono.Cecil;
+    using UnityEngine;
     using XamlIl.Ast;
     using XamlIl.Parsers;
     using XamlIl.Runtime;
@@ -28,9 +29,44 @@
             compiler.Compile(parsed, builder, context, "Populate", "Build", "XamlIlNamespaceInfo", "http://example.com/", null);
             return parsed;
         }
-        
-        
+
         public (Func<IServiceProvider, object> create, Action<IServiceProvider, object> populate) Compile(string xaml)
+        {
+            try
+            {
+                return CompileInternal(xaml);
+            }
+            catch (Exception)
+            {
+                // We want to have a padded line number
+                // in front of each line.
+
+                // So let's fetch all individual XAML lines.
+                var lines = xaml.Split(new []{ Environment.NewLine}, StringSplitOptions.None);
+
+                // Determine the padding count.
+                // (probably no XAML files with more than 1 million lines...)
+                var count = lines.Length;
+                var spacing =
+                    count < 10 ? 1 :
+                    count < 100 ? 2 :
+                    count < 1000 ? 3 :
+                    count < 10000 ? 4 : 5;
+                
+                // ... Prefix each line.
+                var format = $"D{spacing}";
+                for (var i = 0; i < count; i++)
+                {
+                    lines[i] = $"{i.ToString(format)}: {lines[i]}";
+                }
+                
+                // And throw both errors.
+                Debug.LogError("Unable to process XAML: " + Environment.NewLine + string.Join(Environment.NewLine, lines));
+                throw;
+            }
+        }
+
+        private (Func<IServiceProvider, object> create, Action<IServiceProvider, object> populate) CompileInternal(string xaml)
         {
             // Let's build ourselves a typesystem and compiler configuration.
             // We're going to do this for each compile action as we don't want to have anything 
