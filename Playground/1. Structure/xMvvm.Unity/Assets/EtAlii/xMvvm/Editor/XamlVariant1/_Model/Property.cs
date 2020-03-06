@@ -2,6 +2,9 @@ namespace EtAlii.xMvvm
 {
     using DotLiquid;
 
+    /// <summary>
+    /// A Binding from ViewModel properties to Component properties or fields. 
+    /// </summary>
     [LiquidType( new []
     {
         nameof(Name),

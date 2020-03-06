@@ -2,6 +2,9 @@ namespace EtAlii.xMvvm
 {
     using DotLiquid;
 
+    /// <summary>
+    /// A Binding from Component (Unity) events to ViewModel methods.  
+    /// </summary>
     [LiquidType( new []
     {
         nameof(Name),
