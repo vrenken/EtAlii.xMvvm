@@ -1,6 +1,6 @@
 namespace EtAlii.xMvvm
 {
-    public abstract class ComponentBinding : Element
+    public abstract class ComponentBinding : Binding
     {
         [Content]
         public string Name { get; set; }

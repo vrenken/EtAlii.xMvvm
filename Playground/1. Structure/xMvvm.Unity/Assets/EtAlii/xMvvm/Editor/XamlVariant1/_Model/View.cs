@@ -14,7 +14,6 @@ namespace EtAlii.xMvvm
         public string ViewModelType { get; set; }
         public string Prefab { get; set; }
         
-        [Content]
-        public List<Element> Bindings { get; } = new List<Element>();
+        public List<Binding> Bindings { get; } = new List<Binding>();
     }
 }
