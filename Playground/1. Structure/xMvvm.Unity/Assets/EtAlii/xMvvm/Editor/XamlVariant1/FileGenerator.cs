@@ -13,7 +13,7 @@
         {
             Template.NamingConvention = new CSharpNamingConvention();
             Template.RegisterFilter(typeof(CodeGenerationFilters));
-            Template.RegisterSafeType(typeof(ElementType), elementType => elementType.ToString());
+            Template.RegisterSafeType(typeof(BindingType), bindingType => bindingType.ToString());
             Template.RegisterSafeType(typeof(BindingMode), bindingMode => bindingMode.ToString());
         }
         public void Generate(string outputFileName, string template, Dictionary<string, object> data)

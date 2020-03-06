@@ -17,8 +17,8 @@ namespace {{classNamespace}}
 
     public partial class {{className}} : View<{{view.ViewModelType}}>  
     {
-{% for element in view.Elements -%}
-        private readonly Binding<{{element.Type}}, {{view.ViewModelType}}> {{ element.Name | PrivateMember }};
+{% for binding in view.Bindings -%}
+        private readonly Binding<{{binding.Type}}, {{view.ViewModelType}}> {{ binding.Name | PrivateMember }};
 {% endfor -%}
          
         public {{className}}() : this(GameObject.Instantiate(Resources.Load("{{view.Prefab}}", typeof(GameObject))) as GameObject)
@@ -28,9 +28,9 @@ namespace {{classNamespace}}
         public {{className}}(GameObject gameObject) : base(gameObject)
         {
             // Wire the bindings.
-{% for element in view.Elements -%}{% case element.ElementType -%}
-{% when "Property" %}            {{ element.Name | PrivateMember }} = new PropertyBinding<{{element.Type}}, {{view.ViewModelType}}>(this, "{{element.Path}}", component => component.{{element.Member}}, vm => vm.{{element.Value.Name}}, BindingMode.{{element.Value.Mode}});
-{% when "Event" %}            {{ element.Name | PrivateMember }} = new EventBinding<{{element.Type}}, {{view.ViewModelType}}>(this, "{{element.Path}}", component => component.{{element.Member}}, vm => vm.{{element.Handler.Name}});
+{% for binding in view.Bindings -%}{% case binding.BindingType -%}
+{% when "Property" %}            {{ binding.Name | PrivateMember }} = new PropertyBinding<{{binding.Type}}, {{view.ViewModelType}}>(this, "{{binding.Path}}", component => component.{{binding.Member}}, vm => vm.{{binding.Value.Name}}, BindingMode.{{binding.Value.Mode}});
+{% when "Event" %}            {{ binding.Name | PrivateMember }} = new EventBinding<{{binding.Type}}, {{view.ViewModelType}}>(this, "{{binding.Path}}", component => component.{{binding.Member}}, vm => vm.{{binding.Handler.Name}});
 {% endcase -%}{% endfor -%}                 
             // And initialize.
             Initialize();   

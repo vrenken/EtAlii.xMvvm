@@ -2,15 +2,15 @@ namespace EtAlii.xMvvm
 {
     public abstract class Element
     {
-        protected Element(ElementType elementType)
+        protected Element(BindingType bindingType)
         {
-            ElementType = elementType;
+            BindingType = bindingType;
         }
 
         protected Element()
         {
         }
 
-        public ElementType ElementType { get; }
+        public BindingType BindingType { get; }
     }
 }

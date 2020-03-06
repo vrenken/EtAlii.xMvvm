@@ -1,6 +1,6 @@
 namespace EtAlii.xMvvm
 {
-    public enum ElementType
+    public enum BindingType
     {
         Property,
         Event

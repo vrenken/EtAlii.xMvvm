@@ -1,6 +1,6 @@
 namespace EtAlii.xMvvm
 {
-    public abstract class ComponentElement : Element
+    public abstract class ComponentBinding : Element
     {
         [Content]
         public string Name { get; set; }
@@ -9,8 +9,8 @@ namespace EtAlii.xMvvm
         public string Member { get; set; }
         public string Type { get; set; }
         
-        protected ComponentElement(ElementType elementType)
-            : base(elementType)
+        protected ComponentBinding(BindingType bindingType)
+            : base(bindingType)
         {
         }
     }

@@ -8,16 +8,16 @@ namespace EtAlii.xMvvm
         nameof(Path),
         nameof(Member),
         nameof(Type),
-        nameof(ElementType),
+        nameof(BindingType),
         
         nameof(Value),
     })]
-    public class Property : ComponentElement
+    public class Property : ComponentBinding
     {
         public Bind Value { get; set; }
         
         public Property()
-            : base(ElementType.Property)
+            : base(BindingType.Property)
         {
         }
 

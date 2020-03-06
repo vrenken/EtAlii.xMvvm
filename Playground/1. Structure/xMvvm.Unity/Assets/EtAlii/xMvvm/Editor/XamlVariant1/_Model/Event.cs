@@ -8,16 +8,16 @@ namespace EtAlii.xMvvm
         nameof(Path),
         nameof(Member),
         nameof(Type),
-        nameof(ElementType),
+        nameof(BindingType),
 
         nameof(Handler),
     })]
-    public class Event : ComponentElement
+    public class Event : ComponentBinding
     {
         public Bind Handler { get; set; }
         
         public Event()
-            : base(ElementType.Event)
+            : base(BindingType.Event)
         {
         }
     }
