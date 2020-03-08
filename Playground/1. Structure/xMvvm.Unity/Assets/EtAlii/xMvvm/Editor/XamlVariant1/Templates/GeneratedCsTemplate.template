@@ -15,10 +15,16 @@ namespace {{classNamespace}}
     using System;
     using {{variantNamespace}};
 
-    public partial class {{className}} : View<{{view.ViewModelType}}>  
+    public partial class {{className}} : {{variantNamespace}}.View<{{view.ViewModelType}}>  
     {
+        // Bindings.
 {% for binding in view.Bindings -%}
         private readonly Binding<{{binding.Type}}, {{view.ViewModelType}}> {{ binding.Name | PrivateMember }};
+{% endfor -%}
+
+        // Elements.
+{% for element in view.Elements -%}
+        private readonly {{variantNamespace}}.Element {{ element.Name | PrivateMember }};
 {% endfor -%}
          
         public {{className}}() : this(GameObject.Instantiate(Resources.Load("{{view.Prefab}}", typeof(GameObject))) as GameObject)
@@ -32,6 +38,10 @@ namespace {{classNamespace}}
 {% when "Property" %}            {{ binding.Name | PrivateMember }} = new PropertyBinding<{{binding.Type}}, {{view.ViewModelType}}>(this, "{{binding.Path}}", component => component.{{binding.Member}}, vm => vm.{{binding.Value.Name}}, BindingMode.{{binding.Value.Mode}});
 {% when "Event" %}            {{ binding.Name | PrivateMember }} = new EventBinding<{{binding.Type}}, {{view.ViewModelType}}>(this, "{{binding.Path}}", component => component.{{binding.Member}}, vm => vm.{{binding.Handler.Name}});
 {% endcase -%}{% endfor -%}                 
+            // Setup the child elements.
+{% for element in view.Elements -%}
+            {{ element.Name | PrivateMember }} = new {{variantNamespace}}.Element(gameObject, this, "{{element.Name}}");
+{% endfor -%}             
             // And initialize.
             Initialize();   
         }

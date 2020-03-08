@@ -3,11 +3,9 @@ namespace EtAlii.xMvvm.XamlVariant1
     using System.ComponentModel;
     using UnityEngine;
 
-    public abstract class View<TViewModel> : INotifyPropertyChanged
+    public abstract class View<TViewModel> : Element, INotifyPropertyChanged
         where TViewModel : INotifyPropertyChanged
     {
-        public GameObject GameObject { get; }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -16,11 +14,9 @@ namespace EtAlii.xMvvm.XamlVariant1
         public TViewModel ViewModel { get => _viewModel; set => PropertyChanged.SetAndRaise(this, ref _viewModel, value); }
         private TViewModel _viewModel;
 
-        protected View(GameObject gameObject)
+        protected View(GameObject gameObject) 
+            : base(gameObject)
         {
-            // Setup a prefab instance. 
-            GameObject = gameObject;
-
         }
     }
 }

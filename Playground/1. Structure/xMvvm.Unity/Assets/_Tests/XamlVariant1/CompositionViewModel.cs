@@ -14,6 +14,12 @@
         public bool Rotate { get => _rotate; set => PropertyChanged.SetAndRaise(this, ref _rotate, value); }
         private bool _rotate;
 
+        
+        // Wrong. THe VM should have no knowledge of the views and therefore also never translate/rotate/scale insights.
+        public object SubjectTransformation { get => _subjectTransformation; set => PropertyChanged.SetAndRaise(this, ref _subjectTransformation, value); }
+        private object _subjectTransformation;
+        
+            
         public event PropertyChangedEventHandler PropertyChanged;
 
         public CompositionViewModel()

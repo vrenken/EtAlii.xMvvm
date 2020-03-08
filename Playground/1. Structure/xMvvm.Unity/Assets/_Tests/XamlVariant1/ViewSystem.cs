@@ -24,7 +24,7 @@
                     Password = "1234"
                 }
             };
-
+            
             compositionView = new CompositionView(compositionPanel)
             {
                 ViewModel = new CompositionViewModel()

@@ -7,9 +7,14 @@ namespace EtAlii.xMvvm
     {
         nameof(ViewModelType),
         nameof(Prefab),
-        nameof(Bindings)
+        nameof(Bindings),
+        
+        nameof(Name),
+        nameof(Elements),
+        nameof(Path),
+        nameof(Transformation)
     })]
-    public class View
+    public class View : Element
     {
         public string ViewModelType { get; set; }
         public string Prefab { get; set; }

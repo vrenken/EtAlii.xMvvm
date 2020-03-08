@@ -1,18 +1,21 @@
 ﻿<View
+    Name="Test"
     xmlns="xMvvm"     
     xmlns:x="xMvvm"
     ViewModelType="CompositionViewModel"        
     Prefab="CompositionView.prefab">  
 
-    <View.Bindings>
+    <View.Bindings>   
         <Property Name="Up" Value="{x:Bind Up, Mode=OneWayToSource}" Path="Canvas/Panel/UpSlider" Type="UnityEngine.UI.Slider" Member="value" /> 
         <Property Name="Forward" Value="{x:Bind Forward, Mode=OneWayToSource}" Path="Canvas/Panel/ForwardSlider" Type="UnityEngine.UI.Slider" Member="value" /> 
         <Property Name="Rotate" Value="{x:Bind Rotate, Mode=OneWayToSource}" Path="Canvas/Panel/RotateToggle" Type="UnityEngine.UI.Toggle" Member="isOn" /> 
 
         <!-- <Element Name="SubjectTranslation" Value="{x:Bind Transform}" Path="Subject" Type="Transform" Member="translation"/>  -->
-
-    </View.Bindings>
-    <!-- <View.Elements> -->
-    <!--     <Element Path="Subject" Transform="{x:Bind Transform}"/> -->
-    <!-- </View.Elements> -->
+   
+    </View.Bindings>  
+         
+    <View.Elements>
+        <Element Name="Canvas" Path="Canvas" />
+        <Element Name="Subject" Path="Subject" Transformation="{x:Bind SubjectTransformation}" />
+    </View.Elements>
 </View>
