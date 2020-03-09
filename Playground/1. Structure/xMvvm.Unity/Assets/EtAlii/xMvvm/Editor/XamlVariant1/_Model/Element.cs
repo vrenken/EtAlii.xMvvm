@@ -15,7 +15,7 @@ namespace EtAlii.xMvvm
     {
         public string Name { get; set; }
         public string Path { get; set; }
-        public ResourceDictionary Resources { get; set; }
+        public ResourceDictionary Resources { get; set; } = new ResourceDictionary();
 
         public Bind Transformation { get; set; } // UnityEngine.Transform
         
