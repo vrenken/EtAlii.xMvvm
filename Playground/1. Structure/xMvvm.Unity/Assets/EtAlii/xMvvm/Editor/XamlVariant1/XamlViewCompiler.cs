@@ -90,6 +90,7 @@
                 ContentAttributes = {typeSystem.GetType(typeof(ContentAttribute).FullName)},
                 UsableDuringInitializationAttributes = {typeSystem.GetType(typeof(UsableDuringInitializationAttribute).FullName)},
                 DeferredContentPropertyAttributes = { typeSystem.GetType(typeof(DeferredContentAttribute).FullName) },
+                //DeferredContentExecutorCustomization = typeSystem.GetType(typeof(XamlViewCompiler).FullName).FindMethod(m => m.Name == "CustomizeDeferredContent"),
                 
                 RootObjectProvider = typeSystem.GetType(typeof(IViewRootObjectProvider).FullName),
                 UriContextProvider = typeSystem.GetType(typeof(IViewUriContext).FullName),
@@ -152,5 +153,24 @@
             
             return (createCb, populateCb);
         }
+        
+        // public static Func<IServiceProvider, object> CustomizeDeferredContent(
+        //     Func<IServiceProvider, object> builder, 
+        //     IServiceProvider parentServices)
+        // {
+        //     return builder;
+        //     
+        //     //var parentRoot = ((IViewRootObjectProvider)parentServices.GetService(typeof(IViewRootObjectProvider))).RootObject;
+        //     //var cb = parentServices.GetService(typeof(CallbackExtensionCallback));
+        //
+        //     // return sp => builder(new DictionaryServiceProvider
+        //     // {
+        //     //     [typeof(ITestRootObjectProvider)] = new ConstantRootObjectProvider {RootObject = parentRoot},
+        //     //     [typeof(CallbackExtensionCallback)] = cb,
+        //     //     Parent = sp
+        //     // });
+        //     // return null;
+        // }
+
     }
 }

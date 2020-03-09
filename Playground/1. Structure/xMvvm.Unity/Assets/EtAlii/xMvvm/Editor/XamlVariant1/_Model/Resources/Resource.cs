@@ -4,7 +4,7 @@ namespace EtAlii.xMvvm
 
     [LiquidType( new []
     {
-        nameof(Key),
+        nameof(Key)
     })]
     public class Resource
     {
