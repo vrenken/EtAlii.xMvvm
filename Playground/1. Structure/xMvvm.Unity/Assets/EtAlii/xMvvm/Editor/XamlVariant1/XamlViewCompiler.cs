@@ -36,7 +36,7 @@
             {
                 return CompileInternal(xaml);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 // We want to have a padded line number
                 // in front of each line.
@@ -61,8 +61,8 @@
                 }
                 
                 // And throw both errors.
-                Debug.LogError("Unable to process XAML: " + Environment.NewLine + string.Join(Environment.NewLine, lines));
-                throw;
+                Debug.LogError(e.GetType().Name + ": " + e.Message + Environment.NewLine + Environment.NewLine + string.Join(Environment.NewLine, lines));
+                return default;
             }
         }
 

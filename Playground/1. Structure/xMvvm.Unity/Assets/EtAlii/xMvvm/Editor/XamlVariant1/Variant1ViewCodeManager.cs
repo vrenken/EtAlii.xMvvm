@@ -47,6 +47,10 @@
             // Let's fetch the XAML and convert it into a View hierarchy.
             var xamlContent = File.ReadAllText(xamlFileName);
             var compilation = _xamlViewCompiler.Compile(xamlContent);
+            if (compilation == default)
+            {
+                return;
+            }
             var view = (View)compilation.create(null);
 
             // Some values might not be set. Let's add a few default ones.
