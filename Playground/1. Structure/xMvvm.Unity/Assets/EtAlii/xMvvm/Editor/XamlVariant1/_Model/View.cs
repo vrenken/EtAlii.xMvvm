@@ -12,7 +12,8 @@ namespace EtAlii.xMvvm
         nameof(Name),
         nameof(Elements),
         nameof(Path),
-        nameof(Transformation)
+        nameof(Transformation),
+        nameof(Resources)
     })]
     public class View : Element
     {
