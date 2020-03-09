@@ -13,7 +13,7 @@ namespace EtAlii.xMvvm
         nameof(Type),
         nameof(BindingType),
 
-        nameof(Handler),
+        nameof(Handler)
     })]
     public class Event : ComponentBinding
     {

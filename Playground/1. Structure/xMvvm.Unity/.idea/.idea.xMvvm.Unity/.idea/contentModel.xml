@@ -9,7 +9,6 @@
           <e p="MouseLook.cs" t="Include" />
           <e p="XamlVariant1" t="Include">
             <e p="CompositionView.v1xaml.cs" t="Include" />
-            <e p="CompositionView.v1xaml.g.cs" t="Include" />
             <e p="CompositionViewModel.cs" t="Include" />
             <e p="LoginView.v1xaml.cs" t="Include" />
             <e p="LoginView.v1xaml.g.cs" t="Include" />
@@ -31,6 +30,10 @@
                   <e p="Element.cs" t="Include" />
                   <e p="Event.cs" t="Include" />
                   <e p="Property.cs" t="Include" />
+                  <e p="Resource.cs" t="Include" />
+                  <e p="ResourceBinding.cs" t="Include" />
+                  <e p="ResourceDictionary.cs" t="Include" />
+                  <e p="StaticResource.cs" t="Include" />
                   <e p="View.cs" t="Include" />
                 </e>
                 <e p="FileGenerator.cs" t="Include" />

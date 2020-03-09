@@ -6,10 +6,13 @@ namespace EtAlii.xMvvm
     {
         nameof(Name),
         nameof(Mode),
+        nameof(Converter)
     })]
     public class Bind
     {
         public string Name { get; set; }
+        
+        public StaticResource Converter { get; set; }
 
         public BindingMode Mode { get; set; } = BindingMode.OneWay;
         
@@ -18,10 +21,6 @@ namespace EtAlii.xMvvm
             return this;
         }
 
-        public Bind()
-        {
-            
-        }
         public Bind(string name)
         {
             Name = name;
