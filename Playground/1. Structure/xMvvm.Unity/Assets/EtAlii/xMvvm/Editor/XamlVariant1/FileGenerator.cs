@@ -4,13 +4,16 @@
     using System.Collections.Generic;
     using System.IO;
     using DotLiquid;
+    using DotLiquid.FileSystems;
     using DotLiquid.NamingConventions;
     using UnityEngine;
 
     public class FileGenerator 
     {
-        static FileGenerator()
+        public static void Initialize(string templatesFolder)
         {
+            Template.FileSystem = new LocalFileSystem(templatesFolder); 
+
             Template.NamingConvention = new CSharpNamingConvention();
             Template.RegisterFilter(typeof(CodeGenerationFilters));
             Template.RegisterSafeType(typeof(BindingType), bindingType => bindingType.ToString());

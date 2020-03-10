@@ -1,0 +1,9 @@
+﻿new {{variantNamespace}}.Element(gameObject, this, "{{element.Name}}")  
+{
+    Elements = new []
+    {
+    {% for element in element.Elements -%}
+    {% include "ElementConstruct" %}
+    {% endfor -%}             
+    };
+}

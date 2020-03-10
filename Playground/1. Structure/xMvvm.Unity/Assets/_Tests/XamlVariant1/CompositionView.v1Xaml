@@ -5,9 +5,9 @@
     ViewModelType="CompositionViewModel"        
     Prefab="CompositionView.prefab">  
 
-    <View.Resources>
+    <View.Resources>            
         <ResourceDictionary> 
-            <LinearTransformationConverter Key="LinearTransformationConverter" />            
+            <LinearTransformationConverter Key="LinearTransformationConverter" />              
         </ResourceDictionary>
     </View.Resources>    
     <View.Bindings>             
@@ -19,6 +19,10 @@
     </View.Bindings>  
     <View.Elements>    
         <Element Name="Canvas" Path="Canvas" />  
-        <Element Name="Subject" Path="Subject" Transformation="{x:Bind SubjectTransformation, Converter={StaticResource LinearTransformationConverter}}" />
+        <Element Name="Subject" Path="Subject" Transformation="{x:Bind SubjectTransformation, Converter={StaticResource LinearTransformationConverter}}">
+            <Element.Elements>
+                <Element Name="Child" Path="Child" />   
+            </Element.Elements>
+        </Element>
     </View.Elements>
 </View>

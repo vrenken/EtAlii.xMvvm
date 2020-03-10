@@ -35,6 +35,7 @@
                   </e>
                   <e p="Element.cs" t="Include" />
                   <e p="Resources" t="Include">
+                    <e p="Direction.cs" t="Include" />
                     <e p="LinearTransformationConverter.cs" t="Include" />
                     <e p="Resource.cs" t="Include" />
                     <e p="ResourceDictionary.cs" t="Include" />
@@ -45,8 +46,6 @@
                 <e p="FileGenerator.cs" t="Include" />
                 <e p="Templates" t="Include">
                   <e p="CodeGenerationFilters.cs" t="Include" />
-                  <e p="GeneratedCsTemplate.template" t="Include" />
-                  <e p="PartialCsTemplate.template" t="Include" />
                 </e>
                 <e p="Variant1ViewCodeManager.cs" t="Include" />
                 <e p="XamlLanguage.cs" t="Include" />

@@ -4,10 +4,18 @@ namespace EtAlii.xMvvm
 
     [LiquidType( new []
     {
-        nameof(Key)
+        nameof(Key),
+        nameof(Type),
     })]
-    public class Resource
+    public abstract class Resource
     {
+        public string Type { get; }
+
         public string Key { get; set; }
+        
+        protected Resource(string type)
+        {
+            Type = type;
+        }
     }
 }

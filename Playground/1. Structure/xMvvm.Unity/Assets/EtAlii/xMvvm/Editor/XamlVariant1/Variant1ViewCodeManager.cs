@@ -13,8 +13,8 @@
 
         public bool CanManage(string asset) => string.Compare(Path.GetExtension(asset), XamlFileExtension, StringComparison.OrdinalIgnoreCase) == 0;
 
-        private const string GeneratedCsTemplateFileName = "GeneratedCsTemplate.template";
-        private const string PartialCsTemplateFileName = "PartialCsTemplate.template";
+        private const string GeneratedCsTemplateFileName = "GeneratedCsTemplate.liquid";
+        private const string PartialCsTemplateFileName = "PartialCsTemplate.liquid";
         private const string TemplateFolder = "EtAlii/xMvvm/Editor/XamlVariant1/Templates";
             
         private readonly FileGenerator _fileGenerator = new FileGenerator();
@@ -31,16 +31,13 @@
             }
         }
 
+        static Variant1ViewCodeManager()
+        {
+            var templatesFolder = Path.Combine(Application.dataPath, TemplateFolder).Replace("/", @"\");
+            FileGenerator.Initialize(templatesFolder);
+        }
         public void Create(string asset)
         {
-            // Let's fetch our templates.
-            // This could be optimized by moving it to the constructor and only done once
-            // but this makes development frustrating as the editor classes need to be touched in order to test template changes.  
-            var generatedCsTemplateFileName = Path.Combine(Application.dataPath, TemplateFolder, GeneratedCsTemplateFileName);
-            var generatedCsTemplate = File.ReadAllText(generatedCsTemplateFileName);
-            var partialCsTemplateFileName = Path.Combine(Application.dataPath, TemplateFolder, PartialCsTemplateFileName);
-            var partialCsTemplate = File.ReadAllText(partialCsTemplateFileName);
-
             // Also we need a few files and folders. 
             BuildRelevantFileNames(asset, out var xamlFileName, out var generatedFileName, out var partialFileName);
 
@@ -66,6 +63,14 @@
                 ["variantNamespace"] = "EtAlii.xMvvm.XamlVariant1",
             };
             
+            // Let's fetch our templates.
+            // This could be optimized by moving it to the constructor and only done once
+            // but this makes development frustrating as the editor classes need to be touched in order to test template changes.  
+            var generatedCsTemplateFileName = Path.Combine(Application.dataPath, TemplateFolder, GeneratedCsTemplateFileName);
+            var generatedCsTemplate = File.ReadAllText(generatedCsTemplateFileName);
+            var partialCsTemplateFileName = Path.Combine(Application.dataPath, TemplateFolder, PartialCsTemplateFileName);
+            var partialCsTemplate = File.ReadAllText(partialCsTemplateFileName);
+
             // We always delete the generated file and recreate it.
             if (File.Exists(generatedFileName))
             {

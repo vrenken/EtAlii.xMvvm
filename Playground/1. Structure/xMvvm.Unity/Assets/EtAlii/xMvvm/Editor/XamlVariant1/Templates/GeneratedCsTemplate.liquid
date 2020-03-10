@@ -17,6 +17,11 @@ namespace {{classNamespace}}
 
     public partial class {{className}} : {{variantNamespace}}.View<{{view.ViewModelType}}>  
     {
+        // Resources.
+{% for resource in view.Resources.Items -%}
+        private readonly {{resource.Type}} {{ resource.Key | PrivateMember }};
+{% endfor -%}
+        
         // Bindings.
 {% for binding in view.Bindings -%}
         private readonly Binding<{{binding.Type}}, {{view.ViewModelType}}> {{ binding.Name | PrivateMember }};
@@ -33,6 +38,11 @@ namespace {{classNamespace}}
         
         public {{className}}(GameObject gameObject) : base(gameObject)
         {
+            // Setup the resources.
+{% for resource in view.Resources.Items -%}
+            {{ resource.Key | PrivateMember }} = new {{resource.Type}}();
+{% endfor -%}
+        
             // Wire the bindings.
 {% for binding in view.Bindings -%}{% case binding.BindingType -%}
 {% when "Property" %}            {{ binding.Name | PrivateMember }} = new PropertyBinding<{{binding.Type}}, {{view.ViewModelType}}>(this, "{{binding.Path}}", component => component.{{binding.Member}}, vm => vm.{{binding.Value.Name}}, BindingMode.{{binding.Value.Mode}});
@@ -40,7 +50,7 @@ namespace {{classNamespace}}
 {% endcase -%}{% endfor -%}                 
             // Setup the child elements.
 {% for element in view.Elements -%}
-            {{ element.Name | PrivateMember }} = new {{variantNamespace}}.Element(gameObject, this, "{{element.Name}}");
+            //{{ element.Name | PrivateMember }} = { % include "ElementConstruct" % }
 {% endfor -%}             
             // And initialize.
             Initialize();   
