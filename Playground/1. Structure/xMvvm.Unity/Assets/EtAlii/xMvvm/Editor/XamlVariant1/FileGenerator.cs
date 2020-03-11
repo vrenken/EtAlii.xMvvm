@@ -13,7 +13,7 @@
         public static void Initialize(string templatesFolder)
         {
             Template.FileSystem = new LocalFileSystem(templatesFolder); 
-
+ 
             Template.NamingConvention = new CSharpNamingConvention();
             Template.RegisterFilter(typeof(CodeGenerationFilters));
             Template.RegisterSafeType(typeof(BindingType), bindingType => bindingType.ToString());

@@ -1,9 +1,10 @@
-﻿new {{variantNamespace}}.Element(gameObject, this, "{{element.Name}}")  
-{
-    Elements = new []
+﻿new {{variantNamespace}}.Element(gameObject, this, "{{ElementConstruct.Name}}")  
+{%- capture elementExpression -%}{
+    Elements = new {{variantNamespace}}.Element[]
     {
-    {% for element in element.Elements -%}
-    {% include "ElementConstruct" %}
+    {% for childElement in ElementConstruct.Elements -%}
+    {% include 'ElementConstruct' with childElement %}{% if forloop.last == false %},{% endif %}
     {% endfor -%}             
-    };
-}
+    }
+}{%- endcapture %}
+{{elementExpression | Indent }}{% comment %}Indent:ElementConstruct.Indent {%endcomment%}

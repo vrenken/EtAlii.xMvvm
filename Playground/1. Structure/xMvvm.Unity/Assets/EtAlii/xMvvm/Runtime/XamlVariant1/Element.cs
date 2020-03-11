@@ -5,13 +5,14 @@ namespace EtAlii.xMvvm.XamlVariant1
     public class Element
     {
         public GameObject GameObject { get; }
+        public Element[] Elements { get; set; }
 
         public Element(GameObject gameObject)
         {
             // Setup a prefab instance. 
             GameObject = gameObject;
         }
-
+        
         public Element(GameObject gameObject, Element parent, string name)
             : this(gameObject)
         {
