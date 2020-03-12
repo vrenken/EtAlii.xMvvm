@@ -10,25 +10,25 @@
 
         public GameObject compositionPanel;
         public CompositionView compositionView;
-        //
-        // private void Start()
-        // {
-        //     // This is just a simple method to wire up the View with ViewModels.
-        //     // There are most probably better ways to do so.  
-        //
-        //     loginView = new LoginView(loginPanel)
-        //     {
-        //         ViewModel = new LoginViewModel
-        //         {
-        //             UserName = "john.doe@nomail.com",
-        //             Password = "1234"
-        //         }
-        //     };
-        //     
-        //     compositionView = new CompositionView(compositionPanel)
-        //     {
-        //         ViewModel = new CompositionViewModel()
-        //     };
-        // }
+        
+        private void Start()
+        {
+            // This is just a simple method to wire up the View with ViewModels.
+            // There are most probably better ways to do so.  
+        
+            loginView = new LoginView(loginPanel)
+            {
+                ViewModel = new LoginViewModel
+                {
+                    UserName = "john.doe@nomail.com",
+                    Password = "1234"
+                }
+            };
+            
+            compositionView = new CompositionView(compositionPanel)
+            {
+                ViewModel = new CompositionViewModel()
+            };
+        }
     }
 }
