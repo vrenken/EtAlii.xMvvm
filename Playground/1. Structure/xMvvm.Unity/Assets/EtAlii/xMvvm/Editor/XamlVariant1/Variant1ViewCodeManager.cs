@@ -5,6 +5,9 @@
     using System.IO;
     using UnityEngine;
 
+    //using FileGenerator = DotLiquidFileGenerator;
+    using FileGenerator = T4FileGenerator;
+    
     public class Variant1ViewCodeManager : IViewCodeManager
     {
         private const string XamlFileExtension = ".v1xaml";
@@ -34,7 +37,7 @@
         static Variant1ViewCodeManager()
         {
             var templatesFolder = Path.Combine(Application.dataPath, TemplateFolder).Replace("/", @"\");
-            FileGenerator.Initialize(templatesFolder);
+            DotLiquidFileGenerator.Initialize(templatesFolder);
         }
         public void Create(string asset)
         {

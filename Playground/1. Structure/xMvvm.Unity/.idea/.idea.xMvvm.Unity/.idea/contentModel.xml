@@ -43,10 +43,13 @@
                   </e>
                   <e p="View.cs" t="Include" />
                 </e>
-                <e p="FileGenerator.cs" t="Include" />
                 <e p="Templates" t="Include">
                   <e p="CodeGenerationFilters.cs" t="Include" />
+                  <e p="DotLiquidFileGenerator.cs" t="Include" />
                   <e p="IndentBlock.cs" t="Include" />
+                </e>
+                <e p="Templates2" t="Include">
+                  <e p="T4FileGenerator.cs" t="Include" />
                 </e>
                 <e p="Variant1ViewCodeManager.cs" t="Include" />
                 <e p="XamlLanguage.cs" t="Include" />

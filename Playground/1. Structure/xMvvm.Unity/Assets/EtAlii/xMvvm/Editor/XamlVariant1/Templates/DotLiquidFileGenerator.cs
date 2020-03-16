@@ -8,7 +8,7 @@
     using DotLiquid.NamingConventions;
     using UnityEngine;
 
-    public class FileGenerator 
+    public class DotLiquidFileGenerator
     {
         public static void Initialize(string templatesFolder)
         {
