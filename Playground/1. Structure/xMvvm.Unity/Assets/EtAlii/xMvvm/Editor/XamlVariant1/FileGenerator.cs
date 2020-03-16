@@ -16,6 +16,7 @@
  
             Template.NamingConvention = new CSharpNamingConvention();
             Template.RegisterFilter(typeof(CodeGenerationFilters));
+            Template.RegisterTag<IndentBlock>("Indent");
             Template.RegisterSafeType(typeof(BindingType), bindingType => bindingType.ToString());
             Template.RegisterSafeType(typeof(BindingMode), bindingMode => bindingMode.ToString());
         }

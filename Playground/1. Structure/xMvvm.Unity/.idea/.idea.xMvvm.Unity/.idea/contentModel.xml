@@ -46,6 +46,7 @@
                 <e p="FileGenerator.cs" t="Include" />
                 <e p="Templates" t="Include">
                   <e p="CodeGenerationFilters.cs" t="Include" />
+                  <e p="IndentBlock.cs" t="Include" />
                 </e>
                 <e p="Variant1ViewCodeManager.cs" t="Include" />
                 <e p="XamlLanguage.cs" t="Include" />
@@ -174,6 +175,32 @@
             </e>
           </e>
         </e>
+        <e p="Mono" t="Include">
+          <e p="TextTemplating" t="Include">
+            <e p="Editor" t="Include">
+              <e p="CompiledTemplate.cs" t="Include" />
+              <e p="CrossAppDomainAssemblyResolver.cs" t="Include" />
+              <e p="DirectiveProcessor.cs" t="Include" />
+              <e p="DirectiveProcessorException.cs" t="Include" />
+              <e p="EncodingHelper.cs" t="Include" />
+              <e p="Engine.cs" t="Include" />
+              <e p="FileUtil.cs" t="Include" />
+              <e p="Interfaces.cs" t="Include" />
+              <e p="ParameterDirectiveProcessor.cs" t="Include" />
+              <e p="ParsedTemplate.cs" t="Include" />
+              <e p="RecyclableAppDomain.cs" t="Include" />
+              <e p="RequiresProvidesDirectiveProcessor.cs" t="Include" />
+              <e p="TemplateGenerator.cs" t="Include" />
+              <e p="TemplatingEngine.cs" t="Include" />
+              <e p="TextTemplateSettings.cs" t="Include" />
+              <e p="TextTemplatingSession.cs" t="Include" />
+              <e p="TextTransformation.cs" t="Include" />
+              <e p="Tokeniser.cs" t="Include" />
+              <e p="ToStringHelper.cs" t="Include" />
+            </e>
+            <e p="Mono.TextTemplating.asmdef" t="Include" />
+          </e>
+        </e>
         <e p="Packages" t="Include">
           <e p="DotLiquid.2.0.323" t="Include">
             <e p="lib" t="Include">
@@ -233,6 +260,7 @@
         </e>
       </e>
       <e p="EtAlii.xMvvm.csproj" t="IncludeRecursive" />
+      <e p="Mono.TextTemplating.csproj" t="IncludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
