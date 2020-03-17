@@ -4,7 +4,7 @@
     xmlns:x="xMvvm"
     ViewModelType="CompositionViewModel"        
     Prefab="CompositionView.prefab">  
-    <View.Resources>         
+    <View.Resources>                           
         <ResourceDictionary> 
             <LinearTransformationConverter Key="LinearTransformationConverter" />              
         </ResourceDictionary>

@@ -38,30 +38,10 @@
             }
             catch (Exception e)
             {
-                // We want to have a padded line number
-                // in front of each line.
-
-                // So let's fetch all individual XAML lines.
-                var lines = xaml.Split(new []{ Environment.NewLine}, StringSplitOptions.None);
-
-                // Determine the padding count.
-                // (probably no XAML files with more than 1 million lines...)
-                var count = lines.Length;
-                var spacing =
-                    count < 10 ? 1 :
-                    count < 100 ? 2 :
-                    count < 1000 ? 3 :
-                    count < 10000 ? 4 : 5;
-                
-                // ... Prefix each line.
-                var format = $"D{spacing}";
-                for (var i = 0; i < count; i++)
-                {
-                    lines[i] = $"{i.ToString(format)}: {lines[i]}";
-                }
+                xaml = DebugHelper.AddLineNumbers(xaml);
                 
                 // And throw both errors.
-                Debug.LogError(e.GetType().Name + ": " + e.Message + Environment.NewLine + Environment.NewLine + string.Join(Environment.NewLine, lines));
+                Debug.LogError(e.GetType().Name + ": " + e.Message + Environment.NewLine + Environment.NewLine + xaml);
                 return default;
             }
         }

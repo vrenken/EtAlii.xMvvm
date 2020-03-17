@@ -30,5 +30,19 @@ namespace <#= data["classNamespace"] #>
 
     public partial class <#= data["className"] #> : <#= data["variantNamespace"] #>.View<<#= view.ViewModelType #>>  
     {
+        // Resources.
+        <# foreach(var resource in view.Resources.Items) { #>
+private readonly <#=resource.Type#> <#= resource.Key.AsPrivateMember() #>;
+        <# } #>
+        
+        // Bindings.
+        <# foreach(var binding in view.Bindings) { #>
+private readonly Binding<<#=binding.Type#>>, <#=view.ViewModelType#>> <#= binding.Name.AsPrivateMember() #>;
+        <# } #>
+
+        // Elements.
+        <# foreach(var element in view.Elements) { #>
+private readonly <#=data["variantNamespace"]#>.Element <#= element.Name.AsPrivateMember() #>;
+        <# } #>
     }
 }
