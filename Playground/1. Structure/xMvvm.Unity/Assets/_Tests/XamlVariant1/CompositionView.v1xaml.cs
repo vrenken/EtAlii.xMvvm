@@ -1,9 +1,10 @@
-namespace EtAlii.xMvvm 
+﻿namespace EtAlii.xMvvm
 {
-    public partial class CompositionView 
-    {    
-        private void Initialize()
-        {
-        }
+    using UnityEngine;
+    using System;
+    using EtAlii.xMvvm.XamlVariant1;
+
+    public partial class CompositionView   
+    {
     }
 }

@@ -8,7 +8,7 @@
     //using FileGenerator = DotLiquidFileGenerator;
     using FileGenerator = T4FileGenerator;
     
-    public class Variant1ViewCodeManager : IViewCodeManager
+    public class Variant1ViewCodeManagerT4 : IViewCodeManager
     {
         private const string XamlFileExtension = ".v1xaml";
         private const string GeneratedCsFileExtension = ".v1xaml.g.cs";
@@ -16,11 +16,11 @@
 
         public bool CanManage(string asset) => string.Compare(Path.GetExtension(asset), XamlFileExtension, StringComparison.OrdinalIgnoreCase) == 0;
 
-        private const string GeneratedCsTemplateFileName = "GeneratedCsTemplate.liquid";
-        private const string PartialCsTemplateFileName = "PartialCsTemplate.liquid";
-        private const string TemplateFolder = "EtAlii/xMvvm/Editor/XamlVariant1/Templates";
+        private const string GeneratedCsTemplateFileName = "GeneratedCsTemplate.t4";
+        private const string PartialCsTemplateFileName = "PartialCsTemplate.t4";
+        private const string TemplateFolder = "EtAlii/xMvvm/Editor/XamlVariant1/Templates2";
             
-        private readonly FileGenerator _fileGenerator = new FileGenerator();
+        private readonly T4FileGenerator _fileGenerator = new T4FileGenerator();
         private readonly XamlViewCompiler _xamlViewCompiler = new XamlViewCompiler();
         
         public void Delete(string asset)
@@ -34,7 +34,7 @@
             }
         }
 
-        static Variant1ViewCodeManager()
+        static Variant1ViewCodeManagerT4()
         {
             var templatesFolder = Path.Combine(Application.dataPath, TemplateFolder).Replace("/", @"\");
             DotLiquidFileGenerator.Initialize(templatesFolder);
@@ -61,6 +61,7 @@
             {
                 ["view"] = view,
                 ["now"] = DateTime.Now,
+                ["toolVersion"] = "TBD",
                 ["className"] = Path.GetFileNameWithoutExtension(asset), 
                 ["classNamespace"] = UnityEditor.EditorSettings.projectGenerationRootNamespace,
                 ["variantNamespace"] = "EtAlii.xMvvm.XamlVariant1",
@@ -70,21 +71,19 @@
             // This could be optimized by moving it to the constructor and only done once
             // but this makes development frustrating as the editor classes need to be touched in order to test template changes.  
             var generatedCsTemplateFileName = Path.Combine(Application.dataPath, TemplateFolder, GeneratedCsTemplateFileName);
-            var generatedCsTemplate = File.ReadAllText(generatedCsTemplateFileName);
             var partialCsTemplateFileName = Path.Combine(Application.dataPath, TemplateFolder, PartialCsTemplateFileName);
-            var partialCsTemplate = File.ReadAllText(partialCsTemplateFileName);
 
             // We always delete the generated file and recreate it.
             if (File.Exists(generatedFileName))
             {
                 File.Delete(generatedFileName);
             }
-            _fileGenerator.Generate(generatedFileName, generatedCsTemplate, data);
+            _fileGenerator.Generate(generatedFileName, generatedCsTemplateFileName, data);
             
             // We only generated the partial file when it doesn't exist yet.
             if (!File.Exists(partialFileName))
             {
-                _fileGenerator.Generate(partialFileName, partialCsTemplate, data);
+                _fileGenerator.Generate(partialFileName, partialCsTemplateFileName, data);
             }
         }
         

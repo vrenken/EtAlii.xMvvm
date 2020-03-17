@@ -9,7 +9,7 @@
         public LoginView loginView;
 
         public GameObject compositionPanel;
-        public CompositionView compositionView;
+        //public CompositionView compositionView;
         //
         // private void Start()
         // {

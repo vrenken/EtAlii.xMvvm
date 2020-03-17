@@ -8,8 +8,6 @@
           <e p="FPSWalkerEnhanced.cs" t="Include" />
           <e p="MouseLook.cs" t="Include" />
           <e p="XamlVariant1" t="Include">
-            <e p="CompositionView.v1xaml.cs" t="Include" />
-            <e p="CompositionView.v1xaml.g.cs" t="Include" />
             <e p="CompositionViewModel.cs" t="Include" />
             <e p="LoginView.v1xaml.cs" t="Include" />
             <e p="LoginView.v1xaml.g.cs" t="Include" />
@@ -21,6 +19,7 @@
           <e p="xMvvm" t="Include">
             <e p="Editor" t="Include">
               <e p="IViewCodeManager.cs" t="Include" />
+              <e p="WindowsHelper.cs" t="Include" />
               <e p="XamlAssetPostprocessor.cs" t="Include" />
               <e p="XamlVariant1" t="Include">
                 <e p="_Model" t="Include">
@@ -51,7 +50,8 @@
                 <e p="Templates2" t="Include">
                   <e p="T4FileGenerator.cs" t="Include" />
                 </e>
-                <e p="Variant1ViewCodeManager.cs" t="Include" />
+                <e p="Variant1ViewCodeManager.DotLiquid.cs" t="Include" />
+                <e p="Variant1ViewCodeManager.T4.cs" t="Include" />
                 <e p="XamlLanguage.cs" t="Include" />
                 <e p="XamlViewCompiler.cs" t="Include" />
               </e>

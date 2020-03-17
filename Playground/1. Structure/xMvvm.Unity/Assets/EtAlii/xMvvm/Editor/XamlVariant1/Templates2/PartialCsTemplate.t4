@@ -1,0 +1,22 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#v3.5" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="Mono.TextTemplating" #>
+<#@ assembly name="EtAlii.xMvvm" #>
+<#@ import namespace="System" #>
+<#@ import namespace="Mono.TextTemplating" #>
+<#@ import namespace="EtAlii.xMvvm" #>
+<#
+    var data = ((ITextTemplatingSessionHost)Host).Session;
+    var view = (View)data["view"];
+#>
+namespace <#= data["classNamespace"] #>
+{
+    using UnityEngine;
+    using System;
+    using <#= data["variantNamespace"] #>;
+
+    public partial class <#= data["className"] #>   
+    {
+    }
+}

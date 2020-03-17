@@ -11,7 +11,7 @@
         {
             ViewCodeManagers = new IViewCodeManager[]
             {
-                new Variant1ViewCodeManager(),
+                new Variant1ViewCodeManagerT4(),
                 new Variant2ViewCodeManager(),
                 new Variant3ViewCodeManager()
             };

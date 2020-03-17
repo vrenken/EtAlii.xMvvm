@@ -3,7 +3,8 @@
     "references": [
         "XamlIl",
         "XamlIl.Cecil",
-        "XamlIl.Runtime"
+        "XamlIl.Runtime",
+        "Mono.TextTemplating"
     ],
     "includePlatforms": [
         "Editor"
