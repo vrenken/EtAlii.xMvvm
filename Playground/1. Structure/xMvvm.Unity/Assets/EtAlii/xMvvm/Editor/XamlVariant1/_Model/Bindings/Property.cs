@@ -6,11 +6,5 @@ namespace EtAlii.xMvvm
     public class Property : ComponentBinding
     {
         public Bind Value { get; set; }
-        
-        public Property()
-            : base(BindingType.Property)
-        {
-        }
-
     }
 }

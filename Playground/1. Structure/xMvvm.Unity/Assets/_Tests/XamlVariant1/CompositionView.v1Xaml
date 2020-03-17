@@ -4,7 +4,7 @@
     xmlns:x="xMvvm"
     ViewModelType="CompositionViewModel"        
     Prefab="CompositionView.prefab">  
-    <View.Resources>                           
+    <View.Resources>  
         <ResourceDictionary> 
             <LinearTransformationConverter Key="LinearTransformationConverter" />              
         </ResourceDictionary>
@@ -14,7 +14,7 @@
         <Property Name="Forward" Value="{x:Bind Forward, Mode=OneWayToSource}" Path="Canvas/Panel/ForwardSlider" Type="UnityEngine.UI.Slider" Member="value" /> 
         <Property Name="Rotate" Value="{x:Bind Rotate, Mode=OneWayToSource}" Path="Canvas/Panel/RotateToggle" Type="UnityEngine.UI.Toggle" Member="isOn" /> 
     </View.Bindings>              
-    <View.Elements>    
+    <View.Elements>         
         <Element Name="Canvas" Path="Canvas" />  
         <Element Name="Subject" Path="Subject" Transformation="{x:Bind SubjectTransformation, Converter={StaticResource LinearTransformationConverter}}">
             <Element.Elements>

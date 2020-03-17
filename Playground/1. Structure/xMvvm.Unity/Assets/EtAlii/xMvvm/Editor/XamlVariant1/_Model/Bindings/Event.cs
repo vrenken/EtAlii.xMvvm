@@ -6,10 +6,5 @@ namespace EtAlii.xMvvm
     public class Event : ComponentBinding
     {
         public Bind Handler { get; set; }
-        
-        public Event()
-            : base(BindingType.Event)
-        {
-        }
     }
 }

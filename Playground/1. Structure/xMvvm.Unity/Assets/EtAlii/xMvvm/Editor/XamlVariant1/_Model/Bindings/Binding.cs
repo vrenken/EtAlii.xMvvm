@@ -5,11 +5,7 @@ namespace EtAlii.xMvvm
     /// </summary>
     public abstract class Binding
     {
-        protected Binding(BindingType bindingType)
-        {
-            BindingType = bindingType;
-        }
-
-        public BindingType BindingType { get; }
+        public abstract string Id { get; }
+        public string Type { get; set; }
     }
 }

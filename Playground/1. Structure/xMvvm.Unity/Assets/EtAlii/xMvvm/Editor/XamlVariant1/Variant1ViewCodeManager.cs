@@ -5,9 +5,6 @@
     using System.IO;
     using UnityEngine;
 
-    //using FileGenerator = DotLiquidFileGenerator;
-    using FileGenerator = T4FileGenerator;
-    
     public class Variant1ViewCodeManagerT4 : IViewCodeManager
     {
         private const string XamlFileExtension = ".v1xaml";
@@ -18,7 +15,7 @@
 
         private const string GeneratedCsTemplateFileName = "GeneratedCsTemplate.t4";
         private const string PartialCsTemplateFileName = "PartialCsTemplate.t4";
-        private const string TemplateFolder = "EtAlii/xMvvm/Editor/XamlVariant1/Templates2";
+        private const string TemplateFolder = "EtAlii/xMvvm/Editor/XamlVariant1/Templates";
             
         private readonly T4FileGenerator _fileGenerator = new T4FileGenerator();
         private readonly XamlViewCompiler _xamlViewCompiler = new XamlViewCompiler();

@@ -25,13 +25,23 @@
 		    ReferencePaths.Add(Path.GetDirectoryName(xMvvmAssembly.Location));
 	    }
 
-        public void Generate(string outputFileName, string templateFileName, Dictionary<string, object> data)
+	    public void Generate(string outputFileName, string templateFileName, Dictionary<string, object> data)
+	    {
+		    var templateContent = File.ReadAllText(templateFileName);
+		    try
+		    {
+			    GenerateInternal(outputFileName, templateFileName, templateContent, data);
+		    }
+		    catch (Exception e)
+		    {
+			    ShowErrors(e.Message, templateContent);
+		    }
+	    }
+
+	    private void GenerateInternal(string outputFileName, string templateFileName, string templateContent, Dictionary<string, object> data)
         {
 			var templateName = Path.GetFileNameWithoutExtension(templateFileName);
 			var templateNamespace = UnityEditor.EditorSettings.projectGenerationRootNamespace;
-
-			var templateContent = File.ReadAllText(templateFileName);
-			templateContent = DebugHelper.AddLineNumbers(templateContent);
 
 			if (PreprocessTemplate(templateFileName, templateName, templateNamespace, templateContent, out _, out _, out _) == false)
 			{
@@ -56,6 +66,7 @@
         private void ShowErrors(string header, string templateContent)
         {
 	        // And throw all errors.
+	        templateContent = DebugHelper.AddLineNumbers(templateContent);
 	        var errors = (from CompilerError error in Errors select $"[{error.Line}, {error.Column}] {error.ErrorText}").ToList();
 	        Debug.LogError(header + ": " + Environment.NewLine + string.Join(Environment.NewLine, errors) + Environment.NewLine + Environment.NewLine + templateContent);
 	        WindowsHelper.GiveConsoleWindowFocus();

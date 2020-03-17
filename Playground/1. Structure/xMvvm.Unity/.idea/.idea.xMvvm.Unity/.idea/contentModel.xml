@@ -9,6 +9,7 @@
           <e p="MouseLook.cs" t="Include" />
           <e p="XamlVariant1" t="Include">
             <e p="CompositionView.v1xaml.cs" t="Include" />
+            <e p="CompositionView.v1xaml.g.cs" t="Include" />
             <e p="CompositionViewModel.cs" t="Include" />
             <e p="LoginView.v1xaml.cs" t="Include" />
             <e p="LoginView.v1xaml.g.cs" t="Include" />
@@ -28,7 +29,6 @@
                   <e p="Bindings" t="Include">
                     <e p="Bind.cs" t="Include" />
                     <e p="Binding.cs" t="Include" />
-                    <e p="BindingType.cs" t="Include" />
                     <e p="ComponentBinding.cs" t="Include" />
                     <e p="Event.cs" t="Include" />
                     <e p="Property.cs" t="Include" />
@@ -48,7 +48,7 @@
                   <e p="String.Extensions.cs" t="Include" />
                   <e p="T4FileGenerator.cs" t="Include" />
                 </e>
-                <e p="Variant1ViewCodeManager.T4.cs" t="Include" />
+                <e p="Variant1ViewCodeManager.cs" t="Include" />
                 <e p="XamlLanguage.cs" t="Include" />
                 <e p="XamlViewCompiler.cs" t="Include" />
               </e>

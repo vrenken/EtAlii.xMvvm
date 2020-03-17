@@ -12,11 +12,10 @@
 #>
 namespace <#= data["classNamespace"] #>
 {
-    using UnityEngine;
-    using System;
-    using <#= data["variantNamespace"] #>;
-
     public partial class <#= data["className"] #>   
     {
+        private void Initialize()
+        {
+        }
     }
 }

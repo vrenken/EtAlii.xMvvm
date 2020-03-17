@@ -13,8 +13,6 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "DotLiquid.dll",
-        "DotLiquid.resources.dll",
         "System.Reflection.Emit.dll",
         "System.Reflection.Emit.ILGeneration.dll",
         "Mono.Cecil.dll",

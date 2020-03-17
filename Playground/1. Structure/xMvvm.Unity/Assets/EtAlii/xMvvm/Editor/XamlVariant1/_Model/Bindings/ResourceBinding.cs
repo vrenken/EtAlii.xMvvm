@@ -8,9 +8,6 @@ namespace EtAlii.xMvvm
         [Content]
         public string ResourceKey { get; set; }
         
-        protected ResourceBinding()
-            : base(BindingType.Resource)
-        {
-        }
+        public override string Id => ResourceKey;
     }
 }
