@@ -32,19 +32,19 @@ namespace <#= data["classNamespace"] #>
     public partial class <#= data["className"] #> : <#= data["variantNamespace"] #>.View<<#= view.ViewModelType #>>  
     {
         // Resources.
-<# foreach(var resource in view.Resources.Items) { #>
-        private readonly <#=resource.Type#> <#= resource.Key.AsPrivateMember() #>;
-<# } #>
+<# foreach(var resource in view.Resources.Items) { if(CodeEntity.RequiresField(resource)) { #>
+        private readonly <#=resource.Type#> <#=CodeEntity.GetLocalName(resource) #>;
+<# } } #>
         
         // Bindings.
-<# foreach(var binding in view.Bindings) { #>
-        private readonly Binding<<#=binding.Type#>, <#=view.ViewModelType#>> <#= binding.Id.AsPrivateMember() #>;
-<# } #>
+<# foreach(var binding in view.Bindings) { if (CodeEntity.RequiresField(binding)) { #>
+        private readonly Binding<<#=binding.Type#>, <#=view.ViewModelType#>> <#=CodeEntity.GetLocalName(binding) #>;
+<# } } #>
 
         // Elements.
-<# foreach(var element in view.Elements) { #>
-        private readonly <#=data["variantNamespace"]#>.Element <#= element.Name.AsPrivateMember() #>;
-<# } #>
+<# foreach(var element in view.Elements) { if (CodeEntity.RequiresField(element)) { #>
+        private readonly <#=data["variantNamespace"]#>.Element <#=CodeEntity.GetLocalName(element) #>;
+<# } } #>
 
         public <#=data["className"]#>() : this(GameObject.Instantiate(Resources.Load("<#=view.Prefab#>", typeof(GameObject))) as GameObject)
         {
@@ -54,20 +54,20 @@ namespace <#= data["classNamespace"] #>
         {
             // Setup the resources.
 <# foreach(var resource in view.Resources.Items) { #>
-            <#= resource.Key.AsPrivateMember()#> = new <#=resource.Type#>();
+            <#=CodeEntity.GetLocalName(resource)#> = new <#=resource.Type#>();
 <# } #>
 
             // Wire the bindings.
 <# foreach(var binding in view.Bindings) {
     if (binding is Property property) { #>
-            <#= property.Id.AsPrivateMember()#> = new PropertyBinding<<#=property.Type#>, <#=view.ViewModelType#>>(this, "<#=property.Path#>", component => component.<#=property.Member#>, vm => vm.<#=property.Value.Name#>, BindingMode.<#=property.Value.Mode#>);
+            <#=CodeEntity.GetLocalName(property)#> = new PropertyBinding<<#=property.Type#>, <#=view.ViewModelType#>>(this, "<#=property.Path#>", component => component.<#=property.Member#>, vm => vm.<#=property.Value.Name#>, BindingMode.<#=property.Value.Mode#>);
 <# } else if(binding is Event evt) { #>
-            <#= evt.Id.AsPrivateMember()#> = new EventBinding<<#=evt.Type#>, <#=view.ViewModelType#>>(this, "<#=evt.Path#>", component => component.<#=evt.Member#>, vm => vm.<#=evt.Handler.Name#>);
+            <#=CodeEntity.GetLocalName(evt)#> = new EventBinding<<#=evt.Type#>, <#=view.ViewModelType#>>(this, "<#=evt.Path#>", component => component.<#=evt.Member#>, vm => vm.<#=evt.Handler.Name#>);
 <# } } #>
 
             // Setup the child elements.
 <# foreach(var element in view.Elements) { #>
-            <#= element.Name.AsPrivateMember()#> = <# ConstructElement(element, data, true); #>;
+            <#=CodeEntity.GetLocalName(element)#> = <# ConstructElement(element, data, true); #>;
 <#
    } #>
 

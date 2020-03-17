@@ -6,11 +6,9 @@ namespace EtAlii.xMvvm
     public abstract class ComponentBinding : Binding
     {
         [Content]
-        public string Name { get; set; }
+        public string Name { get => Id; set => Id = value; }
         
         public string Path { get; set; }
         public string Member { get; set; }
-
-        public override string Id => Name;
     }
 }

@@ -30,11 +30,7 @@
                 File.Delete(generatedFileName);
             }
         }
-
-        static Variant1ViewCodeManagerT4()
-        {
-            //var templatesFolder = Path.Combine(Application.dataPath, TemplateFolder).Replace("/", @"\");
-        }
+        
         public void Create(string asset)
         {
             // Also we need a few files and folders. 

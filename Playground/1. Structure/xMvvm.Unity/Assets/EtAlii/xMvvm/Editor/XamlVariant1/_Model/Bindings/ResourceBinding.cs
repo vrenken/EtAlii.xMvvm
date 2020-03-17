@@ -6,8 +6,6 @@ namespace EtAlii.xMvvm
     public abstract class ResourceBinding : Binding
     {
         [Content]
-        public string ResourceKey { get; set; }
-        
-        public override string Id => ResourceKey;
+        public string ResourceKey { get => Id; set => Id = value; }
     }
 }

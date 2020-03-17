@@ -14,7 +14,5 @@
 
 		    return new string(characters);
 	    }
-        
-	    public static string AsPrivateMember(this string input) => "_" + PascalCase(input);
     }
 }
