@@ -2,5 +2,8 @@
 {
     public partial class CompositionView   
     {
+        private void Initialize()
+        {
+        }
     }
 }
