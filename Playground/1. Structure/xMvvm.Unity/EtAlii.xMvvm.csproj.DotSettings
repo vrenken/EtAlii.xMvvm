@@ -7,6 +7,7 @@
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Cetalii_005Cxmvvm_005Ceditor_005Cxamlvariant1_005Ctemplates2/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Cetalii_005Cxmvvm_005Ceditor_005Cxamlvariant1_005Ctemplates2_005Cmono_002Etexttemplating/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Cetalii_005Cxmvvm_005Ceditor_005Cxamlvariant1_005Ctemplates2_005C_005Fexternalsource/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Cetalii_005Cxmvvm_005Ceditor_005Cxamlvariant1_005Ctemplates2_005C_005Fold/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Cetalii_005Cxmvvm_005Ceditor_005Cxamlvariant1_005C_005Fmodel/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Cetalii_005Cxmvvm_005Ceditor_005Cxamlvariant1_005C_005Fmodel_005Cbindings/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=assets_005Cetalii_005Cxmvvm_005Ceditor_005Cxamlvariant1_005C_005Fmodel_005Cconverters/@EntryIndexedValue">True</s:Boolean>

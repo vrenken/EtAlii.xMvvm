@@ -1,12 +1,7 @@
 namespace EtAlii.xMvvm
 {
     using System.Collections.Generic;
-    using DotLiquid;
 
-    [LiquidType(new []
-    {
-        nameof(Items)        
-    })]
     public class ResourceDictionary 
     {
         // [Content, DeferredContent]

@@ -36,8 +36,7 @@
 
         static Variant1ViewCodeManagerT4()
         {
-            var templatesFolder = Path.Combine(Application.dataPath, TemplateFolder).Replace("/", @"\");
-            DotLiquidFileGenerator.Initialize(templatesFolder);
+            //var templatesFolder = Path.Combine(Application.dataPath, TemplateFolder).Replace("/", @"\");
         }
         public void Create(string asset)
         {

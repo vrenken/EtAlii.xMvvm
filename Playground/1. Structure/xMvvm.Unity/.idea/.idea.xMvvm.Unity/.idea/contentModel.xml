@@ -45,15 +45,9 @@
                   <e p="View.cs" t="Include" />
                 </e>
                 <e p="Templates" t="Include">
-                  <e p="CodeGenerationFilters.cs" t="Include" />
-                  <e p="DotLiquidFileGenerator.cs" t="Include" />
-                  <e p="IndentBlock.cs" t="Include" />
-                </e>
-                <e p="Templates2" t="Include">
                   <e p="String.Extensions.cs" t="Include" />
                   <e p="T4FileGenerator.cs" t="Include" />
                 </e>
-                <e p="Variant1ViewCodeManager.DotLiquid.cs" t="Include" />
                 <e p="Variant1ViewCodeManager.T4.cs" t="Include" />
                 <e p="XamlLanguage.cs" t="Include" />
                 <e p="XamlViewCompiler.cs" t="Include" />
@@ -208,15 +202,6 @@
           </e>
         </e>
         <e p="Packages" t="Include">
-          <e p="DotLiquid.2.0.323" t="Include">
-            <e p="lib" t="Include">
-              <e p="netstandard1.3" t="Include">
-                <e p="DotLiquid.xml" t="Include" />
-              </e>
-            </e>
-            <e p="LICENSE.txt" t="Include" />
-            <e p="readme.txt" t="Include" />
-          </e>
           <e p="System.Reflection.Emit.4.7.0" t="Include">
             <e p="lib" t="Include">
               <e p="netstandard2.0" t="Include">

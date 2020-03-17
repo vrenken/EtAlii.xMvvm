@@ -1,11 +1,5 @@
 namespace EtAlii.xMvvm
 {
-    using DotLiquid;
-
-    [LiquidType( new []
-    {
-        nameof(ResourceKey),
-    })]
     public class StaticResource
     {
         [Content]
