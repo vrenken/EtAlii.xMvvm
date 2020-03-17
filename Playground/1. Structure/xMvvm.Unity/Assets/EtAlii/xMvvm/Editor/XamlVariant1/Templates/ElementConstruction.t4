@@ -1,0 +1,21 @@
+﻿<#+
+    void ConstructElement(Element element, ITextTemplatingSession data, bool initialIndent)
+    {
+#>﻿new <#=data["variantNamespace"]#>.Element(gameObject, this, "<#=element.Name#>")  <#+ PushIndent(initialIndent ? "            " : "");#>
+
+{
+    Elements = new <#=data["variantNamespace"]#>.Element[]
+    {
+<#+ 
+    PushIndent("        ");
+    for (var i = 0; i < element.Elements.Count; i++)
+    {
+        var childElement = element.Elements[i]; #>
+<#+ ConstructElement(childElement, data, false); #><#+ if (i < element.Elements.Count - 1) {#>,<#+} #>
+
+<#+ }; PopIndent(); #>
+    }
+}<#+
+        PopIndent();
+    }
+#>

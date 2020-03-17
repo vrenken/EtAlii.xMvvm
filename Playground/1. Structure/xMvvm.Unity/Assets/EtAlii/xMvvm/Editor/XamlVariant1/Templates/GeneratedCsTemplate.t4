@@ -6,6 +6,7 @@
 <#@ import namespace="System" #>
 <#@ import namespace="Mono.TextTemplating" #>
 <#@ import namespace="EtAlii.xMvvm" #>
+<#@ include file="ElementConstruction.t4" #>
 <#
     var data = ((ITextTemplatingSessionHost)Host).Session;
     var view = (View)data["view"];
@@ -66,8 +67,9 @@ namespace <#= data["classNamespace"] #>
 
             // Setup the child elements.
 <# foreach(var element in view.Elements) { #>
-            <#= element.Name.AsPrivateMember()#> = null;//{% include 'ElementConstruct' with childElement %};
-<# } #>
+            <#= element.Name.AsPrivateMember()#> = <# ConstructElement(element, data, true); #>;
+<#
+   } #>
 
             // And initialize.
             Initialize();   

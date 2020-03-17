@@ -7,9 +7,9 @@
     <View.Resources>  
         <ResourceDictionary> 
             <LinearTransformationConverter Key="LinearTransformationConverter" />              
-        </ResourceDictionary>
+        </ResourceDictionary>                     
     </View.Resources>    
-    <View.Bindings>             
+    <View.Bindings>                 
         <Property Name="Up" Value="{x:Bind Up, Mode=OneWayToSource}" Path="Canvas/Panel/UpSlider" Type="UnityEngine.UI.Slider" Member="value" /> 
         <Property Name="Forward" Value="{x:Bind Forward, Mode=OneWayToSource}" Path="Canvas/Panel/ForwardSlider" Type="UnityEngine.UI.Slider" Member="value" /> 
         <Property Name="Rotate" Value="{x:Bind Rotate, Mode=OneWayToSource}" Path="Canvas/Panel/RotateToggle" Type="UnityEngine.UI.Toggle" Member="isOn" /> 
