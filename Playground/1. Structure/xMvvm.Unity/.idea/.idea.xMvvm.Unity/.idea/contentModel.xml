@@ -67,14 +67,20 @@
               <e p="PropertyChangedEventHandler.RaiseExtensions.cs" t="Include" />
               <e p="XamlVariant1" t="Include">
                 <e p="Binding.cs" t="Include" />
-                <e p="ComponentListener.cs" t="Include" />
-                <e p="ComponentUpdater.cs" t="Include" />
-                <e p="Element.cs" t="Include" />
-                <e p="EventBinding.cs" t="Include" />
-                <e p="PropertyBinding.cs" t="Include" />
+                <e p="Components" t="Include">
+                  <e p="ComponentListener.cs" t="Include" />
+                  <e p="ComponentUpdater.cs" t="Include" />
+                  <e p="EventBinding.cs" t="Include" />
+                  <e p="PropertyBinding.cs" t="Include" />
+                  <e p="ViewModelListener.cs" t="Include" />
+                  <e p="ViewModelUpdater.cs" t="Include" />
+                </e>
+                <e p="Elements" t="Include">
+                  <e p="ElementBinding.cs" t="Include" />
+                  <e p="ElementListener.cs" t="Include" />
+                  <e p="ElementUpdater.cs" t="Include" />
+                </e>
                 <e p="View.cs" t="Include" />
-                <e p="ViewModelListener.cs" t="Include" />
-                <e p="ViewModelUpdater.cs" t="Include" />
               </e>
             </e>
           </e>
