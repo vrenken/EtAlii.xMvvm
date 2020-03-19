@@ -13,6 +13,6 @@
         /// <param name="items"></param>
         /// <param name="childSelector"></param>
         /// <returns></returns>
-        public static IEnumerable<T> SelectAllDepthFirst<T>(this IEnumerable<T> items, Func<T, IEnumerable<T>> childSelector) => items.SelectMany(i => new T[] { i }.Concat(childSelector(i).SelectAllDepthFirst(childSelector)));
+        public static IEnumerable<T> SelectAllDepthFirst<T>(this IEnumerable<T> items, Func<T, IEnumerable<T>> childSelector) => items.SelectMany(i => new[] { i }.Concat(childSelector(i).SelectAllDepthFirst(childSelector)));
     }
 }

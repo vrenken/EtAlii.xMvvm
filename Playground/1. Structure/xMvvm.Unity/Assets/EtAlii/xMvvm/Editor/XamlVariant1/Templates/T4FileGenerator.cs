@@ -46,6 +46,7 @@
 	    private void GenerateInternal(string outputFileName, string templateFileName, string templateContent, Dictionary<string, object> data)
         {
 			var templateName = Path.GetFileNameWithoutExtension(templateFileName);
+			templateName += "_" + Guid.NewGuid().ToString("n");
 			var templateNamespace = UnityEditor.EditorSettings.projectGenerationRootNamespace;
 
 			var temporaryOutputFile = Path.GetTempFileName();

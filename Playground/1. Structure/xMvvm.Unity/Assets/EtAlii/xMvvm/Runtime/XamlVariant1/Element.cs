@@ -13,7 +13,7 @@ namespace EtAlii.xMvvm.XamlVariant1
             GameObject = gameObject;
         }
         
-        public Element(GameObject gameObject, Element parent, string name)
+        public Element(GameObject gameObject, Element parent, string path)
             : this(gameObject)
         {
             GameObject.transform.parent = parent.GameObject.transform;
