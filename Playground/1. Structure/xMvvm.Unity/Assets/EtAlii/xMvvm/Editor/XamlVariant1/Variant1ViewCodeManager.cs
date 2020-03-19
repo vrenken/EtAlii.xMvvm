@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using UnityEngine;
 
     public class Variant1ViewCodeManagerT4 : IViewCodeManager
@@ -49,9 +50,14 @@
             view.ViewModelType = view.ViewModelType ?? Path.GetFileNameWithoutExtension(asset) + "Model";
             view.Prefab = view.Prefab ?? Path.GetFileNameWithoutExtension(asset) + ".prefab";
 
+            var allElements = view.Elements
+                .SelectAllDepthFirst(element => element.Elements)
+                .ToArray();
+            
             var data = new Dictionary<string, object>
             {
                 ["view"] = view,
+                ["allElements"] = allElements,
                 ["now"] = DateTime.Now,
                 ["toolVersion"] = "TBD",
                 ["className"] = Path.GetFileNameWithoutExtension(asset), 

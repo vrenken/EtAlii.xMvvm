@@ -4,6 +4,7 @@
 <#@ assembly name="Mono.TextTemplating" #>
 <#@ assembly name="EtAlii.xMvvm" #>
 <#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
 <#@ import namespace="Mono.TextTemplating" #>
 <#@ import namespace="EtAlii.xMvvm" #>
 <#@ include file="ElementConstruction.t4" #>
@@ -42,7 +43,9 @@ namespace <#= data["classNamespace"] #>
 <# } } #>
 
         // Elements.
-<# foreach(var element in view.Elements) { if (CodeEntity.RequiresField(element)) { #>
+<#  
+    var alElements = (Element[])data["allElements"];
+    foreach(var element in alElements) { if (CodeEntity.RequiresField(element)) { #>
         private readonly <#=data["variantNamespace"]#>.Element <#=CodeEntity.GetLocalName(element) #>;
 <# } } #>
 
@@ -65,11 +68,22 @@ namespace <#= data["classNamespace"] #>
             <#=CodeEntity.GetLocalName(evt)#> = new EventBinding<<#=evt.Type#>, <#=view.ViewModelType#>>(this, "<#=evt.Path#>", component => component.<#=evt.Member#>, vm => vm.<#=evt.Handler.Name#>);
 <# } } #>
 
-            // Setup the child elements.
-<# foreach(var element in view.Elements) { #>
-            <#=CodeEntity.GetLocalName(element)#> = <# ConstructElement(element, data, true); #>;
+            // Create the child elements.
+<# 
+    foreach(var element in alElements) { #>
+            <#=CodeEntity.GetLocalName(element)#> = ﻿new <#=data["variantNamespace"]#>.Element(gameObject, this, "<#=element.Name#>");
 <#
    } #>
+
+            // Setup the child elements.
+<# foreach(var element in alElements) { if (element.Elements.Any()) { #>
+            <#=CodeEntity.GetLocalName(element)#>.Elements = new <#=data["variantNamespace"]#>.Element[] { <#
+    for (var i = 0; i < element.Elements.Count; i++)
+    {
+        var childElement = element.Elements[i];
+#><#=CodeEntity.GetLocalName(childElement)#><# if (i < element.Elements.Count - 1) {#>,<#} #> <# } #>};
+<#
+   } } #>
 
             // And initialize.
             Initialize();   

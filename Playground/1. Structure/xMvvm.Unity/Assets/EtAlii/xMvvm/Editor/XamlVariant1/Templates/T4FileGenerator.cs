@@ -5,6 +5,7 @@
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
+	using System.Text;
 	using Mono.TextTemplating;
 	using UnityEngine;
 
@@ -23,7 +24,11 @@
 		    var xMvvmAssembly = typeof(View).Assembly;
 		    Refs.Add(Path.GetFileName(xMvvmAssembly.Location));
 		    ReferencePaths.Add(Path.GetDirectoryName(xMvvmAssembly.Location));
-	    }
+		    
+		    var linqAssembly = typeof(Enumerable).Assembly;
+		    Refs.Add(Path.GetFileName(linqAssembly.Location));
+		    ReferencePaths.Add(Path.GetDirectoryName(linqAssembly.Location));
+ 	    } 
 
 	    public void Generate(string outputFileName, string templateFileName, Dictionary<string, object> data)
 	    {
@@ -43,7 +48,8 @@
 			var templateName = Path.GetFileNameWithoutExtension(templateFileName);
 			var templateNamespace = UnityEditor.EditorSettings.projectGenerationRootNamespace;
 
-			if (PreprocessTemplate(templateFileName, templateName, templateNamespace, templateContent, out _, out _, out _) == false)
+			var temporaryOutputFile = Path.GetTempFileName();
+			if (PreprocessTemplate(templateFileName, templateName, templateNamespace, temporaryOutputFile, Encoding.UTF8, out _, out _) == false)
 			{
 				ShowErrors($"Failed to preprocess template '{templateFileName}'", templateContent);
 				return;
@@ -61,6 +67,8 @@
 			{
 				ShowErrors($"Failed to process template '{templateFileName}'", templateContent);
 			}
+			
+			File.Delete(temporaryOutputFile);
         }
 
         private void ShowErrors(string header, string templateContent)
