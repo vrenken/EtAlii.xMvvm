@@ -7,7 +7,7 @@
     <View.Resources>     
         <ResourceDictionary>              
             <LinearTransformationConverter Key="LinearTransformationConverter" />              
-        </ResourceDictionary>                       
+        </ResourceDictionary>                            
     </View.Resources>        
     <View.Bindings>                     
         <Property Name="Up" Value="{x:Bind Up, Mode=OneWayToSource}" Path="Canvas/Panel/UpSlider" Type="UnityEngine.UI.Slider" Member="value" /> 
@@ -17,14 +17,14 @@
     <View.Elements>             
         <Element Name="Canvas" Path="Canvas2" />       
         <Element Name="Subject" Path="Subject" Transformation="{x:Bind SubjectTransformation, Converter={StaticResource LinearTransformationConverter}}">
-            <Element.Elements>  
+            <Element.Elements>   
                 <Element Name="Child" Path="Child" > 
                     <Element.Elements>
                         <Element Name="Child3" Path="Child3" />                             
                         <Element Name="Child4" Path="Child4" />                               
                     </Element.Elements> 
                 </Element>                         
-                <Element Name="Child2" Path="Child2" />                             
+                <Element Name="Child2" Path="Child2" />                              
             </Element.Elements>
         </Element>
         <Element Name="Photo" Path="Photo" />   

@@ -59,7 +59,7 @@
                 ["view"] = view,
                 ["allElements"] = allElements,
                 ["now"] = DateTime.Now,
-                ["toolVersion"] = "TBD",
+                ["toolVersion"] = "1.0.0-Preview",
                 ["className"] = Path.GetFileNameWithoutExtension(asset), 
                 ["classNamespace"] = UnityEditor.EditorSettings.projectGenerationRootNamespace,
                 ["variantNamespace"] = "EtAlii.xMvvm.XamlVariant1",

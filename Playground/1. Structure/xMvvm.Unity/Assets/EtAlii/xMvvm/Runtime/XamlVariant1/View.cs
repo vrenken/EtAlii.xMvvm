@@ -3,7 +3,7 @@ namespace EtAlii.xMvvm.XamlVariant1
     using System.ComponentModel;
     using UnityEngine;
 
-    public abstract class View<TViewModel> : Element, INotifyPropertyChanged
+    public abstract class View<TViewModel> : INotifyPropertyChanged
         where TViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -14,9 +14,11 @@ namespace EtAlii.xMvvm.XamlVariant1
         public TViewModel ViewModel { get => _viewModel; set => PropertyChanged.SetAndRaise(this, ref _viewModel, value); }
         private TViewModel _viewModel;
 
+        public GameObject GameObject { get; }
+
         protected View(GameObject gameObject) 
-            : base(gameObject)
         {
+            GameObject = gameObject;
         }
     }
 }
