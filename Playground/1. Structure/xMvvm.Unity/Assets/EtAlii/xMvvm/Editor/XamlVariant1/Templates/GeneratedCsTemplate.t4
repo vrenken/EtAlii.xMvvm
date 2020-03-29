@@ -40,14 +40,14 @@ namespace <#= data["classNamespace"] #>
         
         // Component bindings.
 <# foreach(var binding in view.Bindings) { if (CodeEntity.RequiresField(binding)) { #>
-        private readonly Binding<<#=binding.Type#>, <#=view.ViewModelType#>> <#=CodeEntity.GetLocalName(binding) #>;
+        private readonly ComponentBinding<<#=binding.Type#>, <#=view.ViewModelType#>> <#=CodeEntity.GetLocalName(binding) #>;
 <# } } #>
 
         // Element bindings.
 <#  
     var alElements = (Element[])data["allElements"];
     foreach(var element in alElements) { if (CodeEntity.RequiresField(element)) { #>
-        private readonly <#=data["variantNamespace"]#>.ElementBinding <#=CodeEntity.GetLocalName(element) #>;
+        private readonly <#=data["variantNamespace"]#>.ElementBinding<<#=view.ViewModelType#>> <#=CodeEntity.GetLocalName(element) #>;
 <# } } #>
 
         public <#=data["className"]#>() : this(GameObject.Instantiate(Resources.Load("<#=view.Prefab#>", typeof(GameObject))) as GameObject)
@@ -72,14 +72,14 @@ namespace <#= data["classNamespace"] #>
             // Setup the element bindings.
 <# 
     foreach(var element in alElements.Reverse()) { if(element.Elements.Any()) { #>
-            <# if (CodeEntity.RequiresVariable(element)) {#>var <#} #><#=CodeEntity.GetLocalName(element)#> = ﻿new <#=data["variantNamespace"]#>.ElementBinding(<#= view.Elements.Contains(element) ? "gameObject, " : ""#>"<#=element.Path#>", new <#=data["variantNamespace"]#>.ElementBinding[] { <#
+            <# if (CodeEntity.RequiresVariable(element)) {#>var <#} #><#=CodeEntity.GetLocalName(element)#> = ﻿new <#=data["variantNamespace"]#>.ElementBinding<<#=view.ViewModelType#>>(<#= view.Elements.Contains(element) ? "this, " : ""#>"<#=element.Path#>"<#= element.Transformation != null ? ", vm => vm."+element.Transformation.Name : ""#>, new <#=data["variantNamespace"]#>.ElementBinding<<#=view.ViewModelType#>>[] { <#
     for (var i = 0; i < element.Elements.Count; i++)
     {
         var childElement = element.Elements[i];
 #><#=CodeEntity.GetLocalName(childElement)#><# if (i < element.Elements.Count - 1) {#>,<#} #> <# } #>});
 <#
    }  else { #>
-            <# if (CodeEntity.RequiresVariable(element)) {#>var <#} #><#=CodeEntity.GetLocalName(element)#> = ﻿new <#=data["variantNamespace"]#>.ElementBinding(<#= view.Elements.Contains(element) ? "gameObject, " : ""#>"<#=element.Path#>");
+            <# if (CodeEntity.RequiresVariable(element)) {#>var <#} #><#=CodeEntity.GetLocalName(element)#> = ﻿new <#=data["variantNamespace"]#>.ElementBinding<<#=view.ViewModelType#>>(<#= view.Elements.Contains(element) ? "this, " : ""#>"<#=element.Path#>"<#= element.Transformation != null ? ", vm => vm."+element.Transformation.Name : ""#>);
 <#
    } } #> 
             // And initialize.

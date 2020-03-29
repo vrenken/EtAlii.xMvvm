@@ -11,8 +11,9 @@
             <e p="CompositionView.v1xaml.cs" t="Include" />
             <e p="CompositionView.v1xaml.g.cs" t="Include" />
             <e p="CompositionViewModel.cs" t="Include" />
-            <e p="LoginView.v1xaml.cs" t="Include" />
-            <e p="LoginView.v1xaml.g.cs" t="Include" />
+            <e p="LocationsView.v1xaml.cs" t="Include" />
+            <e p="LocationsView.v1xaml.g.cs" t="Include" />
+            <e p="LocationsViewModel.cs" t="Include" />
             <e p="LoginViewModel.cs" t="Include" />
             <e p="ViewSystem.cs" t="Include" />
           </e>
@@ -66,8 +67,8 @@
               <e p="BindingMode.cs" t="Include" />
               <e p="PropertyChangedEventHandler.RaiseExtensions.cs" t="Include" />
               <e p="XamlVariant1" t="Include">
-                <e p="Binding.cs" t="Include" />
                 <e p="Components" t="Include">
+                  <e p="ComponentBinding.cs" t="Include" />
                   <e p="ComponentListener.cs" t="Include" />
                   <e p="ComponentUpdater.cs" t="Include" />
                   <e p="EventBinding.cs" t="Include" />
@@ -76,11 +77,15 @@
                   <e p="ViewModelUpdater.cs" t="Include" />
                 </e>
                 <e p="Elements" t="Include">
+                  <e p="_Model" t="Include">
+                    <e p="ViewModelTransform.cs" t="Include" />
+                  </e>
                   <e p="ElementBinding.cs" t="Include" />
                   <e p="ElementListener.cs" t="Include" />
                   <e p="ElementUpdater.cs" t="Include" />
                 </e>
                 <e p="View.cs" t="Include" />
+                <e p="ViewBinding.cs" t="Include" />
               </e>
             </e>
           </e>

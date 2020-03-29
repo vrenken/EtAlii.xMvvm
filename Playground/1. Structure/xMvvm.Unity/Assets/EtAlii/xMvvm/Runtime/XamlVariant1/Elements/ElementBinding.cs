@@ -1,57 +1,89 @@
 namespace EtAlii.xMvvm.XamlVariant1
 {
     using System;
+    using System.ComponentModel;
+    using System.Linq.Expressions;
     using UnityEngine;
 
-    public class ElementBinding
+    public class ElementBinding<TViewModel> : ViewBinding<TViewModel>
+        where TViewModel: INotifyPropertyChanged
     {
         public GameObject GameObject { get; private set; }
-        public ElementBinding[] Elements { get; }
+        public ElementBinding<TViewModel>[] Elements { get; }
 
         public string Path { get; }
 
-        public ElementBinding(GameObject gameObject)
-        {
-            // Setup a prefab instance. 
-            GameObject = gameObject;
-
-            Path = String.Empty;
-            Elements = Array.Empty<ElementBinding>();
-        }
-
         public ElementBinding(string path)
-            : this(path, Array.Empty<ElementBinding>())
+        {
+            Path = path;
+            Elements = Array.Empty<ElementBinding<TViewModel>>();
+        }
+        
+
+        public ElementBinding(
+            View<TViewModel> view,
+            string path)
+            : this(view, path, null, Array.Empty<ElementBinding<TViewModel>>())
         {
         }
 
-        public ElementBinding(string path, ElementBinding[] elements)
+        public ElementBinding(
+            View<TViewModel> view,
+            string path,
+            ElementBinding<TViewModel>[] elements)
+            : base(view)
+        {
+            Path = path;
+            Elements = elements;
+        }
+        
+        public ElementBinding(
+            string path,
+            ElementBinding<TViewModel>[] elements)
         {
             Path = path;
             Elements = elements;
         }
 
-        public ElementBinding(GameObject parentGameObject, string path)
-            : this(parentGameObject, path, Array.Empty<ElementBinding>())
+        public ElementBinding(
+            View<TViewModel> view, 
+            string path, 
+            Expression<Func<TViewModel, object>> vm)
+            : this(view, path, vm, Array.Empty<ElementBinding<TViewModel>>())
         {
         }
 
-        public ElementBinding(GameObject parentGameObject, string path, ElementBinding[] elements)
+        public ElementBinding(
+            View<TViewModel> view, 
+            string path, 
+            Expression<Func<TViewModel, object>> vm, 
+            ElementBinding<TViewModel>[] elements)
+            : base(view)
         {
             Path = path;
             Elements = elements;
 
-            DelayedInitialize(parentGameObject);
+            var parentGameObject = view.GameObject;
+            DelayedInitialize(view, parentGameObject);
         }
 
-        private void DelayedInitialize(GameObject parentGameObject)
+        private void DelayedInitialize(View<TViewModel> view, GameObject parentGameObject)
         {
+            View = view;
             GameObject = parentGameObject.transform.Find(Path).gameObject;
-            //GameObject.transform.parent = parent.GameObject.transform;
             
             foreach (var element in Elements)
             {
-                element.DelayedInitialize(GameObject);                
+                element.DelayedInitialize(view, GameObject);                
             }
+        }
+
+        protected override void StartBinding()
+        {
+        }
+
+        protected override void StopBinding()
+        {
         }
     }
 }

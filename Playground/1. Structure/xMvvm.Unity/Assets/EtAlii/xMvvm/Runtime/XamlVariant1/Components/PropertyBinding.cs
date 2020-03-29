@@ -7,7 +7,7 @@ namespace EtAlii.xMvvm.XamlVariant1
     using System.Reflection;
     using UnityEngine;
 
-    public class PropertyBinding<TComponent, TViewModel> : Binding<TComponent, TViewModel>
+    public class PropertyBinding<TComponent, TViewModel> : ComponentBinding<TComponent, TViewModel>
         where TComponent: MonoBehaviour
         where TViewModel: INotifyPropertyChanged
     {
