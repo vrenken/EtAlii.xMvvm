@@ -114,8 +114,7 @@ namespace Mono.TextTemplating
 				return false;
 			}
 
-			string output;
-			ProcessTemplate(inputFile, content, ref outputFile, out output);
+			ProcessTemplate(inputFile, content, ref outputFile, out var output);
 
 			try
 			{
@@ -166,8 +165,7 @@ namespace Mono.TextTemplating
 				return false;
 			}
 
-			string output;
-			PreprocessTemplate(inputFile, className, classNamespace, content, out language, out references, out output);
+			PreprocessTemplate(inputFile, className, classNamespace, content, out language, out references, out var output);
 
 			try
 			{

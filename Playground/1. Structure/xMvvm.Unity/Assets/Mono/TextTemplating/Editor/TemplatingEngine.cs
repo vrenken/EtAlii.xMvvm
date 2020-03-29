@@ -45,14 +45,11 @@ namespace Mono.TextTemplating
 			var tpl = CompileTemplate(content, host);
 			try
 			{
-				if (tpl != null)
-					return tpl.Process();
-				return null;
+				return tpl?.Process();
 			}
 			finally
 			{
-				if (tpl != null)
-					tpl.Dispose();
+				tpl?.Dispose();
 			}
 		}
 
