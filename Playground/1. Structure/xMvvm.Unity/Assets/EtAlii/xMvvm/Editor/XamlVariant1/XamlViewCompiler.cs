@@ -18,7 +18,7 @@
     public class XamlViewCompiler 
     {
         private const string GeneratedNameSpace = "EtAlii.xMvvm.Generated";
-        private const string GeneratedAssemblyName = "EtAlii.xMvvm.Generated";
+        private const string GeneratedAssemblyNamePrefix = "EtAlii.xMvvm.Generated";
         private const string GeneratedViewClass = "GeneratedView";
         
         private XamlIlDocument Compile(IXamlIlTypeBuilder builder, XamlIlTransformerConfiguration configuration, IXamlIlType context, string xaml)
@@ -81,28 +81,27 @@
             };
             var configuration = new XamlIlTransformerConfiguration(typeSystem, defaultAssembly, languageTypeMappings);
 
-            var asm = typeSystem.CreateAndRegisterAssembly(GeneratedAssemblyName, new Version(1, 0),
+            var generatedAssemblyName = $"{GeneratedAssemblyNamePrefix}_{Guid.NewGuid():n}";
+            var assemblyDefinition = typeSystem.CreateAndRegisterAssembly(generatedAssemblyName, new Version(1, 0),
                 ModuleKind.Dll);
 
-            var def = new TypeDefinition(GeneratedNameSpace, GeneratedViewClass,
-                TypeAttributes.Class | TypeAttributes.Public, asm.MainModule.TypeSystem.Object);
+            var classTypeDefinition = new TypeDefinition(GeneratedNameSpace, GeneratedViewClass, TypeAttributes.Class | TypeAttributes.Public, assemblyDefinition.MainModule.TypeSystem.Object);
 
-            var ct = new TypeDefinition(GeneratedNameSpace, "XamlContext", TypeAttributes.Class,
-                asm.MainModule.TypeSystem.Object);
-            asm.MainModule.Types.Add(ct);
-            var ctb = typeSystem.CreateTypeBuilder(ct);
+            var mainModuleTypeDefinition = new TypeDefinition(GeneratedNameSpace, "XamlContext", TypeAttributes.Class, assemblyDefinition.MainModule.TypeSystem.Object);
+            assemblyDefinition.MainModule.Types.Add(mainModuleTypeDefinition);
+            var ctb = typeSystem.CreateTypeBuilder(mainModuleTypeDefinition);
             var contextTypeDef = XamlIlContextDefinition.GenerateContextClass(ctb, typeSystem, configuration.TypeMappings);
             
-            asm.MainModule.Types.Add(def);
+            assemblyDefinition.MainModule.Types.Add(classTypeDefinition);
 
 
-            var tb = typeSystem.CreateTypeBuilder(def);
+            var tb = typeSystem.CreateTypeBuilder(classTypeDefinition);
             var _ = Compile(tb, configuration, contextTypeDef, xaml);
 
-            using (var ms = new MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
-                asm.Write(ms);
-                var data = ms.ToArray();
+                assemblyDefinition.Write(memoryStream);
+                var data = memoryStream.ToArray();
             
                 var loaded = Assembly.Load(data);
                 var t = loaded.GetType($"{GeneratedNameSpace}.{GeneratedViewClass}");
