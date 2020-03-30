@@ -27,8 +27,8 @@ namespace EtAlii.xMvvm.XamlVariant1
             }
         }
 
-        public void StartListening() => EventHelper.AddListener(_onValueChangedMember, _component, _viewModelUpdater.UpdateFromComponent);
+        public void StartListening() => EventHelper.AddListener(_onValueChangedMember, _component, _viewModelUpdater.Update);
         
-        public void StopListening() => EventHelper.RemoveListener(_onValueChangedMember, _component, _viewModelUpdater.UpdateFromComponent);
+        public void StopListening() => EventHelper.RemoveListener(_onValueChangedMember, _component, _viewModelUpdater.Update);
     }
 }

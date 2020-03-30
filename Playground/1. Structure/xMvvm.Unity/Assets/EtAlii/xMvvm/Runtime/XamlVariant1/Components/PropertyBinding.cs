@@ -13,7 +13,7 @@ namespace EtAlii.xMvvm.XamlVariant1
         private readonly BindingMode _bindingMode;
 
         private readonly ComponentListener<TViewModel> _componentListener;
-        private readonly MemberUpdater _memberUpdater;
+        private readonly MemberValueHelper _componentMemberValueHelper;
         private readonly ViewModelUpdater<TViewModel> _viewModelUpdater;
         private readonly ViewModelListener<TViewModel> _viewModelListener;
 
@@ -32,12 +32,12 @@ namespace EtAlii.xMvvm.XamlVariant1
 
             MemberHelper.GetProperty(vm, out _viewModelPropertyInfo);
 
-            _viewModelUpdater = new ViewModelUpdater<TViewModel>(view, _viewModelPropertyInfo, Component, ComponentMemberExpression);
-            _memberUpdater = new MemberUpdater(Component, ComponentMemberExpression);
-            _viewModelListener = new ViewModelListener<TViewModel>(view, _viewModelPropertyInfo, _memberUpdater, bindingMode);
+            _componentMemberValueHelper = new MemberValueHelper(Component, ComponentMemberExpression);
+            _viewModelUpdater = new ViewModelUpdater<TViewModel>(view, _viewModelPropertyInfo, _componentMemberValueHelper);
+            _viewModelListener = new ViewModelListener<TViewModel>(view, _viewModelPropertyInfo, _componentMemberValueHelper, bindingMode);
 
+            // We only want a component listener when the binding is two-way.
             if (_bindingMode != BindingMode.TwoWay && _bindingMode != BindingMode.OneWayToSource) return;
-            
             _componentListener = new ComponentListener<TViewModel>(Component, _viewModelUpdater);
         }
 
@@ -45,12 +45,12 @@ namespace EtAlii.xMvvm.XamlVariant1
         {
             if (_bindingMode == BindingMode.OneWayToSource)
             {
-                _viewModelUpdater.UpdateFromComponent();
+                _viewModelUpdater.Update();
             }
             else
             {
                 var value = _viewModelPropertyInfo.GetValue(View.ViewModel);
-                _memberUpdater.Update(value);
+                _componentMemberValueHelper.SetValue(value);
             }
 
             if (_bindingMode == BindingMode.TwoWay || _bindingMode == BindingMode.OneWay)

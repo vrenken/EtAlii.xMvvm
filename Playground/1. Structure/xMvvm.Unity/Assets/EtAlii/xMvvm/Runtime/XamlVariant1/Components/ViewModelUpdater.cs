@@ -1,43 +1,28 @@
 namespace EtAlii.xMvvm.XamlVariant1
 {
     using System.ComponentModel;
-    using System.Linq.Expressions;
-    using UnityEngine;
     using System.Reflection;
     
     public class ViewModelUpdater<TViewModel>
         where TViewModel: INotifyPropertyChanged
     {
         private readonly PropertyInfo _viewModelPropertyInfo;
-        private readonly MonoBehaviour _component;
-        private readonly MemberExpression _componentMemberExpression;
+        private readonly MemberValueHelper _sourceMemberValueHelper;
         private readonly View<TViewModel> _view;
 
         public ViewModelUpdater(
             View<TViewModel> view,
             PropertyInfo viewModelPropertyInfo,
-            MonoBehaviour component, 
-            MemberExpression componentMemberExpression)
+            MemberValueHelper sourceMemberValueHelper)
         {
             _viewModelPropertyInfo = viewModelPropertyInfo;
-            _component = component;
-            _componentMemberExpression = componentMemberExpression;
+            _sourceMemberValueHelper = sourceMemberValueHelper;
             _view = view;
         }
 
-        public void UpdateFromComponent()
+        public void Update()
         {
-            object value = null;
-                
-            switch (_componentMemberExpression.Member)
-            {
-                case PropertyInfo componentPropertyInfo: 
-                    value = componentPropertyInfo.GetValue(_component, null);
-                    break;
-                case FieldInfo componentFieldInfo: 
-                    value = componentFieldInfo.GetValue(_component);
-                    break;
-            }
+            var value = _sourceMemberValueHelper.GetValue();
             _viewModelPropertyInfo.SetValue(_view.ViewModel, value);
         }
     }

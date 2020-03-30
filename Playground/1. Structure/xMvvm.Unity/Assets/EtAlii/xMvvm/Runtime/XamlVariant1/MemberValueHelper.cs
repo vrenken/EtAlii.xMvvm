@@ -3,18 +3,18 @@ namespace EtAlii.xMvvm.XamlVariant1
     using System.Linq.Expressions;
     using System.Reflection;
     
-    public class MemberUpdater
+    public class MemberValueHelper
     {
         private readonly object _target;
         private readonly MemberExpression _memberExpression;
 
-        public MemberUpdater(object target, MemberExpression memberExpression)
+        public MemberValueHelper(object target, MemberExpression memberExpression)
         {
             _target = target;
             _memberExpression = memberExpression;
         }
 
-        public void Update(object value)
+        public void SetValue(object value)
         {
             switch (_memberExpression.Member)
             {
@@ -25,6 +25,21 @@ namespace EtAlii.xMvvm.XamlVariant1
                     fieldInfo.SetValue(_target, value);
                     break;
             }
+        }
+
+        public object GetValue()
+        {
+            object value = null;
+            switch (_memberExpression.Member)
+            {
+                case PropertyInfo componentPropertyInfo: 
+                    value = componentPropertyInfo.GetValue(_target, null);
+                    break;
+                case FieldInfo componentFieldInfo: 
+                    value = componentFieldInfo.GetValue(_target);
+                    break;
+            }
+            return value;
         }
     }
 }

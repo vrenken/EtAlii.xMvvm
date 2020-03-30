@@ -87,7 +87,7 @@
                 </e>
                 <e p="EventHelper.cs" t="Include" />
                 <e p="MemberHelper.cs" t="Include" />
-                <e p="MemberUpdater.cs" t="Include" />
+                <e p="MemberValueHelper.cs" t="Include" />
                 <e p="View.cs" t="Include" />
                 <e p="ViewBinding.cs" t="Include" />
               </e>

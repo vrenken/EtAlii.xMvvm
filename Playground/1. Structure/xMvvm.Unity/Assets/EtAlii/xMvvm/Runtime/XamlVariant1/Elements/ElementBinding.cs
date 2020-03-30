@@ -9,6 +9,7 @@ namespace EtAlii.xMvvm.XamlVariant1
     public class ElementBinding<TViewModel> : ViewBinding<TViewModel>
         where TViewModel: INotifyPropertyChanged
     {
+        private readonly BindingMode _bindingMode = BindingMode.OneWay;
         public GameObject GameObject { get; private set; }
 
         private readonly PropertyInfo _viewModelPropertyInfo;
@@ -18,8 +19,10 @@ namespace EtAlii.xMvvm.XamlVariant1
 
         public string Path { get; }
 
-        private MemberUpdater _memberUpdater;
+        private MemberValueHelper _elementMemberValueHelper;
         private ViewModelListener<TViewModel> _viewModelListener;
+        private ElementListener<TViewModel> _elementListener;
+        private ViewModelUpdater<TViewModel> _viewModelUpdater;
 
         public ElementBinding(string path)
         {
@@ -105,16 +108,49 @@ namespace EtAlii.xMvvm.XamlVariant1
                 element.DelayedInitialize(view, GameObject);                
             }
             
-            _memberUpdater = new MemberUpdater(GameObject, _elementMemberExpression);
-            _viewModelListener = new ViewModelListener<TViewModel>(view, _viewModelPropertyInfo, _memberUpdater, BindingMode.OneWay);
+            _elementMemberValueHelper = new MemberValueHelper(GameObject, _elementMemberExpression);
+            _viewModelUpdater = new ViewModelUpdater<TViewModel>(view, _viewModelPropertyInfo, _elementMemberValueHelper);
+            _viewModelListener = new ViewModelListener<TViewModel>(view, _viewModelPropertyInfo, _elementMemberValueHelper, BindingMode.OneWay);
+            
+            // We only want a element listener when the binding is two-way.
+            if (_bindingMode != BindingMode.TwoWay && _bindingMode != BindingMode.OneWayToSource) return;
+            _elementListener = new ElementListener<TViewModel>(GameObject, _viewModelUpdater);
         }
 
         protected override void StartBinding()
         {
+            if (_bindingMode == BindingMode.OneWayToSource)
+            {
+                _viewModelUpdater.Update();
+            }
+            else
+            {
+                var value = _viewModelPropertyInfo.GetValue(View.ViewModel);
+                _elementMemberValueHelper.SetValue(value);
+            }
+
+            if (_bindingMode == BindingMode.TwoWay || _bindingMode == BindingMode.OneWay)
+            {
+                _viewModelListener.StartListening();
+            }
+
+            if (_bindingMode == BindingMode.TwoWay || _bindingMode == BindingMode.OneWayToSource)
+            {
+                _elementListener.StartListening();
+            }
         }
 
         protected override void StopBinding()
         {
+            if (_bindingMode == BindingMode.TwoWay || _bindingMode == BindingMode.OneWayToSource)
+            {
+                _elementListener.StopListening();
+            }
+
+            if (_bindingMode == BindingMode.TwoWay || _bindingMode == BindingMode.OneWay)
+            {
+                _viewModelListener.StopListening();
+            }
         }
     }
 }
