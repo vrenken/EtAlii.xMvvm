@@ -2,7 +2,6 @@ namespace EtAlii.xMvvm.XamlVariant1
 {
     using System;
     using System.ComponentModel;
-    using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
     using UnityEngine;
@@ -14,10 +13,12 @@ namespace EtAlii.xMvvm.XamlVariant1
         private readonly BindingMode _bindingMode;
 
         private readonly ComponentListener<TViewModel> _componentListener;
-        private readonly ComponentUpdater<TViewModel> _componentUpdater;
+        private readonly MemberUpdater _memberUpdater;
         private readonly ViewModelUpdater<TViewModel> _viewModelUpdater;
         private readonly ViewModelListener<TViewModel> _viewModelListener;
-        
+
+        private readonly PropertyInfo _viewModelPropertyInfo;
+
         public PropertyBinding(
             View<TViewModel> view, 
             string path, 
@@ -26,42 +27,18 @@ namespace EtAlii.xMvvm.XamlVariant1
             BindingMode bindingMode) 
             : base(view, path, component)
         {
-            if (vm == null)
-            {
-                throw new ArgumentNullException(nameof(vm));
-            }
 
             _bindingMode = bindingMode;
 
-            PropertyInfo viewModelPropertyInfo = null;
+            MemberHelper.GetProperty(vm, out _viewModelPropertyInfo);
 
-            switch (vm.Body)
-            {
-                case MemberExpression memberExpression:
-                    viewModelPropertyInfo = memberExpression.Member as PropertyInfo;
-                    break;
-                case UnaryExpression unaryExpression:
-                    viewModelPropertyInfo = (unaryExpression.Operand as MemberExpression)?.Member as PropertyInfo;
-                    break;
-            }
-
-            if (viewModelPropertyInfo == null)
-            {
-                throw new InvalidOperationException("Unable to access viewModelProperty from expression: " + vm);
-            }
-
-            _viewModelUpdater = new ViewModelUpdater<TViewModel>(view, viewModelPropertyInfo, Component, ComponentMemberExpression);
-            _componentUpdater = new ComponentUpdater<TViewModel>(view, viewModelPropertyInfo, Component, ComponentMemberExpression);
-            _viewModelListener = new ViewModelListener<TViewModel>(view, viewModelPropertyInfo, _componentUpdater, bindingMode);
+            _viewModelUpdater = new ViewModelUpdater<TViewModel>(view, _viewModelPropertyInfo, Component, ComponentMemberExpression);
+            _memberUpdater = new MemberUpdater(Component, ComponentMemberExpression);
+            _viewModelListener = new ViewModelListener<TViewModel>(view, _viewModelPropertyInfo, _memberUpdater, bindingMode);
 
             if (_bindingMode != BindingMode.TwoWay && _bindingMode != BindingMode.OneWayToSource) return;
             
-            var onValueChangedMember = ComponentType.GetMember("onValueChanged").SingleOrDefault();
-            if (onValueChangedMember == null)
-            {
-                throw new InvalidOperationException("Unable to access onValueChanged from component: " + Component);
-            }
-            _componentListener = new ComponentListener<TViewModel>(onValueChangedMember, Component, ComponentMemberExpression, _viewModelUpdater);
+            _componentListener = new ComponentListener<TViewModel>(Component, _viewModelUpdater);
         }
 
         protected override void StartBinding()
@@ -72,7 +49,8 @@ namespace EtAlii.xMvvm.XamlVariant1
             }
             else
             {
-                _componentUpdater.UpdateFromViewModel();
+                var value = _viewModelPropertyInfo.GetValue(View.ViewModel);
+                _memberUpdater.Update(value);
             }
 
             if (_bindingMode == BindingMode.TwoWay || _bindingMode == BindingMode.OneWay)

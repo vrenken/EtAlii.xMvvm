@@ -6,9 +6,11 @@ namespace EtAlii.xMvvm
     {
         public string Name { get => Id; set => Id = value; }
         public string Path { get; set; }
+        public string Member { get; set; }
+
         public ResourceDictionary Resources { get; set; } = new ResourceDictionary();
 
-        public Bind Transformation { get; set; } // UnityEngine.Transform
+        public Bind Value { get; set; } // UnityEngine.Transform
         
         public List<Element> Elements { get; } = new List<Element>();
     }

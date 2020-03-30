@@ -14,6 +14,8 @@
             <e p="LocationsView.v1xaml.cs" t="Include" />
             <e p="LocationsView.v1xaml.g.cs" t="Include" />
             <e p="LocationsViewModel.cs" t="Include" />
+            <e p="LoginView.v1xaml.cs" t="Include" />
+            <e p="LoginView.v1xaml.g.cs" t="Include" />
             <e p="LoginViewModel.cs" t="Include" />
             <e p="ViewSystem.cs" t="Include" />
           </e>
@@ -70,7 +72,6 @@
                 <e p="Components" t="Include">
                   <e p="ComponentBinding.cs" t="Include" />
                   <e p="ComponentListener.cs" t="Include" />
-                  <e p="ComponentUpdater.cs" t="Include" />
                   <e p="EventBinding.cs" t="Include" />
                   <e p="PropertyBinding.cs" t="Include" />
                   <e p="ViewModelListener.cs" t="Include" />
@@ -84,6 +85,9 @@
                   <e p="ElementListener.cs" t="Include" />
                   <e p="ElementUpdater.cs" t="Include" />
                 </e>
+                <e p="EventHelper.cs" t="Include" />
+                <e p="MemberHelper.cs" t="Include" />
+                <e p="MemberUpdater.cs" t="Include" />
                 <e p="View.cs" t="Include" />
                 <e p="ViewBinding.cs" t="Include" />
               </e>

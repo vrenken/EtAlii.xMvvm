@@ -5,7 +5,6 @@ namespace EtAlii.xMvvm.XamlVariant1
     using System.Linq.Expressions;
     using System.Reflection;
     using UnityEngine;
-    using UnityEngine.Events;
 
     public class EventBinding<TComponent, TViewModel> : ComponentBinding<TComponent, TViewModel>
         where TComponent: MonoBehaviour
@@ -13,7 +12,11 @@ namespace EtAlii.xMvvm.XamlVariant1
     {
         private readonly MethodInfo _viewModelMethodInfo;
 
-        public EventBinding(View<TViewModel> view, string path, Expression<Func<TComponent, object>> component, Expression<Func<TViewModel, Action>> vm) 
+        public EventBinding(
+            View<TViewModel> view, 
+            string path, 
+            Expression<Func<TComponent, object>> component, 
+            Expression<Func<TViewModel, Action>> vm) 
             : base(view, path, component)
         {
             if (vm == null)
@@ -31,40 +34,7 @@ namespace EtAlii.xMvvm.XamlVariant1
             }
         }
 
-        protected override void StartBinding()
-        {
-            var handler = _viewModelMethodInfo;
-            var listener = (UnityAction)Delegate.CreateDelegate(typeof(UnityAction), ViewModel, handler);
-
-            switch (ComponentMemberExpression.Member)
-            {
-                case PropertyInfo componentPropertyInfo:
-                    var unityPropertyEvent = (UnityEvent)componentPropertyInfo.GetValue(Component);
-                    unityPropertyEvent.AddListener(listener);
-                    break;
-                case FieldInfo componentFieldInfo: 
-                    var unityFieldEvent = (UnityEvent)componentFieldInfo.GetValue(Component);
-                    unityFieldEvent.AddListener(listener);
-                    break;
-            }
-        }
-
-        protected override void StopBinding()
-        {
-            var handler = _viewModelMethodInfo;
-            var listener = (UnityAction)Delegate.CreateDelegate(typeof(UnityAction), ViewModel, handler);
-
-            switch (ComponentMemberExpression.Member)
-            {
-                case PropertyInfo componentPropertyInfo:
-                    var unityPropertyEvent = (UnityEvent)componentPropertyInfo.GetValue(Component);
-                    unityPropertyEvent.RemoveListener(listener);
-                    break;
-                case FieldInfo componentFieldInfo: 
-                    var unityFieldEvent = (UnityEvent)componentFieldInfo.GetValue(Component);
-                    unityFieldEvent.RemoveListener(listener);
-                    break;
-            }
-        }
+        protected override void StartBinding() => EventHelper.AddListener(ComponentMemberExpression.Member, Component, ViewModel, _viewModelMethodInfo);
+        protected override void StopBinding() => EventHelper.RemoveListener(ComponentMemberExpression.Member, Component, ViewModel, _viewModelMethodInfo);
     }
 }

@@ -6,7 +6,7 @@ namespace EtAlii.xMvvm.XamlVariant1
     public class ViewModelListener<TViewModel>
         where TViewModel: INotifyPropertyChanged
     {
-        private readonly ComponentUpdater<TViewModel> _componentUpdater;
+        private readonly MemberUpdater _memberUpdater;
         private readonly BindingMode _bindingMode;
         private readonly View<TViewModel> _view;
         private readonly PropertyInfo _viewModelPropertyInfo;
@@ -14,11 +14,11 @@ namespace EtAlii.xMvvm.XamlVariant1
         public ViewModelListener(
             View<TViewModel> view,
             PropertyInfo viewModelPropertyInfo,
-            ComponentUpdater<TViewModel> componentUpdater, 
+            MemberUpdater memberUpdater, 
             BindingMode bindingMode)
         {
             _viewModelPropertyInfo = viewModelPropertyInfo;
-            _componentUpdater = componentUpdater;
+            _memberUpdater = memberUpdater;
             _bindingMode = bindingMode;
             _view = view;
         }
@@ -38,10 +38,10 @@ namespace EtAlii.xMvvm.XamlVariant1
         {
             if (e.PropertyName != _viewModelPropertyInfo.Name) return;
 
-            if (_bindingMode != BindingMode.OneWayToSource)
-            {
-                _componentUpdater.UpdateFromViewModel();
-            }
+            if (_bindingMode == BindingMode.OneWayToSource) return;
+            
+            var value = _viewModelPropertyInfo.GetValue(_view.ViewModel);
+            _memberUpdater.Update(value);
         }
     }
 }

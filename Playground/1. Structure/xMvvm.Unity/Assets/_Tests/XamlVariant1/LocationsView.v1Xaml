@@ -4,9 +4,9 @@
     ViewModelType="LocationsViewModel"        
     Prefab="LocationsView.prefab">  
         
-     <View.Elements>         
-         <Element Name="Canvas" Path="Canvas2" />
-         <Element Name="Subject" Path="Subject" Transformation="{x:Bind SubjectTransformation, Converter={StaticResource LinearTransformationConverter}}">
+     <View.Elements>          
+         <Element Name="Canvas" Path="Canvas2" /> 
+         <Element Name="Subject" Path="Subject" Value="{x:Bind SubjectTransformation, Converter={StaticResource LinearTransformationConverter}}" Member="transform">
              <Element.Elements>   
                  <Element Name="Child" Path="Child" >  
                      <Element.Elements>

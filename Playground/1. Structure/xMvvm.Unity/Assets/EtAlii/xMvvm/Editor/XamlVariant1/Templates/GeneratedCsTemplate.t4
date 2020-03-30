@@ -61,7 +61,7 @@ namespace <#= data["classNamespace"] #>
             <#=CodeEntity.GetLocalName(resource)#> = new <#=resource.Type#>();
 <# } #>
 
-            // Wire the component bindings.
+            // Setup the component bindings.
 <# foreach(var binding in view.Bindings) {
     if (binding is Property property) { #>
             <#=CodeEntity.GetLocalName(property)#> = new PropertyBinding<<#=property.Type#>, <#=view.ViewModelType#>>(this, "<#=property.Path#>", component => component.<#=property.Member#>, vm => vm.<#=property.Value.Name#>, BindingMode.<#=property.Value.Mode#>);
@@ -72,19 +72,18 @@ namespace <#= data["classNamespace"] #>
             // Setup the element bindings.
 <# 
     foreach(var element in alElements.Reverse()) { if(element.Elements.Any()) { #>
-            <# if (CodeEntity.RequiresVariable(element)) {#>var <#} #><#=CodeEntity.GetLocalName(element)#> = ﻿new <#=data["variantNamespace"]#>.ElementBinding<<#=view.ViewModelType#>>(<#= view.Elements.Contains(element) ? "this, " : ""#>"<#=element.Path#>"<#= element.Transformation != null ? ", vm => vm."+element.Transformation.Name : ""#>, new <#=data["variantNamespace"]#>.ElementBinding<<#=view.ViewModelType#>>[] { <#
+            <# if (CodeEntity.RequiresVariable(element)) {#>var <#} #><#=CodeEntity.GetLocalName(element)#> = ﻿new <#=data["variantNamespace"]#>.ElementBinding<<#=view.ViewModelType#>>(<#= view.Elements.Contains(element) ? "this, " : ""#>"<#=element.Path#>"<#= element.Member != null ? ", element => element."+element.Member : ""#><#= element.Value != null ? ", vm => vm."+element.Value.Name : ""#>, new <#=data["variantNamespace"]#>.ElementBinding<<#=view.ViewModelType#>>[] { <#
     for (var i = 0; i < element.Elements.Count; i++)
     {
         var childElement = element.Elements[i];
 #><#=CodeEntity.GetLocalName(childElement)#><# if (i < element.Elements.Count - 1) {#>,<#} #> <# } #>});
 <#
    }  else { #>
-            <# if (CodeEntity.RequiresVariable(element)) {#>var <#} #><#=CodeEntity.GetLocalName(element)#> = ﻿new <#=data["variantNamespace"]#>.ElementBinding<<#=view.ViewModelType#>>(<#= view.Elements.Contains(element) ? "this, " : ""#>"<#=element.Path#>"<#= element.Transformation != null ? ", vm => vm."+element.Transformation.Name : ""#>);
+            <# if (CodeEntity.RequiresVariable(element)) {#>var <#} #><#=CodeEntity.GetLocalName(element)#> = ﻿new <#=data["variantNamespace"]#>.ElementBinding<<#=view.ViewModelType#>>(<#= view.Elements.Contains(element) ? "this, " : ""#>"<#=element.Path#>"<#= element.Member != null ? ", element => element."+element.Member : ""#><#= element.Value != null ? ", vm => vm."+element.Value.Name : ""#>);
 <#
    } } #> 
             // And initialize.
             Initialize();   
         }
-
     }
 }
