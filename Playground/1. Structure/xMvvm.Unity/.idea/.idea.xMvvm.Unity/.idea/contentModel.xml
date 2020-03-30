@@ -81,13 +81,20 @@
                   <e p="_Model" t="Include">
                     <e p="ViewModelTransform.cs" t="Include" />
                   </e>
+                  <e p="Converters" t="Include">
+                    <e p="DefaultTransformationConverter.cs" t="Include" />
+                    <e p="IValueConverter.cs" t="Include" />
+                    <e p="LinearTransformationConverter.cs" t="Include" />
+                  </e>
                   <e p="ElementBinding.cs" t="Include" />
                   <e p="ElementListener.cs" t="Include" />
-                  <e p="ElementUpdater.cs" t="Include" />
                 </e>
                 <e p="EventHelper.cs" t="Include" />
                 <e p="MemberHelper.cs" t="Include" />
                 <e p="MemberValueHelper.cs" t="Include" />
+                <e p="MemberValueHelper.Mappings.cs" t="Include" />
+                <e p="Quaternion.Extensions.cs" t="Include" />
+                <e p="Vector3.Extensions.cs" t="Include" />
                 <e p="View.cs" t="Include" />
                 <e p="ViewBinding.cs" t="Include" />
               </e>

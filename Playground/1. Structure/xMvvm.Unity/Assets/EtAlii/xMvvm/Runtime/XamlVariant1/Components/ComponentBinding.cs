@@ -3,6 +3,7 @@ namespace EtAlii.xMvvm.XamlVariant1
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
+    using System.Reflection;
     using UnityEngine;
 
     public abstract class ComponentBinding<TComponent, TViewModel> : ViewBinding<TViewModel>
@@ -10,8 +11,8 @@ namespace EtAlii.xMvvm.XamlVariant1
         where TViewModel: INotifyPropertyChanged
     {
         protected MonoBehaviour Component { get; }
-        protected MemberExpression ComponentMemberExpression => _componentMemberExpression;
-        private readonly MemberExpression _componentMemberExpression;
+        protected MemberInfo ComponentMemberInfo => _componentMemberInfo;
+        private readonly MemberInfo _componentMemberInfo;
 
         protected ComponentBinding(
             View<TViewModel> view,
@@ -26,7 +27,8 @@ namespace EtAlii.xMvvm.XamlVariant1
                 throw new InvalidOperationException($"Unable to find component {typeof(TComponent)} on path {path}");
             }
 
-            MemberHelper.GetMember(component, out _componentMemberExpression);
+            MemberHelper.GetMember(component, out var componentMemberExpression);
+            _componentMemberInfo = componentMemberExpression.Member;
         }
     }
 }

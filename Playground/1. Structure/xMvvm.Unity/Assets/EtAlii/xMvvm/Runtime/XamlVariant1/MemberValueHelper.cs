@@ -1,42 +1,44 @@
 namespace EtAlii.xMvvm.XamlVariant1
 {
-    using System.Linq.Expressions;
     using System.Reflection;
     
-    public class MemberValueHelper
+    public partial class MemberValueHelper
     {
-        private readonly object _target;
-        private readonly MemberExpression _memberExpression;
+        private readonly MemberInfo _memberInfo;
 
-        public MemberValueHelper(object target, MemberExpression memberExpression)
+        public string MemberName => _memberInfo.Name;
+        
+        public MemberValueHelper(MemberInfo memberInfo)
         {
-            _target = target;
-            _memberExpression = memberExpression;
+            _memberInfo = memberInfo;
         }
-
-        public void SetValue(object value)
+        
+        public void SetValue(object instance, object value)
         {
-            switch (_memberExpression.Member)
+            // First try to set the value explicit. There are some mappings that cannot be done automagically.
+            if (SetValueExplicit(instance, value)) return;
+            
+            switch (_memberInfo)
             {
                 case PropertyInfo propertyInfo: 
-                    propertyInfo.SetValue(_target, value, null);
+                    propertyInfo.SetValue(instance, value, null);
                     break;
                 case FieldInfo fieldInfo: 
-                    fieldInfo.SetValue(_target, value);
+                    fieldInfo.SetValue(instance, value);
                     break;
             }
         }
 
-        public object GetValue()
+        public object GetValue(object instance)
         {
             object value = null;
-            switch (_memberExpression.Member)
+            switch (_memberInfo)
             {
                 case PropertyInfo componentPropertyInfo: 
-                    value = componentPropertyInfo.GetValue(_target, null);
+                    value = componentPropertyInfo.GetValue(instance, null);
                     break;
                 case FieldInfo componentFieldInfo: 
-                    value = componentFieldInfo.GetValue(_target);
+                    value = componentFieldInfo.GetValue(instance);
                     break;
             }
             return value;

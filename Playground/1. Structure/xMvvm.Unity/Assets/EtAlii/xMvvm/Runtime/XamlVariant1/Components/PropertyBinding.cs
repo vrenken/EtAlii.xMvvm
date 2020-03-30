@@ -27,14 +27,14 @@ namespace EtAlii.xMvvm.XamlVariant1
             BindingMode bindingMode) 
             : base(view, path, component)
         {
-
             _bindingMode = bindingMode;
 
             MemberHelper.GetProperty(vm, out _viewModelPropertyInfo);
 
-            _componentMemberValueHelper = new MemberValueHelper(Component, ComponentMemberExpression);
-            _viewModelUpdater = new ViewModelUpdater<TViewModel>(view, _viewModelPropertyInfo, _componentMemberValueHelper);
-            _viewModelListener = new ViewModelListener<TViewModel>(view, _viewModelPropertyInfo, _componentMemberValueHelper, bindingMode);
+            var viewModelMemberValueHelper = new MemberValueHelper(_viewModelPropertyInfo);
+            _componentMemberValueHelper = new MemberValueHelper(ComponentMemberInfo);
+            _viewModelUpdater = new ViewModelUpdater<TViewModel>(view, Component, _componentMemberValueHelper, viewModelMemberValueHelper);
+            _viewModelListener = new ViewModelListener<TViewModel>(view, Component, _componentMemberValueHelper, viewModelMemberValueHelper, bindingMode);
 
             // We only want a component listener when the binding is two-way.
             if (_bindingMode != BindingMode.TwoWay && _bindingMode != BindingMode.OneWayToSource) return;
@@ -50,7 +50,7 @@ namespace EtAlii.xMvvm.XamlVariant1
             else
             {
                 var value = _viewModelPropertyInfo.GetValue(View.ViewModel);
-                _componentMemberValueHelper.SetValue(value);
+                _componentMemberValueHelper.SetValue(Component, value);
             }
 
             if (_bindingMode == BindingMode.TwoWay || _bindingMode == BindingMode.OneWay)

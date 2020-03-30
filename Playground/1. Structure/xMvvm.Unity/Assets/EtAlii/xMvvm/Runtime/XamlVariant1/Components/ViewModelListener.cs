@@ -1,26 +1,28 @@
 namespace EtAlii.xMvvm.XamlVariant1
 {
     using System.ComponentModel;
-    using System.Reflection;
 
     public class ViewModelListener<TViewModel>
         where TViewModel: INotifyPropertyChanged
     {
-        private readonly MemberValueHelper _memberValueHelper;
+        private readonly MemberValueHelper _targetMemberValueHelper;
+        private readonly MemberValueHelper _sourceMemberValueHelper;
         private readonly BindingMode _bindingMode;
         private readonly View<TViewModel> _view;
-        private readonly PropertyInfo _viewModelPropertyInfo;
+        private readonly object _target;
 
         public ViewModelListener(
             View<TViewModel> view,
-            PropertyInfo viewModelPropertyInfo,
-            MemberValueHelper memberValueHelper, 
+            object target,
+            MemberValueHelper targetMemberValueHelper, 
+            MemberValueHelper sourceMemberValueHelper,
             BindingMode bindingMode)
         {
-            _viewModelPropertyInfo = viewModelPropertyInfo;
-            _memberValueHelper = memberValueHelper;
+            _targetMemberValueHelper = targetMemberValueHelper;
+            _sourceMemberValueHelper = sourceMemberValueHelper;
             _bindingMode = bindingMode;
             _view = view;
+            _target = target;
         }
 
         public void StartListening()
@@ -36,12 +38,12 @@ namespace EtAlii.xMvvm.XamlVariant1
         
         private void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName != _viewModelPropertyInfo.Name) return;
+            if (e.PropertyName != _sourceMemberValueHelper.MemberName) return;
 
             if (_bindingMode == BindingMode.OneWayToSource) return;
-            
-            var value = _viewModelPropertyInfo.GetValue(_view.ViewModel);
-            _memberValueHelper.SetValue(value);
+
+            var value = _sourceMemberValueHelper.GetValue(_view.ViewModel);
+            _targetMemberValueHelper.SetValue(_target, value);
         }
     }
 }

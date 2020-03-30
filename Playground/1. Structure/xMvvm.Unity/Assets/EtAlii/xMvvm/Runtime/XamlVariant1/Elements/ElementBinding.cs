@@ -9,11 +9,11 @@ namespace EtAlii.xMvvm.XamlVariant1
     public class ElementBinding<TViewModel> : ViewBinding<TViewModel>
         where TViewModel: INotifyPropertyChanged
     {
-        private readonly BindingMode _bindingMode = BindingMode.OneWay;
+        private readonly BindingMode _bindingMode = BindingMode.OneWay; // For now element bindings will be one way.
         public GameObject GameObject { get; private set; }
 
         private readonly PropertyInfo _viewModelPropertyInfo;
-        private readonly MemberExpression _elementMemberExpression; 
+        private readonly MemberInfo _elementMemberInfo; 
 
         public ElementBinding<TViewModel>[] Elements { get; }
 
@@ -77,8 +77,8 @@ namespace EtAlii.xMvvm.XamlVariant1
             Elements = elements;
             
             MemberHelper.GetProperty(vm, out _viewModelPropertyInfo);
-            MemberHelper.GetMember(element, out _elementMemberExpression);
-
+            MemberHelper.GetMember(element, out var elementMemberExpression);
+            _elementMemberInfo = elementMemberExpression.Member;
             
             var parentGameObject = view.GameObject;
             DelayedInitialize(view, parentGameObject);
@@ -108,9 +108,10 @@ namespace EtAlii.xMvvm.XamlVariant1
                 element.DelayedInitialize(view, GameObject);                
             }
             
-            _elementMemberValueHelper = new MemberValueHelper(GameObject, _elementMemberExpression);
-            _viewModelUpdater = new ViewModelUpdater<TViewModel>(view, _viewModelPropertyInfo, _elementMemberValueHelper);
-            _viewModelListener = new ViewModelListener<TViewModel>(view, _viewModelPropertyInfo, _elementMemberValueHelper, BindingMode.OneWay);
+            var viewModelMemberValueHelper = new MemberValueHelper(_viewModelPropertyInfo);
+            _elementMemberValueHelper = new MemberValueHelper(_elementMemberInfo);
+            _viewModelUpdater = new ViewModelUpdater<TViewModel>(view, GameObject, _elementMemberValueHelper, viewModelMemberValueHelper);
+            _viewModelListener = new ViewModelListener<TViewModel>(view, GameObject, _elementMemberValueHelper, viewModelMemberValueHelper, BindingMode.OneWay);
             
             // We only want a element listener when the binding is two-way.
             if (_bindingMode != BindingMode.TwoWay && _bindingMode != BindingMode.OneWayToSource) return;
@@ -126,7 +127,7 @@ namespace EtAlii.xMvvm.XamlVariant1
             else
             {
                 var value = _viewModelPropertyInfo.GetValue(View.ViewModel);
-                _elementMemberValueHelper.SetValue(value);
+                _elementMemberValueHelper.SetValue(GameObject, value);
             }
 
             if (_bindingMode == BindingMode.TwoWay || _bindingMode == BindingMode.OneWay)

@@ -1,29 +1,31 @@
 namespace EtAlii.xMvvm.XamlVariant1
 {
     using System.ComponentModel;
-    using System.Reflection;
-    
+
     public class ViewModelUpdater<TViewModel>
         where TViewModel: INotifyPropertyChanged
     {
-        private readonly PropertyInfo _viewModelPropertyInfo;
+        private readonly MemberValueHelper _targetMemberValueHelper;
         private readonly MemberValueHelper _sourceMemberValueHelper;
         private readonly View<TViewModel> _view;
+        private readonly object _target;
 
         public ViewModelUpdater(
             View<TViewModel> view,
-            PropertyInfo viewModelPropertyInfo,
+            object target,
+            MemberValueHelper targetMemberValueHelper,
             MemberValueHelper sourceMemberValueHelper)
         {
-            _viewModelPropertyInfo = viewModelPropertyInfo;
+            _targetMemberValueHelper = targetMemberValueHelper;
             _sourceMemberValueHelper = sourceMemberValueHelper;
             _view = view;
+            _target = target;
         }
 
         public void Update()
         {
-            var value = _sourceMemberValueHelper.GetValue();
-            _viewModelPropertyInfo.SetValue(_view.ViewModel, value);
+            var value = _targetMemberValueHelper.GetValue(_target);
+            _sourceMemberValueHelper.SetValue(_view.ViewModel, value);
         }
     }
 }

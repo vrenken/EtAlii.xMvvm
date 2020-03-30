@@ -6,7 +6,7 @@
     Prefab="CompositionView.prefab">  
     <View.Resources>     
         <ResourceDictionary>
-            <LinearTransformationConverter Key="LinearTransformationConverter" />              
+            <LinearTransformationConverter Key="LinearTransformationConverter" Scale="0.5" />              
         </ResourceDictionary>                       
     </View.Resources>    
     <View.Bindings>                         

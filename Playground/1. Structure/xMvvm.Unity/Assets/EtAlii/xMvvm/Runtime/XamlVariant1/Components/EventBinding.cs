@@ -34,7 +34,7 @@ namespace EtAlii.xMvvm.XamlVariant1
             }
         }
 
-        protected override void StartBinding() => EventHelper.AddListener(ComponentMemberExpression.Member, Component, ViewModel, _viewModelMethodInfo);
-        protected override void StopBinding() => EventHelper.RemoveListener(ComponentMemberExpression.Member, Component, ViewModel, _viewModelMethodInfo);
+        protected override void StartBinding() => EventHelper.AddListener(ComponentMemberInfo, Component, ViewModel, _viewModelMethodInfo);
+        protected override void StopBinding() => EventHelper.RemoveListener(ComponentMemberInfo, Component, ViewModel, _viewModelMethodInfo);
     }
 }
