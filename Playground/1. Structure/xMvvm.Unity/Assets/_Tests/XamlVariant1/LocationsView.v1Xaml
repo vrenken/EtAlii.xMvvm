@@ -4,29 +4,6 @@
     ViewModelType="LocationsViewModel"        
     Prefab="LocationsView.prefab">  
         
-     <View.Elements>          
-         <Element Name="Canvas" Path="Canvas2" /> 
-         <Element Name="Subject" Path="Subject" Value="{x:Bind SubjectTransformation, Converter={StaticResource LinearTransformationConverter}}" Member="transform">
-             <Element.Elements>   
-                 <Element Name="Child" Path="Child" >  
-                     <Element.Elements>
-                         <Element Name="Child3" Path="Child3" />                             
-                         <Element Name="Child4" Path="Child4" />                               
-                     </Element.Elements> 
-                 </Element>                         
-                 <Element Name="Child2" Path="Child2" />                              
-             </Element.Elements>
-         </Element>   
-         <Element Name="Photo" Path="Photo" />   
-         <Element Name="Child5" Path="Child5" > 
-             <Element.Elements>
-                 <Element Path="Child6" />                             
-                 <Element Path="Child8" />                               
-             </Element.Elements> 
-         </Element>                         
-     </View.Elements>  
- 
- 
 <!--    <View.Elements>
     
         <ListElement ItemsSource="{x:Bind Locations}">
