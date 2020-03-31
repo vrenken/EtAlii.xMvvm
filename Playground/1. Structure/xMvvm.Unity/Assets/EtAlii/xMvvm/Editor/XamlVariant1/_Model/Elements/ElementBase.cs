@@ -2,16 +2,13 @@ namespace EtAlii.xMvvm
 {
     using System.Collections.Generic;
 
-    public class Element : CodeEntity
+    public abstract class ElementBase : CodeEntity
     {
         public string Name { get => Id; set => Id = value; }
         public string Path { get; set; }
-        public string Member { get; set; }
 
         public ResourceDictionary Resources { get; set; } = new ResourceDictionary();
-
-        public Bind Value { get; set; } // UnityEngine.Transform
         
-        public List<Element> Elements { get; } = new List<Element>();
+        public List<ElementBase> Elements { get; } = new List<ElementBase>();
     }
 }

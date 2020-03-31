@@ -10,7 +10,10 @@
 
         public GameObject compositionPanel;
         public CompositionView compositionView;
-        
+
+        public GameObject locationsGlobe;
+        public LocationsView locationsView;
+
          private void Start()
          {
              // This is just a simple method to wire up the View with ViewModels.
@@ -28,6 +31,11 @@
              {
                  ViewModel = new CompositionViewModel()
              };
+
+             // locationsView = new LocationsView(locationsGlobe)
+             // {
+             //     ViewModel = new LocationsViewModel()
+             // };
          }
     }
 }

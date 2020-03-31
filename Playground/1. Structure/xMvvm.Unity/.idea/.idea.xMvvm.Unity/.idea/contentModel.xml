@@ -42,7 +42,13 @@
                     <e p="ResourceBinding.cs" t="Include" />
                   </e>
                   <e p="CodeEntity.cs" t="Include" />
-                  <e p="Element.cs" t="Include" />
+                  <e p="Elements" t="Include">
+                    <e p="DataTemplate.cs" t="Include" />
+                    <e p="Element.cs" t="Include" />
+                    <e p="ElementBase.cs" t="Include" />
+                    <e p="ListElement.cs" t="Include" />
+                    <e p="StackPanel.cs" t="Include" />
+                  </e>
                   <e p="Resources" t="Include">
                     <e p="Direction.cs" t="Include" />
                     <e p="LinearTransformationConverter.cs" t="Include" />
@@ -91,6 +97,7 @@
                   </e>
                   <e p="ElementBinding.cs" t="Include" />
                   <e p="ElementListener.cs" t="Include" />
+                  <e p="ListElementBinding.cs" t="Include" />
                 </e>
                 <e p="EventHelper.cs" t="Include" />
                 <e p="MemberHelper.cs" t="Include" />

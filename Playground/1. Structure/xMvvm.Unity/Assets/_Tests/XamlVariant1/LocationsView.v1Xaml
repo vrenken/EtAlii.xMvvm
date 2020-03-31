@@ -4,17 +4,21 @@
     ViewModelType="LocationsViewModel"        
     Prefab="LocationsView.prefab">  
         
-<!--    <View.Elements>
-    
-        <ListElement ItemsSource="{x:Bind Locations}">
+    <View.Elements>     
+        <ListElement Name="Locations" ItemsSource="{x:Bind Locations}" Path="Globe/Locations" >   
+            <ListElement.ItemContainer>
+                <StackPanel Orientation="Vertical" />   
+            </ListElement.ItemContainer> 
             <ListElement.ItemTemplate>
                 <DataTemplate 
-                    Prefab="LocationItem.prefab" />
-                    <Property Name="Title" Value="{x:Bind Title}" Path="Canvas/Panel/TitleLabel" Type="TMPro.TMP_Text" Member="text" /> 
-                    <Property Name="Text" Value="{x:Bind Text}" Path="Canvas/Panel/TextLabel" Type="TMPro.TMP_Text" Member="text" /> 
+                    Prefab="LocationItem.prefab" >
+                    <DataTemplate.Bindings>
+                        <Property Name="Title" Value="{x:Bind Title}" Path="Canvas/Panel/TitleLabel" Type="TMPro.TMP_Text" Member="text" /> 
+                        <Property Name="Text" Value="{x:Bind Text}" Path="Canvas/Panel/TextLabel" Type="TMPro.TMP_Text" Member="text" /> 
+                    </DataTemplate.Bindings>
                 </DataTemplate>
-            </ListElement.ItemTemplate>
+            </ListElement.ItemTemplate> 
         </ListElement>
-    </View.Elements> -->  
+    </View.Elements>  
     
 </View>

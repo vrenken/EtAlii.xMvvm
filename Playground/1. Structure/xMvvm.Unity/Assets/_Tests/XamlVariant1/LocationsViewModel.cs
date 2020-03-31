@@ -1,14 +1,14 @@
 ﻿namespace EtAlii.xMvvm
 {
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using EtAlii.xMvvm.XamlVariant1;
 
     public class LocationsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ViewModelTransform SubjectTransformation { get => _subjectTransformation; set => PropertyChanged.SetAndRaise(this, ref _subjectTransformation, value); }
-        private ViewModelTransform _subjectTransformation;
+        public ObservableCollection<object> Locations => _locations;
+        private readonly ObservableCollection<object> _locations = new ObservableCollection<object>();
 
         public LocationsViewModel()
         {

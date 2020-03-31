@@ -1,21 +1,18 @@
 ﻿<#+
-    void ConstructElement(Element element, ITextTemplatingSession data, bool initialIndent)
+    void ConstructElement(Element element, ITextTemplatingSession data, View view)
     {
-#>﻿new <#=data["variantNamespace"]#>.Element(gameObject, this, "<#=element.Name#>")  <#+ PushIndent(initialIndent ? "            " : "");#>
-
-{
-    Elements = new <#=data["variantNamespace"]#>.Element[]
-    {
-<#+ 
-    PushIndent("        ");
+            if(element.Elements.Any()) 
+            { 
+        #>
+            <#+ if (CodeEntity.RequiresVariable(element)) {#>var <#+} #><#=CodeEntity.GetLocalName(element)#> = ﻿new <#=data["variantNamespace"]#>.ElementBinding<<#=view.ViewModelType#>>(<#= view.Elements.Contains(element) ? "this, " : ""#>"<#=element.Path#>"<#= element.Member != null ? ", element => element."+element.Member : ""#><#= element.Value != null ? ", vm => vm."+element.Value.Name : ""#>, new <#=data["variantNamespace"]#>.ElementBinding<<#=view.ViewModelType#>>[] { <#+
     for (var i = 0; i < element.Elements.Count; i++)
     {
-        var childElement = element.Elements[i]; #>
-<#+ ConstructElement(childElement, data, false); #><#+ if (i < element.Elements.Count - 1) {#>,<#+} #>
-
-<#+ }; PopIndent(); #>
-    }
-}<#+
-        PopIndent();
+        var childElement = element.Elements[i];
+#><#=CodeEntity.GetLocalName(childElement)#><#+ if (i < element.Elements.Count - 1) {#>,<#+} #> <#+ } #>});
+<#+
+   }  else { #>
+            <#+ if (CodeEntity.RequiresVariable(element)) {#>var <#+} #><#=CodeEntity.GetLocalName(element)#> = ﻿new <#=data["variantNamespace"]#>.ElementBinding<<#=view.ViewModelType#>>(<#= view.Elements.Contains(element) ? "this, " : ""#>"<#=element.Path#>"<#= element.Member != null ? ", element => element."+element.Member : ""#><#= element.Value != null ? ", vm => vm."+element.Value.Name : ""#>);
+<#+
+            } 
     }
 #>
