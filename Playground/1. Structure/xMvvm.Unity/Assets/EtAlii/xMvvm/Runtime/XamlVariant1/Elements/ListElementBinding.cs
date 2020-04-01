@@ -1,6 +1,8 @@
 namespace EtAlii.xMvvm.XamlVariant1
 {
     using System;
+    using System.Collections;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Linq.Expressions;
 
@@ -28,6 +30,26 @@ namespace EtAlii.xMvvm.XamlVariant1
         }
 
         public ListElementBinding(View<TViewModel> view, string path, Expression<Func<TViewModel, object>> vm, ElementBinding<TViewModel>[] elements) : base(view, path, null, vm, elements)
+        {
+        }
+        
+        public void StartListening(IEnumerable enumerable)
+        {
+            if (enumerable is INotifyCollectionChanged observableCollection)
+            {
+                observableCollection.CollectionChanged += OnCollectionChanged;
+            }
+        }
+
+        public void StopListening(IEnumerable enumerable)
+        {
+            if (enumerable is INotifyCollectionChanged observableCollection)
+            {
+                observableCollection.CollectionChanged -= OnCollectionChanged;
+            }
+        }
+        
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
         }
     }
