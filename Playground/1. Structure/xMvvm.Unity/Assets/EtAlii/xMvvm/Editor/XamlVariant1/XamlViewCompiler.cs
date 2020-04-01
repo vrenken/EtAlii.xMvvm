@@ -1,10 +1,11 @@
 ﻿namespace EtAlii.xMvvm
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
+    using System.Linq;
     using System.Linq.Expressions;
-    using System.Reflection;
     using Mono.Cecil;
     using UnityEngine;
     using XamlIl.Ast;
@@ -12,6 +13,7 @@
     using XamlIl.Runtime;
     using XamlIl.Transform;
     using XamlIl.TypeSystem;
+    using Assembly = System.Reflection.Assembly;
     using Object = System.Object;
     using TypeAttributes = Mono.Cecil.TypeAttributes;
 
@@ -51,14 +53,20 @@
             // Let's build ourselves a typesystem and compiler configuration.
             // We're going to do this for each compile action as we don't want to have anything 
             // cached in the Unity subsystems.
-            var references = new[] 
+            var references = new List<string>(new [] 
             {
                 typeof(Object).Assembly.Location,
                 typeof(XamlViewCompiler).Assembly.Location,
                 typeof(IServiceProvider).Assembly.Location,
                 typeof(ITypeDescriptorContext).Assembly.Location,
                 typeof(IXamlIlParentStackProviderV1).Assembly.Location,
-            };
+            });
+            
+            // We need to have the compiled code from the Unity program.
+            // This might load a lot of assemblies but it is needed to make sure we create the correct source code.
+            var assembly = Assembly.LoadFrom("Library/ScriptAssemblies/Assembly-CSharp.dll");
+            references.Add(assembly.Location);
+            references.AddRange(assembly.GetReferencedAssemblies().Select(reference => Assembly.Load(reference).Location));
 
             var typeSystem = new CecilTypeSystem(references);
             
