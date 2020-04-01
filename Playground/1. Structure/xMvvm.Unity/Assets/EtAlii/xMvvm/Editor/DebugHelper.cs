@@ -4,6 +4,11 @@
 
     public static class DebugHelper
     {
+        /// <summary>
+        /// A simple method that splits a string into its individual lines and then adds line numbers in front of them. 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public static string AddLineNumbers(string text)
         {
             // We want to have a padded line number
