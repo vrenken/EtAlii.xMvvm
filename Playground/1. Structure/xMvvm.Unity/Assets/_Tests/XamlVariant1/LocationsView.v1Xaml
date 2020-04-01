@@ -1,13 +1,14 @@
 ﻿<View
-    xmlns="xMvvm"     
-    xmlns:x="xMvvm"
+    xmlns="EtAlii.xMvvm"     
+    xmlns:x="EtAlii.xMvvm" 
+    xmlns:cs="clr-namespace:EtAlii.xMvvm;assembly=Assembly-CSharp"
     ViewModelType="LocationsViewModel"        
     Prefab="LocationsView.prefab">  
-        
-    <View.Elements>     
+    
+    <View.Elements> 
         <ListElement Name="Locations" ItemsSource="{x:Bind Locations}" Path="Globe/Locations" >   
             <ListElement.ItemContainer>
-                <StackPanel Orientation="Vertical" />   
+                <cs:HorizontalRoundList MaxItems="10" Radius="1" />   
             </ListElement.ItemContainer> 
             <ListElement.ItemTemplate>
                 <DataTemplate 

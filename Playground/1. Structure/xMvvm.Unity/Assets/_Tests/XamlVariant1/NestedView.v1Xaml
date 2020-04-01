@@ -1,6 +1,6 @@
 ﻿<View
-    xmlns="xMvvm"     
-    xmlns:x="xMvvm"
+    xmlns="EtAlii.xMvvm"     
+    xmlns:x="EtAlii.xMvvm"
     ViewModelType="NestedViewModel"        
     Prefab="NestedView.prefab">  
         

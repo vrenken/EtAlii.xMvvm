@@ -1,14 +1,14 @@
 ﻿<View
     Name="Test"
-    xmlns="xMvvm"     
-    xmlns:x="xMvvm"
+    xmlns="EtAlii.xMvvm"     
+    xmlns:x="EtAlii.xMvvm"
     ViewModelType="CompositionViewModel"          
     Prefab="CompositionView.prefab">  
     <View.Resources>      
         <ResourceDictionary>
             <LinearTransformationConverter Key="LinearTransformationConverter" Scale="0.5" />              
         </ResourceDictionary>                       
-    </View.Resources>     
+    </View.Resources>  
     <View.Bindings>                         
         <Property Name="Up" Value="{x:Bind Up, Mode=OneWayToSource}" Path="Canvas/Panel/UpSlider" Type="UnityEngine.UI.Slider" Member="value" /> 
         <Property Name="Forward" Value="{x:Bind Forward, Mode=OneWayToSource}" Path="Canvas/Panel/ForwardSlider" Type="UnityEngine.UI.Slider" Member="value" /> 

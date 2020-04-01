@@ -20,6 +20,7 @@
             <e p="NestedView.v1xaml.cs" t="Include" />
             <e p="NestedView.v1xaml.g.cs" t="Include" />
             <e p="NestedViewModel.cs" t="Include" />
+            <e p="RoundItemContainer.cs" t="Include" />
             <e p="ViewSystem.cs" t="Include" />
           </e>
         </e>
@@ -43,11 +44,15 @@
                   </e>
                   <e p="CodeEntity.cs" t="Include" />
                   <e p="Elements" t="Include">
+                    <e p="Containers" t="Include">
+                      <e p="ItemContainer.cs" t="Include" />
+                      <e p="Stack.cs" t="Include" />
+                      <e p="StackOrientation.cs" t="Include" />
+                    </e>
                     <e p="DataTemplate.cs" t="Include" />
                     <e p="Element.cs" t="Include" />
                     <e p="ElementBase.cs" t="Include" />
                     <e p="ListElement.cs" t="Include" />
-                    <e p="StackPanel.cs" t="Include" />
                   </e>
                   <e p="Resources" t="Include">
                     <e p="Direction.cs" t="Include" />
